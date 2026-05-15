@@ -5,8 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>健康与家庭行业报告 · 2026Q1</title>
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
-<style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
+<style>* { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f7fa; color: #1a202c; line-height: 1.6; }
 .app { max-width: 1440px; margin: 0 auto; padding: 24px 28px 40px; }
 .header { background: linear-gradient(135deg, #0f172a 0%, #1e40af 100%); color: #fff; border-radius: 14px; padding: 28px 32px; margin-bottom: 18px; }
@@ -15,10 +14,8 @@ body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft
 .tabs { display: flex; gap: 8px; margin-bottom: 20px; padding: 6px; background: #e2e8f0; border-radius: 12px; width: fit-content; flex-wrap: wrap; }
 .tab-btn { border: none; background: transparent; color: #475569; cursor: pointer; padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 600; transition: all 0.18s; }
 .tab-btn.active { background: #fff; color: #0f172a; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
-.page { display: none; }
-.page.active { display: block; }
-.section { margin-bottom: 28px; }
-.section-header { margin-bottom: 16px; }
+.page { display: none; } .page.active { display: block; }
+.section { margin-bottom: 28px; } .section-header { margin-bottom: 16px; }
 .section-title { font-size: 24px; font-weight: 700; color: #0f172a; margin-bottom: 6px; }
 .section-desc { font-size: 13px; color: #64748b; }
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -30,20 +27,16 @@ body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft
 .card { background: #fff; border-radius: 12px; padding: 20px; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
 .card-title { font-size: 15px; font-weight: 600; color: #0f172a; margin-bottom: 2px; }
 .card-subtitle { font-size: 12px; color: #94a3b8; margin-bottom: 14px; }
-.kpi-card { background: #fff; border-radius: 12px; padding: 18px; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+.kpi-card { background: #fff; border-radius: 12px; padding: 18px; border: 1px solid #e2e8f0; }
 .kpi-label { font-size: 11px; color: #64748b; margin-bottom: 6px; letter-spacing: 0.3px; }
 .kpi-value { font-size: 26px; font-weight: 700; color: #0f172a; }
 .kpi-sub { font-size: 12px; color: #64748b; margin-top: 4px; }
-.chart { width: 100%; height: 420px; }
-.chart-lg { width: 100%; height: 500px; }
-.exec-summary { background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); color: #f1f5f9; border-radius: 14px; padding: 22px 26px 24px; border-left: 5px solid #fbbf24; box-shadow: 0 2px 10px rgba(15,23,42,0.15); }
+.chart { width: 100%; height: 420px; } .chart-lg { width: 100%; height: 500px; }
+.exec-summary { background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); color: #f1f5f9; border-radius: 14px; padding: 22px 26px 24px; border-left: 5px solid #fbbf24; }
 .exec-label { font-size: 11px; letter-spacing: 2px; color: #fbbf24; font-weight: 600; margin-bottom: 10px; }
-.exec-body { line-height: 1.8; }
-.exec-body .exec-head { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+.exec-body { line-height: 1.8; } .exec-body .exec-head { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 8px; }
 .exec-body .exec-line { font-size: 14px; color: #cbd5e1; margin-top: 4px; }
-.exec-body b { color: #fff; }
-.exec-up { color: #86efac; font-weight: 700; }
-.exec-down { color: #fca5a5; font-weight: 700; }
+.exec-body b { color: #fff; } .exec-up { color: #86efac; font-weight: 700; } .exec-down { color: #fca5a5; font-weight: 700; }
 .bullet-list { display: flex; flex-direction: column; gap: 12px; }
 .bullet-item { background: #f8fafc; border-left: 4px solid #3b82f6; border-radius: 8px; padding: 12px 14px; }
 .bullet-item.green { border-left-color: #10b981; background: #ecfdf5; }
@@ -52,455 +45,337 @@ body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft
 .bullet-body { font-size: 13px; color: #334155; line-height: 1.7; }
 table { width: 100%; border-collapse: collapse; font-size: 13px; }
 th { text-align: left; padding: 10px 12px; background: #f8fafc; font-weight: 600; color: #475569; border-bottom: 2px solid #e2e8f0; font-size: 12px; }
-td { padding: 10px 12px; border-bottom: 1px solid #f1f5f9; color: #1e293b; }
-tr:hover td { background: #f8fafc; }
-.up { color: #059669; font-weight: 600; }
-.down { color: #dc2626; font-weight: 600; }
+td { padding: 10px 12px; border-bottom: 1px solid #f1f5f9; color: #1e293b; } tr:hover td { background: #f8fafc; }
+.up { color: #059669; font-weight: 600; } .down { color: #dc2626; font-weight: 600; }
 .tag { display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; }
-.tag-p0 { background: #fef3c7; color: #92400e; }
-.tag-p1 { background: #e0e7ff; color: #3730a3; }
-.tag-p2 { background: #e2e8f0; color: #475569; }
-.tag-a { background: #ecfdf5; color: #065f46; }
+.tag-p0 { background: #fef3c7; color: #92400e; } .tag-p1 { background: #e0e7ff; color: #3730a3; }
+.tag-p2 { background: #e2e8f0; color: #475569; } .tag-a { background: #ecfdf5; color: #065f46; }
 .tag-b { background: #fffbeb; color: #92400e; }
 .source-block { background: #f8fafc; border-left: 4px solid #3b82f6; border-radius: 8px; padding: 16px; margin-bottom: 16px; font-size: 13px; color: #64748b; line-height: 1.8; }
-@media (max-width: 960px) { .app { padding: 16px; } .grid-2, .grid-3, .grid-4, .overview-grid { grid-template-columns: 1fr; } }
-</style>
+.filter-bar { display: flex; gap: 16px; align-items: center; margin-bottom: 16px; flex-wrap: wrap; }
+.filter-select { padding: 8px 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 13px; background: #fff; min-width: 300px; }
+@media (max-width: 960px) { .app { padding: 16px; } .grid-2, .grid-3, .grid-4, .overview-grid { grid-template-columns: 1fr; } }</style>
 </head>
 <body>
 <div class="app">
   <header class="header">
     <div class="header-title">健康与家庭行业报告</div>
-    <div class="header-sub">US Amazon · 13品类 · 616子类目 · 2026Q1（2026-04 vs 2026-03）· v2.1 · 钛动科技</div>
+    <div class="header-sub">US Amazon · 13品类 · 616子类目 · 2026-04 vs 2026-03 · v2.2 · 钛动科技</div>
   </header>
-
   <div class="tabs" id="main-tabs">
     <button class="tab-btn active" data-page="page-leads">新客线索</button>
     <button class="tab-btn" data-page="page-market">市场大盘</button>
   </div>
 
-  <!-- ================================================================ -->
-  <!-- TAB 1: 新客线索 -->
-  <!-- ================================================================ -->
+  <!-- ===== TAB 1: 新客线索 ===== -->
   <div class="page active" id="page-leads">
-    <section class="section">
-      <div class="source-block">
-        <strong>信源与画像规则</strong><br>
-        <strong>纳入标准</strong>：中国出海健康与家庭企业，有2025-2026年PR/展会/FDA/平台动态，且存在平台/运营缺口<br>
-        <strong>优先级</strong>：S=强事件钩子+品牌/合规基础+平台增量缺口·立即分发 | A=明确品牌化基础+一个强钩子 | B=方向正确但事件弱<br>
-        <strong>证据等级</strong>：A=官方PR/官网/FDA/展会官方 | B=权威媒体可支撑<br>
-        <strong>信源</strong>：PR Newswire / Business Wire / FDA数据库 / CES-Vitafoods-Cosmoprof官网 · 检索日期：2026-05-15
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="grid-4" style="margin-bottom:18px;">
-        <div class="kpi-card"><div class="kpi-label">优先线索</div><div class="kpi-value" style="color:#059669;">16</div><div class="kpi-sub">全部含事件钩子+BD切入点</div></div>
-        <div class="kpi-card"><div class="kpi-label">S级·立即分发</div><div class="kpi-value">9</div><div class="kpi-sub">强钩子+品牌+缺口</div></div>
-        <div class="kpi-card"><div class="kpi-label">A级·补平台后分发</div><div class="kpi-value">6</div><div class="kpi-sub">品牌化基础+强钩子</div></div>
-        <div class="kpi-card"><div class="kpi-label">A级证据</div><div class="kpi-value">11</div><div class="kpi-sub">官方PR/展会/FDA</div></div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-header"><div class="section-title">PR拓客优先线索清单（16条）</div></div>
-      <div class="card">
-        <div style="overflow-x:auto;">
-          <table style="min-width:1200px;">
-            <thead><tr><th>优先级</th><th>品牌</th><th>母公司/主体</th><th>国家</th><th>赛道</th><th>细分类目</th><th>证据</th><th>事件钩子</th><th>BD切入点</th></tr></thead>
-            <tbody><tr>
-      <td><span class="tag tag-p0">S</span></td><td><b>Natural Field</b></td>
-      <td style="font-size:12px;">西安天丰生物/ Natural Field</td><td>中国·西安</td>
-      <td>健康营养</td><td style="font-size:12px;">健康老龄化/脂质体递送</td>
-      <td><span class="tag tag-a">A</span></td>
-      <td style="font-size:12px;max-width:280px;">在2026 Vitafoods Europe展示NFco-Loading脂质体平台与NF TriSolve健康老龄化配方</td>
-      <td style="font-size:12px;">以健康老龄化、NMN/CoQ10递送效率为内容钩子，适合做欧洲展后PR+KOL科普</td>
-    </tr><tr>
-      <td><span class="tag tag-p0">S</span></td><td><b>SynbioTech</b></td>
-      <td style="font-size:12px;">SYNBIO TECH INC.</td><td>中国台湾·高雄</td>
-      <td>健康营养</td><td style="font-size:12px;">益生菌/后生元/女性健康老龄化</td>
-      <td><span class="tag tag-a">A</span></td>
-      <td style="font-size:12px;max-width:280px;">将于2026 Vitafoods Europe发布面向女性健康老龄化的微生物组平台</td>
-      <td style="font-size:12px;">女性健康老龄化是细分强场景，可做专业内容、医生/KOL教育和展后PR放大</td>
-    </tr><tr>
-      <td><span class="tag tag-p0">S</span></td><td><b>Yuwell 鱼跃医疗</b></td>
-      <td style="font-size:12px;">江苏鱼跃医疗设备股份有限公司</td><td>中国·江苏</td>
-      <td>家用医疗</td><td style="font-size:12px;">呼吸健康/慢病管理/急救/智能穿戴</td>
-      <td><span class="tag tag-a">A</span></td>
-      <td style="font-size:12px;max-width:280px;">2026 CES首次亮相，展示呼吸健康、慢病管理、急救、智能穿戴产品组合</td>
-      <td style="font-size:12px;">从CES展后声量承接切入：呼吸健康、血压管理、移动制氧等品类需要海外消费者教育</td>
-    </tr><tr>
-      <td><span class="tag tag-p0">S</span></td><td><b>iHealth</b></td>
-      <td style="font-size:12px;">iHealth Labs / 九安医疗生态</td><td>中国/美国</td>
-      <td>家用医疗</td><td style="font-size:12px;">血压计/体温计/Covid测试/健康监测</td>
-      <td><span class="tag tag-a">A</span></td>
-      <td style="font-size:12px;max-width:280px;">2025 Amazon Prime Day针对热销健康产品做最高54%折扣，Track血压计为Amazon类目#1卖家</td>
-      <td style="font-size:12px;">以Amazon强势单品切TikTok：家庭血压监测、父母健康、节日健康礼物</td>
-    </tr><tr>
-      <td><span class="tag tag-p0">S</span></td><td><b>Viatom / Wellue</b></td>
-      <td style="font-size:12px;">深圳维亿魄科技有限公司</td><td>中国·深圳</td>
-      <td>家用医疗/数字健康</td><td style="font-size:12px;">血氧/血压/睡眠/心电监测</td>
-      <td><span class="tag tag-a">A</span></td>
-      <td style="font-size:12px;max-width:280px;">FDA 510(k)可查到Viatom Checkme Pro健康监测仪与血压计记录</td>
-      <td style="font-size:12px;">用FDA合规+居家监测切入，适合做睡眠血氧/心电/血压场景科普</td>
-    </tr><tr>
-      <td><span class="tag tag-p1">A</span></td><td><b>Lepu Health / Lepu Medical</b></td>
-      <td style="font-size:12px;">乐普医疗</td><td>中国·北京</td>
-      <td>家用医疗/专业医疗</td><td style="font-size:12px;">心电/血压/心血管监测</td>
-      <td><span class="tag tag-a">A</span></td>
-      <td style="font-size:12px;max-width:280px;">MEDICA 2025展商资料展示便携式血压+ECG设备，可同步App实时监测与报告分享</td>
-      <td style="font-size:12px;">以心血管家庭监测和App报告分享切入，适合医生/KOL科普与B2B2C转化</td>
-    </tr><tr>
-      <td><span class="tag tag-p0">S</span></td><td><b>Laifen 徕芬</b></td>
-      <td style="font-size:12px;">深圳术叶创新科技有限公司</td><td>中国·深圳</td>
-      <td>个人护理</td><td style="font-size:12px;">高速吹风机/电动牙刷/剃须刀</td>
-      <td><span class="tag tag-a">A</span></td>
-      <td style="font-size:12px;max-width:280px;">2026 CES展示新一代智能个人护理产品；2026女性月发布Mini吹风机与Wave Pro口腔护理新品</td>
-      <td style="font-size:12px;">以新品Mini吹风机、Wave Pro口腔护理切入，做TikTok/YouTube测评和礼物季内容</td>
-    </tr><tr>
-      <td><span class="tag tag-p0">S</span></td><td><b>Ulike</b></td>
-      <td style="font-size:12px;">Ulike Group</td><td>中国</td>
-      <td>个人护理/美容仪</td><td style="font-size:12px;">家用IPL脱毛</td>
-      <td><span class="tag tag-a">A</span></td>
-      <td style="font-size:12px;max-width:280px;">2025 IFA展示Air 10等家用护肤科技；2025 holiday campaign强调全球家用脱毛品牌定位</td>
-      <td style="font-size:12px;">用IFA新品+FDA cleared媒体背书切入，适合美妆/生活方式达人矩阵</td>
-    </tr><tr>
-      <td><span class="tag tag-p1">A</span></td><td><b>AMIRO 觅光</b></td>
-      <td style="font-size:12px;">深圳宗匠科技/AMIRO</td><td>中国·深圳</td>
-      <td>美容个护</td><td style="font-size:12px;">LED光疗/RF美容仪/IPL/化妆镜</td>
-      <td><span class="tag tag-b">B</span></td>
-      <td style="font-size:12px;max-width:280px;">AMIRO官网显示国际高科技美护品牌，产品覆盖RF、LED、IPL；此前PR发布L1 LED光疗面罩</td>
-      <td style="font-size:12px;">以高客单美容仪测评、抗老场景、LED/RF科普切入</td>
-    </tr><tr>
-      <td><span class="tag tag-p0">S</span></td><td><b>Momcozy</b></td>
-      <td style="font-size:12px;">Momcozy</td><td>中国/香港</td>
-      <td>母婴/女性健康</td><td style="font-size:12px;">可穿戴吸奶器/哺乳用品/产后护理</td>
-      <td><span class="tag tag-a">A</span></td>
-      <td style="font-size:12px;max-width:280px;">2026母亲节与Postpartum Support International合作；官方称覆盖60+国家、服务500万+妈妈</td>
-      <td style="font-size:12px;">以母亲节公益合作、可穿戴吸奶器、产后支持切入，适合母婴达人与真实用户故事</td>
-    </tr><tr>
-      <td><span class="tag tag-p1">A</span></td><td><b>Bob and Brad</b></td>
-      <td style="font-size:12px;">Bob and Brad / 中国供应链待核</td><td>美国IP/中国供应链可能</td>
-      <td>健康恢复</td><td style="font-size:12px;">筋膜枪/按摩恢复</td>
-      <td><span class="tag tag-b">B</span></td>
-      <td style="font-size:12px;max-width:280px;">Amazon官方店多款按摩枪，C2/T2等产品强调物理治疗师背书与FSA/HSA eligible</td>
-      <td style="font-size:12px;">以办公室肩颈、运动恢复、父母礼物场景切入，适合达人测评和直播转化</td>
-    </tr><tr>
-      <td><span class="tag tag-p1">A</span></td><td><b>RENPHO</b></td>
-      <td style="font-size:12px;">RENPHO</td><td>中国/全球DTC</td>
-      <td>健康家居/体重管理</td><td style="font-size:12px;">智能体脂秤/按摩/健康设备</td>
-      <td><span class="tag tag-b">C</span></td>
-      <td style="font-size:12px;max-width:280px;">2025 Amazon Prime Big Deal Days前，RENPHO智能秤被媒体列为健康工具折扣产品，支持Apple Health/Fitbit/Samsung Health同步</td>
-      <td style="font-size:12px;">以新年健康管理、体脂秤App同步、家庭健康打卡切入，适合健身/生活方式达人</td>
-    </tr><tr>
-      <td><span class="tag tag-p1">A</span></td><td><b>Comfier</b></td>
-      <td style="font-size:12px;">Comfier</td><td>中国/全球电商</td>
-      <td>健康放松</td><td style="font-size:12px;">足部按摩器/背部按摩垫/颈部按摩</td>
-      <td><span class="tag tag-b">C</span></td>
-      <td style="font-size:12px;max-width:280px;">Amazon在售2025款Shiatsu足部按摩器、背部按摩垫等多款家庭放松产品</td>
-      <td style="font-size:12px;">以父母礼物、办公室久坐、足底放松和节日礼物切入</td>
-    </tr><tr>
-      <td><span class="tag tag-p0">S</span></td><td><b>Levoit</b></td>
-      <td style="font-size:12px;">VeSync</td><td>中国/美国运营</td>
-      <td>健康环境/智能家居</td><td style="font-size:12px;">空气净化器/加湿器/风扇/滤芯</td>
-      <td><span class="tag tag-a">A</span></td>
-      <td style="font-size:12px;max-width:280px;">2026年4月Levoit进入澳大利亚Harvey Norman线上渠道；官方博客发布2026最佳空气净化器场景内容</td>
-      <td style="font-size:12px;">以澳洲渠道扩张、居家办公空气质量、过敏季内容切入</td>
-    </tr><tr>
-      <td><span class="tag tag-p1">A</span></td><td><b>Dreo</b></td>
-      <td style="font-size:12px;">Dreo</td><td>中国/全球DTC</td>
-      <td>健康环境/智能家居</td><td style="font-size:12px;">空气舒适/风扇/加湿/厨房小电</td>
-      <td><span class="tag tag-a">A</span></td>
-      <td style="font-size:12px;max-width:280px;">2026 CES发布TurboCool雾化风扇系列及AIoT方向，2026夏季线也围绕TurboCool展开</td>
-      <td style="font-size:12px;">以夏季降温、户外/室内场景、AIoT智能控制切入，适合TikTok场景短视频</td>
-    </tr><tr>
-      <td><span class="tag tag-p2">B</span></td><td><b>Oclean</b></td>
-      <td style="font-size:12px;">Oclean</td><td>中国·深圳</td>
-      <td>口腔护理</td><td style="font-size:12px;">AI/WiFi智能电动牙刷</td>
-      <td><span class="tag tag-b">B</span></td>
-      <td style="font-size:12px;max-width:280px;">2024发布X Ultra WiFi/AI智能声波牙刷，官方称覆盖40+市场、300+专利</td>
-      <td style="font-size:12px;">以AI刷牙指导、儿童/成人口腔习惯、牙医KOL测评切入</td>
-    </tr></tbody>
-          </table>
-        </div>
-      </div>
+    <section class="section"><div class="source-block"><strong>信源与画像规则</strong><br><strong>纳入标准</strong>：中国出海健康与家庭企业，有2025-2026年PR/展会/FDA/平台动态<br><strong>优先级</strong>：S=强钩子+品牌/合规+平台缺口 | A=品牌化基础+一个强钩子 | B=方向正确但事件弱<br><strong>信源</strong>：PR Newswire / Business Wire / FDA数据库 / CES-Vitafoods-Cosmoprof官网 · 2026-05-15</div></section>
+    <section class="section"><div class="grid-4" style="margin-bottom:18px;">
+      <div class="kpi-card"><div class="kpi-label">优先线索</div><div class="kpi-value" style="color:#059669;">16</div><div class="kpi-sub">全部含事件钩子+BD切入点</div></div>
+      <div class="kpi-card"><div class="kpi-label">S级·立即分发</div><div class="kpi-value">9</div><div class="kpi-sub">强钩子+品牌+缺口</div></div>
+      <div class="kpi-card"><div class="kpi-label">A级·补平台后</div><div class="kpi-value">6</div><div class="kpi-sub">品牌化+强钩子</div></div>
+      <div class="kpi-card"><div class="kpi-label">A级证据</div><div class="kpi-value">11</div><div class="kpi-sub">官方PR/展会/FDA</div></div>
+    </div></section>
+    <section class="section"><div class="section-header"><div class="section-title">PR拓客优先线索清单（16条）</div></div>
+      <div class="card"><div style="overflow-x:auto;"><table style="min-width:1200px;">
+        <thead><tr><th>优先级</th><th>品牌</th><th>母公司/主体</th><th>国家</th><th>赛道</th><th>细分类目</th><th>证据</th><th>事件钩子</th><th>BD切入点</th></tr></thead>
+        <tbody><tr><td><span class="tag tag-p0">S</span></td><td><b>Natural Field</b></td><td style="font-size:12px;">西安天丰生物/ Natural Field</td><td>中国·西安</td><td>健康营养</td><td style="font-size:12px;">健康老龄化/脂质体递送</td><td><span class="tag tag-a">A</span></td><td style="font-size:12px;max-width:280px;">在2026 Vitafoods Europe展示NFco-Loading脂质体平台与NF TriSolve健康老龄化配方</td><td style="font-size:12px;">以健康老龄化、NMN/CoQ10递送效率为内容钩子，适合做欧洲展后PR+KOL科普</td></tr><tr><td><span class="tag tag-p0">S</span></td><td><b>SynbioTech</b></td><td style="font-size:12px;">SYNBIO TECH INC.</td><td>中国台湾·高雄</td><td>健康营养</td><td style="font-size:12px;">益生菌/后生元/女性健康老龄化</td><td><span class="tag tag-a">A</span></td><td style="font-size:12px;max-width:280px;">将于2026 Vitafoods Europe发布面向女性健康老龄化的微生物组平台</td><td style="font-size:12px;">女性健康老龄化是细分强场景，可做专业内容、医生/KOL教育和展后PR放大</td></tr><tr><td><span class="tag tag-p0">S</span></td><td><b>Yuwell 鱼跃医疗</b></td><td style="font-size:12px;">江苏鱼跃医疗设备股份有限公司</td><td>中国·江苏</td><td>家用医疗</td><td style="font-size:12px;">呼吸健康/慢病管理/急救/智能穿戴</td><td><span class="tag tag-a">A</span></td><td style="font-size:12px;max-width:280px;">2026 CES首次亮相，展示呼吸健康、慢病管理、急救、智能穿戴产品组合</td><td style="font-size:12px;">从CES展后声量承接切入：呼吸健康、血压管理、移动制氧等品类需要海外消费者教育</td></tr><tr><td><span class="tag tag-p0">S</span></td><td><b>iHealth</b></td><td style="font-size:12px;">iHealth Labs / 九安医疗生态</td><td>中国/美国</td><td>家用医疗</td><td style="font-size:12px;">血压计/体温计/Covid测试/健康监测</td><td><span class="tag tag-a">A</span></td><td style="font-size:12px;max-width:280px;">2025 Amazon Prime Day针对热销健康产品做最高54%折扣，Track血压计为Amazon类目#1卖家</td><td style="font-size:12px;">以Amazon强势单品切TikTok：家庭血压监测、父母健康、节日健康礼物</td></tr><tr><td><span class="tag tag-p0">S</span></td><td><b>Viatom / Wellue</b></td><td style="font-size:12px;">深圳维亿魄科技有限公司</td><td>中国·深圳</td><td>家用医疗/数字健康</td><td style="font-size:12px;">血氧/血压/睡眠/心电监测</td><td><span class="tag tag-a">A</span></td><td style="font-size:12px;max-width:280px;">FDA 510(k)可查到Viatom Checkme Pro健康监测仪与血压计记录</td><td style="font-size:12px;">用FDA合规+居家监测切入，适合做睡眠血氧/心电/血压场景科普</td></tr><tr><td><span class="tag tag-p1">A</span></td><td><b>Lepu Health / Lepu Medical</b></td><td style="font-size:12px;">乐普医疗</td><td>中国·北京</td><td>家用医疗/专业医疗</td><td style="font-size:12px;">心电/血压/心血管监测</td><td><span class="tag tag-a">A</span></td><td style="font-size:12px;max-width:280px;">MEDICA 2025展商资料展示便携式血压+ECG设备，可同步App实时监测与报告分享</td><td style="font-size:12px;">以心血管家庭监测和App报告分享切入，适合医生/KOL科普与B2B2C转化</td></tr><tr><td><span class="tag tag-p0">S</span></td><td><b>Laifen 徕芬</b></td><td style="font-size:12px;">深圳术叶创新科技有限公司</td><td>中国·深圳</td><td>个人护理</td><td style="font-size:12px;">高速吹风机/电动牙刷/剃须刀</td><td><span class="tag tag-a">A</span></td><td style="font-size:12px;max-width:280px;">2026 CES展示新一代智能个人护理产品；2026女性月发布Mini吹风机与Wave Pro口腔护理新品</td><td style="font-size:12px;">以新品Mini吹风机、Wave Pro口腔护理切入，做TikTok/YouTube测评和礼物季内容</td></tr><tr><td><span class="tag tag-p0">S</span></td><td><b>Ulike</b></td><td style="font-size:12px;">Ulike Group</td><td>中国</td><td>个人护理/美容仪</td><td style="font-size:12px;">家用IPL脱毛</td><td><span class="tag tag-a">A</span></td><td style="font-size:12px;max-width:280px;">2025 IFA展示Air 10等家用护肤科技；2025 holiday campaign强调全球家用脱毛品牌定位</td><td style="font-size:12px;">用IFA新品+FDA cleared媒体背书切入，适合美妆/生活方式达人矩阵</td></tr><tr><td><span class="tag tag-p1">A</span></td><td><b>AMIRO 觅光</b></td><td style="font-size:12px;">深圳宗匠科技/AMIRO</td><td>中国·深圳</td><td>美容个护</td><td style="font-size:12px;">LED光疗/RF美容仪/IPL/化妆镜</td><td><span class="tag tag-b">B</span></td><td style="font-size:12px;max-width:280px;">AMIRO官网显示国际高科技美护品牌，产品覆盖RF、LED、IPL；此前PR发布L1 LED光疗面罩</td><td style="font-size:12px;">以高客单美容仪测评、抗老场景、LED/RF科普切入</td></tr><tr><td><span class="tag tag-p0">S</span></td><td><b>Momcozy</b></td><td style="font-size:12px;">Momcozy</td><td>中国/香港</td><td>母婴/女性健康</td><td style="font-size:12px;">可穿戴吸奶器/哺乳用品/产后护理</td><td><span class="tag tag-a">A</span></td><td style="font-size:12px;max-width:280px;">2026母亲节与Postpartum Support International合作；官方称覆盖60+国家、服务500万+妈妈</td><td style="font-size:12px;">以母亲节公益合作、可穿戴吸奶器、产后支持切入，适合母婴达人与真实用户故事</td></tr><tr><td><span class="tag tag-p1">A</span></td><td><b>Bob and Brad</b></td><td style="font-size:12px;">Bob and Brad / 中国供应链待核</td><td>美国IP/中国供应链可能</td><td>健康恢复</td><td style="font-size:12px;">筋膜枪/按摩恢复</td><td><span class="tag tag-b">B</span></td><td style="font-size:12px;max-width:280px;">Amazon官方店多款按摩枪，C2/T2等产品强调物理治疗师背书与FSA/HSA eligible</td><td style="font-size:12px;">以办公室肩颈、运动恢复、父母礼物场景切入，适合达人测评和直播转化</td></tr><tr><td><span class="tag tag-p1">A</span></td><td><b>RENPHO</b></td><td style="font-size:12px;">RENPHO</td><td>中国/全球DTC</td><td>健康家居/体重管理</td><td style="font-size:12px;">智能体脂秤/按摩/健康设备</td><td><span class="tag tag-b">C</span></td><td style="font-size:12px;max-width:280px;">2025 Amazon Prime Big Deal Days前，RENPHO智能秤被媒体列为健康工具折扣产品，支持Apple Health/Fitbit/Samsung Health同步</td><td style="font-size:12px;">以新年健康管理、体脂秤App同步、家庭健康打卡切入，适合健身/生活方式达人</td></tr><tr><td><span class="tag tag-p1">A</span></td><td><b>Comfier</b></td><td style="font-size:12px;">Comfier</td><td>中国/全球电商</td><td>健康放松</td><td style="font-size:12px;">足部按摩器/背部按摩垫/颈部按摩</td><td><span class="tag tag-b">C</span></td><td style="font-size:12px;max-width:280px;">Amazon在售2025款Shiatsu足部按摩器、背部按摩垫等多款家庭放松产品</td><td style="font-size:12px;">以父母礼物、办公室久坐、足底放松和节日礼物切入</td></tr><tr><td><span class="tag tag-p0">S</span></td><td><b>Levoit</b></td><td style="font-size:12px;">VeSync</td><td>中国/美国运营</td><td>健康环境/智能家居</td><td style="font-size:12px;">空气净化器/加湿器/风扇/滤芯</td><td><span class="tag tag-a">A</span></td><td style="font-size:12px;max-width:280px;">2026年4月Levoit进入澳大利亚Harvey Norman线上渠道；官方博客发布2026最佳空气净化器场景内容</td><td style="font-size:12px;">以澳洲渠道扩张、居家办公空气质量、过敏季内容切入</td></tr><tr><td><span class="tag tag-p1">A</span></td><td><b>Dreo</b></td><td style="font-size:12px;">Dreo</td><td>中国/全球DTC</td><td>健康环境/智能家居</td><td style="font-size:12px;">空气舒适/风扇/加湿/厨房小电</td><td><span class="tag tag-a">A</span></td><td style="font-size:12px;max-width:280px;">2026 CES发布TurboCool雾化风扇系列及AIoT方向，2026夏季线也围绕TurboCool展开</td><td style="font-size:12px;">以夏季降温、户外/室内场景、AIoT智能控制切入，适合TikTok场景短视频</td></tr><tr><td><span class="tag tag-p2">B</span></td><td><b>Oclean</b></td><td style="font-size:12px;">Oclean</td><td>中国·深圳</td><td>口腔护理</td><td style="font-size:12px;">AI/WiFi智能电动牙刷</td><td><span class="tag tag-b">B</span></td><td style="font-size:12px;max-width:280px;">2024发布X Ultra WiFi/AI智能声波牙刷，官方称覆盖40+市场、300+专利</td><td style="font-size:12px;">以AI刷牙指导、儿童/成人口腔习惯、牙医KOL测评切入</td></tr></tbody></table></div></div>
     </section>
   </div>
 
-  <!-- ================================================================ -->
-  <!-- TAB 2: 市场大盘（3C v2.6风格） -->
-  <!-- ================================================================ -->
+  <!-- ===== TAB 2: 市场大盘（3C v2.6风格 + 类目深度分析） ===== -->
   <div class="page" id="page-market">
-    <section class="section">
-      <div class="source-block">
-        <strong>数据口径</strong> · Amazon.com Sorftime导出 · 13品类·616子类目 · 2026-04 vs 2026-03 · 中国品牌判定：母公司注册地为中国大陆/香港/台湾 · 年GMV为近12个月滚动合计
-      </div>
+    <section class="section"><div class="source-block"><strong>数据口径</strong> · Amazon.com Sorftime导出 · 13品类·616子类目 · 2026-04 vs 2026-03 · 中国品牌判定：母公司注册地为CN/HK/TW · 年GMV=近12月滚动</div></section>
+    <section class="section"><div class="exec-summary"><div class="exec-label">EXECUTIVE SUMMARY</div><div class="exec-body">
+      <div class="exec-head">US Amazon健康与家庭大盘 <b>$61B</b>（13品类·616子类目），中国品牌GMV占比 <span class="exec-up">11.2%</span></div>
+      <div class="exec-line">2026-04月销 <b>$5.0B</b>（环比<span class="exec-down">-1.2%</span>），品类<b>3升10降</b>，涨幅最大：<b>文具和礼品包装用品</b>（<span class="exec-up">+6.4%</span>），跌幅最大：<b>视觉产品</b>（<span class="exec-down">-8.1%</span>）</div>
+      <div class="exec-line">最大低渗透机会：维生素矿物质<b>$10.1B（CN 2.0%）</b> · 个人护理<b>$11.4B（CN 6.4%）</b> · 运动营养<b>$10.6B（CN 1.6%）</b></div>
+    </div></div></section>
+
+    <section class="section"><div class="overview-grid"><div class="kpi-column">
+      <div class="kpi-card"><div class="kpi-label">大盘年GMV</div><div class="kpi-value">$61.2B</div><div class="kpi-sub">US Amazon 13品类</div></div>
+      <div class="kpi-card"><div class="kpi-label">2026-04月销</div><div class="kpi-value">$5.01B</div><div class="kpi-sub">环比 -1.2%</div></div>
+      <div class="kpi-card"><div class="kpi-label">CN品牌GMV占比</div><div class="kpi-value" style="color:#f59e0b;">11.2%</div><div class="kpi-sub">加权平均</div></div>
+      <div class="kpi-card"><div class="kpi-label">子类目数</div><div class="kpi-value">616</div><div class="kpi-sub">13个一级类目</div></div>
+    </div><div class="card" style="padding:12px;"><div class="chart-lg" id="chart-treemap"></div></div></div></section>
+
+    <section class="section"><div class="card"><div class="card-title">大盘 GMV 趋势（双线图）</div><div class="card-subtitle">18个月 · 13品类合计 · 蓝=总GMV · 绿=CN品牌GMV · 黄虚线=CN份额%</div><div class="chart-lg" id="chart-trend"></div></div></section>
+
+    <section class="section"><div class="section-header"><div class="section-title">核心洞察</div></div><div class="bullet-list">
+      <div class="bullet-item green"><div class="bullet-title">洞察1：维生素矿物质（$10.1B · CN 2.0%）——FDA窗口期是系统性入场机会</div><div class="bullet-body">2026年3月FDA里程碑会议拟扩大"膳食成分"定义，GRAS改革推进中。SPINS数据显示NMN、Sea Moss、Colostrum等新成分崛起，中国原料端有优势。同时碎片化监管（纽约18+限制法等）推高合规门槛，率先完成FDA GRAS/NDI认证的品牌将享受"监管溢价"。<b>BD建议：优先找有GMP认证+Vitafoods/CES参展记录+Amazon有Listing但无TikTok的品牌。</b></div></div>
+      <div class="bullet-item"><div class="bullet-title">洞察2：个人护理（$11.4B · CN 6.4%）——「设备+配方」融合是3C制造能力的自然延伸</div><div class="bullet-body">CES 2026和Cosmoprof Bologna同时指向：光疗正成为美容设备底层能力，包装盖变身治疗引擎。CN在皮肤护理$6.4B中仅3.0%，但在剃须脱毛（16.2%）和按摩工具（56%）已有突破——本质是3C制造能力向个护迁移。<b>BD建议：找已有FDA 510(k)/CE认证+CES/Cosmoprof参展+消费电子ODM背景跨界个护的品牌。</b></div></div>
+      <div class="bullet-item amber"><div class="bullet-title">洞察3：家用医疗设备（$3.2B · CN 40.2%）——从「卖设备」升级到「卖健康数据服务」</div><div class="bullet-body">CES 2026最明确趋势：居家诊断消费级化。CN品牌在移动辅助/血压血氧已有高渗透，但AI健康管理+连续监测+多模态数据整合的"设备+服务"模式未建立。AI医疗市场预计2034年$8,864亿。<b>BD建议：找FDA 510(k)+CES数字健康参展+独立站/App生态品牌，从单品种草升级到健康数据叙事。</b></div></div>
+      <div class="bullet-item"><div class="bullet-title">洞察4：婴儿护理（$2.1B · CN 4.3%）——智能化是中国制造的结构性差异化武器</div><div class="bullet-body">中国工信部已将婴童智能化列为国家战略。智能婴儿监视器2035年预计$89.85B（CAGR 34.5%）。毫米波雷达+AI呼吸监测+自适应哄睡成标配。<b>BD建议：找有母婴产品线+传感/AI技术+Amazon Listing但无品牌化内容矩阵的品牌，以"科技育儿"叙事切入。</b></div></div>
+    </div></section>
+
+    <section class="section"><div class="grid-3" style="margin-bottom:18px;">
+      <div class="kpi-card"><div class="kpi-label">上升/下降品类</div><div class="kpi-value" style="font-size:20px;"><span style="color:#059669;">3↑</span> / <span style="color:#dc2626;">10↓</span></div><div class="kpi-sub">共13个一级类目</div></div>
+      <div class="kpi-card"><div class="kpi-label">环比涨幅最大</div><div class="kpi-value" style="font-size:20px;">文具和礼品包装用品</div><div class="kpi-sub"><span style="color:#059669;">+6.4%</span> · 月销$35M</div></div>
+      <div class="kpi-card"><div class="kpi-label">环比跌幅最大</div><div class="kpi-value" style="font-size:20px;">视觉产品</div><div class="kpi-sub"><span style="color:#dc2626;">-8.1%</span> · 月销$48M</div></div>
+    </div></section>
+
+    <section class="section"><div class="section-header"><div class="section-title">品类月度异动分析</div><div class="section-desc">点击行或Treemap选类目 → 下方展开深度分析（①-⑤结构归因）</div></div>
+      <div class="card"><div style="overflow-x:auto;"><table style="min-width:1000px;">
+        <thead><tr><th>#</th><th>品类</th><th>年GMV</th><th>4月月销</th><th>MoM</th><th>子类目</th><th>CN品牌数</th><th>CN GMV%</th></tr></thead>
+        <tbody><tr style="cursor:pointer;" onclick="selectCat('个人护理产品')"><td>1</td><td><b>个人护理产品</b></td><td>$11.3B</td><td>$942M</td><td class="down">-1.1%</td><td>39</td><td>388</td><td class="">6.4%</td></tr><tr style="cursor:pointer;" onclick="selectCat('维生素矿物质和补充剂')"><td>2</td><td><b>维生素矿物质和补充剂</b></td><td>$10.1B</td><td>$820M</td><td class="down">-2.2%</td><td>42</td><td>210</td><td class="down">2.0%</td></tr><tr style="cursor:pointer;" onclick="selectCat('家居用品')"><td>3</td><td><b>家居用品</b></td><td>$9.0B</td><td>$781M</td><td class="up">+4.2%</td><td>72</td><td>755</td><td class="">14.3%</td></tr><tr style="cursor:pointer;" onclick="selectCat('保健产品')"><td>4</td><td><b>保健产品</b></td><td>$7.1B</td><td>$599M</td><td class="up">+1.4%</td><td>79</td><td>789</td><td class="">15.4%</td></tr><tr style="cursor:pointer;" onclick="selectCat('饮食和运动营养')"><td>5</td><td><b>饮食和运动营养</b></td><td>$5.9B</td><td>$480M</td><td class="down">-3.0%</td><td>37</td><td>215</td><td class="down">1.6%</td></tr><tr style="cursor:pointer;" onclick="selectCat('运动营养产品')"><td>6</td><td><b>运动营养产品</b></td><td>$4.7B</td><td>$370M</td><td class="down">-3.8%</td><td>37</td><td>234</td><td class="down">1.6%</td></tr><tr style="cursor:pointer;" onclick="selectCat('家用医疗用品和设备')"><td>7</td><td><b>家用医疗用品和设备</b></td><td>$3.2B</td><td>$280M</td><td class="down">-0.8%</td><td>65</td><td>1488</td><td class="up">40.2%</td></tr><tr style="cursor:pointer;" onclick="selectCat('口腔护理产品')"><td>8</td><td><b>口腔护理产品</b></td><td>$3.0B</td><td>$228M</td><td class="down">-4.1%</td><td>25</td><td>1109</td><td class="">13.9%</td></tr><tr style="cursor:pointer;" onclick="selectCat('婴儿和儿童护理产品')"><td>9</td><td><b>婴儿和儿童护理产品</b></td><td>$2.1B</td><td>$159M</td><td class="down">-4.5%</td><td>34</td><td>633</td><td class="down">4.3%</td></tr><tr style="cursor:pointer;" onclick="selectCat('健康与放松产品')"><td>10</td><td><b>健康与放松产品</b></td><td>$2.1B</td><td>$148M</td><td class="down">-5.2%</td><td>43</td><td>1611</td><td class="up">49.2%</td></tr><tr style="cursor:pointer;" onclick="selectCat('销售和交易')"><td>11</td><td><b>销售和交易</b></td><td>$1.6B</td><td>$121M</td><td class="down">-7.6%</td><td>96</td><td>1</td><td class="down">0.0%</td></tr><tr style="cursor:pointer;" onclick="selectCat('视觉产品')"><td>12</td><td><b>视觉产品</b></td><td>$0.7B</td><td>$48M</td><td class="down">-8.1%</td><td>20</td><td>1287</td><td class="up">28.3%</td></tr><tr style="cursor:pointer;" onclick="selectCat('文具和礼品包装用品')"><td>13</td><td><b>文具和礼品包装用品</b></td><td>$0.5B</td><td>$35M</td><td class="up">+6.4%</td><td>27</td><td>1735</td><td class="up">83.3%</td></tr></tbody></table></div></div>
     </section>
 
-    <!-- Exec Summary -->
-    <section class="section">
-      <div class="exec-summary">
-        <div class="exec-label">EXECUTIVE SUMMARY</div>
-        <div class="exec-body">
-          <div class="exec-head">US Amazon健康与家庭大盘 <b>$61B</b>（13品类·616子类目），中国品牌GMV占比 <span class="exec-up">11.2%</span></div>
-          <div class="exec-line">2026-04月销 <b>$5.0B</b>，品类<b>3升10降</b>，涨幅最大：<b>文具和礼品包装用品</b>（<span class="exec-up">+6.4%</span>），跌幅最大：<b>视觉产品</b>（<span class="exec-down">-8.1%</span>）</div>
-          <div class="exec-line">最大低渗透机会：维生素矿物质<b>$10.1B（CN 2.0%）</b> · 个人护理<b>$11.4B（CN 6.4%）</b> · 运动营养<b>$10.6B（CN 1.6%）</b></div>
+    <section class="section"><div class="section-header"><div class="section-title">类目深度分析</div><div class="section-desc">选择上方品类行 / Treemap / 下拉框 → 查看核心结论、结构归因与子类目明细</div></div>
+      <div class="filter-bar">
+        <select class="filter-select" id="cat-selector" onchange="selectCat(this.value)"><option value="">-- 选择一级类目 --</option><option value="个人护理产品">个人护理产品（MoM -1.1% · CN 6.4%）</option><option value="维生素矿物质和补充剂">维生素矿物质和补充剂（MoM -2.2% · CN 2.0%）</option><option value="家居用品">家居用品（MoM +4.2% · CN 14.3%）</option><option value="保健产品">保健产品（MoM +1.4% · CN 15.4%）</option><option value="饮食和运动营养">饮食和运动营养（MoM -3.0% · CN 1.6%）</option><option value="运动营养产品">运动营养产品（MoM -3.8% · CN 1.6%）</option><option value="家用医疗用品和设备">家用医疗用品和设备（MoM -0.8% · CN 40.2%）</option><option value="口腔护理产品">口腔护理产品（MoM -4.1% · CN 13.9%）</option><option value="婴儿和儿童护理产品">婴儿和儿童护理产品（MoM -4.5% · CN 4.3%）</option><option value="健康与放松产品">健康与放松产品（MoM -5.2% · CN 49.2%）</option><option value="销售和交易">销售和交易（MoM -7.6% · CN 0.0%）</option><option value="视觉产品">视觉产品（MoM -8.1% · CN 28.3%）</option><option value="文具和礼品包装用品">文具和礼品包装用品（MoM +6.4% · CN 83.3%）</option></select>
+      </div>
+      
+    <div class="cat-detail-panel" id="cat-detail-个人护理产品" style="display:none;">
+      <div class="card" style="margin-bottom:14px;">
+        <div class="card-title">个人护理产品 · 类目深度分析</div>
+        <div class="card-subtitle">年GMV $11.3B · 39子类目 · CN品牌388个 · CN GMV占比6.4% · MoM -1.1%</div>
+        <div class="bullet-list">
+          <div class="bullet-item green"><div class="bullet-title">① 核心结论</div><div class="bullet-body">个人护理产品是健康与家庭赛道中规模最大的低渗透品类之一（年GMV $11.3B，CN仅6.4%），中国品牌在此品类几乎空白，是BD优先级最高的赛道。</div></div>
+          <div class="bullet-item"><div class="bullet-title">② 核心发现：Top 3子类目</div><div class="bullet-body">皮肤护理产品（CN 3.0%，TOP3: La Roche-Posay / medicube / CeraVe） · 口腔护理产品（CN 8.2%，TOP3: Philips Sonicare / Oral-B / Crest） · 剃须和脱毛产品（CN 16.2%，TOP3: Norelco / Gillette / Braun）</div></div>
+          <div class="bullet-item amber"><div class="bullet-title">③ 结构归因</div><div class="bullet-body">8个子类目CN份额>30%（穿孔和纹身用品、毯子和毯子、杯子、杯子和油炸等），贡献了品类内CN GMV的主体；3个高GMV子类目CN份额<5%（皮肤护理产品、除臭剂和止汗剂、唇部护理产品等），是品类内最大的CN增量空间</div></div>
+          <div class="bullet-item green"><div class="bullet-title">④ 机会判断</div><div class="bullet-body">低渗透+大规模：适合作为BD优先赛道，优先找有GMP/FDA/CE认证的中国品牌；可从CN高渗透子类目（如穿孔和纹身用品）向低渗透子类目延伸</div></div>
+          <div class="bullet-item"><div class="bullet-title">⑤ 前瞻观察</div><div class="bullet-body">大品类(11B级)的CN渗透率提升路径长，需3-5年周期规划；品类高度细分（39个子类目），建议聚焦1-2个子类目打透再横向扩展</div></div>
         </div>
       </div>
-    </section>
-
-    <!-- KPI + Treemap -->
-    <section class="section">
-      <div class="overview-grid">
-        <div class="kpi-column">
-          <div class="kpi-card"><div class="kpi-label">大盘年GMV</div><div class="kpi-value">$61.2B</div><div class="kpi-sub">US Amazon 13品类</div></div>
-          <div class="kpi-card"><div class="kpi-label">2026-04月销</div><div class="kpi-value">$5.01B</div><div class="kpi-sub">环比 -1.2%</div></div>
-          <div class="kpi-card"><div class="kpi-label">CN品牌GMV占比</div><div class="kpi-value" style="color:#f59e0b;">11.2%</div><div class="kpi-sub">加权平均</div></div>
-          <div class="kpi-card"><div class="kpi-label">子类目数</div><div class="kpi-value">616</div><div class="kpi-sub">13个一级类目</div></div>
-        </div>
-        <div class="card" style="padding:12px;"><div class="chart-lg" id="chart-treemap"></div></div>
-      </div>
-    </section>
-
-    <!-- 18-Month Trend Chart -->
-    <section class="section">
       <div class="card">
-        <div class="card-title">大盘 GMV 趋势（双线图）</div>
-        <div class="card-subtitle">18个月 · 13品类合计 · 蓝色=总GMV · 绿色=中国品牌GMV · 虚线=CN份额</div>
-        <div class="chart-lg" id="chart-trend"></div>
+        <div class="card-title">Top 10 子类目明细</div>
+        <div style="overflow-x:auto;"><table>
+          <thead><tr><th>#</th><th>子类目</th><th>年GMV</th><th>CN GMV%</th><th>TOP3品牌</th></tr></thead>
+          <tbody><tr><td>1</td><td>皮肤护理产品</td><td>$6,423M</td><td class="down">3.0%</td><td style="font-size:12px;">La Roche-Posay / medicube / CeraVe</td></tr><tr><td>2</td><td>口腔护理产品</td><td>$2,270M</td><td class="">8.2%</td><td style="font-size:12px;">Philips Sonicare / Oral-B / Crest</td></tr><tr><td>3</td><td>剃须和脱毛产品</td><td>$1,291M</td><td class="">16.2%</td><td style="font-size:12px;">Norelco / Gillette / Braun</td></tr><tr><td>4</td><td>除臭剂和止汗剂</td><td>$506M</td><td class="down">0.0%</td><td style="font-size:12px;">Lume / Old Spice / Secret</td></tr><tr><td>5</td><td>唇部护理产品</td><td>$272M</td><td class="down">5.0%</td><td style="font-size:12px;">LANEIGE / Summer Fridays / Burt‘s Bees</td></tr><tr><td>6</td><td>浴缸和浴室配件</td><td>$269M</td><td class="">29.4%</td><td style="font-size:12px;">Body Restore / Dr Teal‘s / Amazon Basics</td></tr><tr><td>7</td><td>穿孔和纹身用品</td><td>$85M</td><td class="up">38.3%</td><td style="font-size:12px;">NeilMed / Hustle Butter Deluxe / MAST TATTOO</td></tr><tr><td>8</td><td>其他</td><td>$40M</td><td class="down">2.8%</td><td style="font-size:12px;">Crest / BodyGlide / Differin</td></tr><tr><td>9</td><td>婴儿皮肤护理</td><td>$31M</td><td class="down">0.0%</td><td style="font-size:12px;">BLUE LIZARD / Coppertone / Babo Botanicals</td></tr><tr><td>10</td><td>浴室毛巾</td><td>$24M</td><td class="down">0.0%</td><td style="font-size:12px;">Chakir Turkish Linens / American Soft Linen / Amazon Basics</td></tr></tbody></table></div>
       </div>
-    </section>
-
-    <!-- 4 Core Insights (merged news + category data) -->
-    <section class="section">
-      <div class="section-header"><div class="section-title">核心洞察</div></div>
-      <div class="bullet-list">
-        <div class="bullet-item green">
-          <div class="bullet-title">洞察1：维生素矿物质（$10.1B · CN 2.0%）——FDA窗口期是中国品牌的系统性入场机会</div>
-          <div class="bullet-body">2026年3月FDA里程碑会议拟扩大"膳食成分"定义（肽类/下一代益生菌），GRAS改革推进中，HHS部长RFK Jr.公开支持补充剂松绑。SPINS数据显示NMN、Sea Moss、Colostrum等新成分崛起——中国原料端有优势。同时纽约州18+限制法等碎片化监管正在推高合规门槛，率先完成FDA GRAS/NDI认证的品牌将享受"监管溢价"。<b>BD建议：优先找有GMP认证+Vitafoods/CES参展记录+Amazon有Listing但无TikTok的品牌。</b></div>
-        </div>
-        <div class="bullet-item">
-          <div class="bullet-title">洞察2：个人护理（$11.4B · CN 6.4%）——「设备+配方」融合是中国3C制造能力的自然延伸</div>
-          <div class="bullet-body">CES 2026和Cosmoprof Bologna 2026同时指向一个趋势：光疗（LED/红外/激光）正在成为美容设备的底层能力，包装盖变身治疗引擎。欧莱雅、LG、科玛韩国均已入场。中国品牌在皮肤护理$6.4B大品类中CN仅3.0%，但在剃须脱毛（CN 16.2%）和按摩工具（CN 56%）已有突破——本质是3C制造能力向个护设备的迁移。<b>BD建议：找已有FDA 510(k)或CE认证+CES/Cosmoprof参展+有消费电子ODM背景跨界个护的品牌。</b></div>
-        </div>
-        <div class="bullet-item amber">
-          <div class="bullet-title">洞察3：家用医疗设备（$3.2B · CN 40.2%）——从「卖设备」升级到「卖健康数据服务」</div>
-          <div class="bullet-body">CES 2026最明确的硬件趋势：居家诊断消费级化（睡眠实验室/激素监测/智能卫生巾）。中国品牌在移动辅助/支架/血压血氧品类已有高渗透，但AI健康管理、连续监测、多模态数据整合等"设备+服务"模式尚未建立。AI医疗市场预计2034年达$8,864亿。<b>BD建议：找有FDA 510(k)+CES数字健康参展+独立站/App生态的品牌，从单品达人种草升级到健康数据叙事。</b></div>
-        </div>
-        <div class="bullet-item">
-          <div class="bullet-title">洞察4：婴儿护理（$2.1B · CN 4.3%）——智能化是中国制造的结构性差异化武器</div>
-          <div class="bullet-body">中国工信部已将婴童智能化列为国家战略方向。智能婴儿监视器市场2035年预计$89.85B（CAGR 34.5%）。毫米波雷达+AI呼吸监测+自适应哄睡正在成为中国品牌的标配能力。Amazon上CN仅4.3%，但中国供应链在传感器/AI算法/硬件集成上有绝对优势。<b>BD建议：找有母婴产品线+毫米波/传感技术+Amazon Listing但无品牌化内容矩阵的品牌，以"科技育儿"叙事切入达人营销。</b></div>
+    </div>
+    <div class="cat-detail-panel" id="cat-detail-维生素矿物质和补充剂" style="display:none;">
+      <div class="card" style="margin-bottom:14px;">
+        <div class="card-title">维生素矿物质和补充剂 · 类目深度分析</div>
+        <div class="card-subtitle">年GMV $10.1B · 42子类目 · CN品牌210个 · CN GMV占比2.0% · MoM -2.2%</div>
+        <div class="bullet-list">
+          <div class="bullet-item green"><div class="bullet-title">① 核心结论</div><div class="bullet-body">维生素矿物质和补充剂是健康与家庭赛道中规模最大的低渗透品类之一（年GMV $10.1B，CN仅2.0%），中国品牌在此品类几乎空白，是BD优先级最高的赛道。</div></div>
+          <div class="bullet-item"><div class="bullet-title">② 核心发现：Top 3子类目</div><div class="bullet-body">维生素补充剂（CN 0.2%，TOP3: Nature Made / THORNE / MARYRUTH‘S） · 草药补充剂（CN 3.0%，TOP3: Grüns / RYZE SUPERFOODS / Metamucil） · 矿物质补充剂（CN 4.4%，TOP3: Pure Encapsulations / THORNE / Nature Made）</div></div>
+          <div class="bullet-item amber"><div class="bullet-title">③ 结构归因</div><div class="bullet-body">1个子类目CN份额>30%（茶饮料等），贡献了品类内CN GMV的主体；14个高GMV子类目CN份额<5%（维生素补充剂、草药补充剂、矿物质补充剂等），是品类内最大的CN增量空间</div></div>
+          <div class="bullet-item green"><div class="bullet-title">④ 机会判断</div><div class="bullet-body">低渗透+大规模：适合作为BD优先赛道，优先找有GMP/FDA/CE认证的中国品牌；可从CN高渗透子类目（如茶饮料）向低渗透子类目延伸</div></div>
+          <div class="bullet-item"><div class="bullet-title">⑤ 前瞻观察</div><div class="bullet-body">大品类(10B级)的CN渗透率提升路径长，需3-5年周期规划；FDA监管窗口期（2026成分定义扩大化）是CN品牌进入的最佳时机；品类高度细分（42个子类目），建议聚焦1-2个子类目打透再横向扩展</div></div>
         </div>
       </div>
-    </section>
-
-    <!-- MoM Summary Cards -->
-    <section class="section">
-      <div class="grid-3" style="margin-bottom:18px;">
-        <div class="kpi-card"><div class="kpi-label">上升/下降品类数</div><div class="kpi-value" style="font-size:20px;"><span style="color:#059669;">3↑</span> / <span style="color:#dc2626;">10↓</span></div><div class="kpi-sub">共13个一级类目</div></div>
-        <div class="kpi-card"><div class="kpi-label">环比涨幅最大</div><div class="kpi-value" style="font-size:20px;">文具和礼品包装用品</div><div class="kpi-sub"><span style="color:#059669;">+6.4%</span> · 月销$35M</div></div>
-        <div class="kpi-card"><div class="kpi-label">环比跌幅最大</div><div class="kpi-value" style="font-size:20px;">视觉产品</div><div class="kpi-sub"><span style="color:#dc2626;">-8.1%</span> · 月销$48M</div></div>
-      </div>
-    </section>
-
-    <!-- Category Table (3C-style: sortable) -->
-    <section class="section">
-      <div class="section-header"><div class="section-title">品类月度异动分析</div><div class="section-desc">2026-04 vs 2026-03 · 年GMV降序 · MoM标色（绿涨红跌）· CN GMV占比标色</div></div>
       <div class="card">
-        <div style="overflow-x:auto;">
-          <table style="min-width:1000px;">
-            <thead><tr><th>#</th><th>品类</th><th>年GMV</th><th>4月月销</th><th>MoM</th><th>子类目</th><th>CN品牌数</th><th>CN GMV%</th></tr></thead>
-            <tbody><tr>
-      <td>1</td><td><b>个人护理产品</b></td>
-      <td>$11.3B</td>
-      <td>$942M</td>
-      <td class="down">-1.1%</td>
-      <td>39</td><td>388</td>
-      <td class="">6.4%</td>
-    </tr><tr>
-      <td>2</td><td><b>维生素矿物质和补充剂</b></td>
-      <td>$10.1B</td>
-      <td>$820M</td>
-      <td class="down">-2.2%</td>
-      <td>42</td><td>210</td>
-      <td class="down">2.0%</td>
-    </tr><tr>
-      <td>3</td><td><b>家居用品</b></td>
-      <td>$9.0B</td>
-      <td>$781M</td>
-      <td class="up">+4.2%</td>
-      <td>72</td><td>755</td>
-      <td class="">14.3%</td>
-    </tr><tr>
-      <td>4</td><td><b>保健产品</b></td>
-      <td>$7.1B</td>
-      <td>$599M</td>
-      <td class="up">+1.4%</td>
-      <td>79</td><td>789</td>
-      <td class="">15.4%</td>
-    </tr><tr>
-      <td>5</td><td><b>饮食和运动营养</b></td>
-      <td>$5.9B</td>
-      <td>$480M</td>
-      <td class="down">-3.0%</td>
-      <td>37</td><td>215</td>
-      <td class="down">1.6%</td>
-    </tr><tr>
-      <td>6</td><td><b>运动营养产品</b></td>
-      <td>$4.7B</td>
-      <td>$370M</td>
-      <td class="down">-3.8%</td>
-      <td>37</td><td>234</td>
-      <td class="down">1.6%</td>
-    </tr><tr>
-      <td>7</td><td><b>家用医疗用品和设备</b></td>
-      <td>$3.2B</td>
-      <td>$280M</td>
-      <td class="down">-0.8%</td>
-      <td>65</td><td>1488</td>
-      <td class="up">40.2%</td>
-    </tr><tr>
-      <td>8</td><td><b>口腔护理产品</b></td>
-      <td>$3.0B</td>
-      <td>$228M</td>
-      <td class="down">-4.1%</td>
-      <td>25</td><td>1109</td>
-      <td class="">13.9%</td>
-    </tr><tr>
-      <td>9</td><td><b>婴儿和儿童护理产品</b></td>
-      <td>$2.1B</td>
-      <td>$159M</td>
-      <td class="down">-4.5%</td>
-      <td>34</td><td>633</td>
-      <td class="down">4.3%</td>
-    </tr><tr>
-      <td>10</td><td><b>健康与放松产品</b></td>
-      <td>$2.1B</td>
-      <td>$148M</td>
-      <td class="down">-5.2%</td>
-      <td>43</td><td>1611</td>
-      <td class="up">49.2%</td>
-    </tr><tr>
-      <td>11</td><td><b>销售和交易</b></td>
-      <td>$1.6B</td>
-      <td>$121M</td>
-      <td class="down">-7.6%</td>
-      <td>96</td><td>1</td>
-      <td class="down">0.0%</td>
-    </tr><tr>
-      <td>12</td><td><b>视觉产品</b></td>
-      <td>$0.7B</td>
-      <td>$48M</td>
-      <td class="down">-8.1%</td>
-      <td>20</td><td>1287</td>
-      <td class="up">28.3%</td>
-    </tr><tr>
-      <td>13</td><td><b>文具和礼品包装用品</b></td>
-      <td>$0.5B</td>
-      <td>$35M</td>
-      <td class="up">+6.4%</td>
-      <td>27</td><td>1735</td>
-      <td class="up">83.3%</td>
-    </tr></tbody>
-          </table>
+        <div class="card-title">Top 10 子类目明细</div>
+        <div style="overflow-x:auto;"><table>
+          <thead><tr><th>#</th><th>子类目</th><th>年GMV</th><th>CN GMV%</th><th>TOP3品牌</th></tr></thead>
+          <tbody><tr><td>1</td><td>维生素补充剂</td><td>$2,043M</td><td class="down">0.2%</td><td style="font-size:12px;">Nature Made / THORNE / MARYRUTH‘S</td></tr><tr><td>2</td><td>草药补充剂</td><td>$1,599M</td><td class="down">3.0%</td><td style="font-size:12px;">Grüns / RYZE SUPERFOODS / Metamucil</td></tr><tr><td>3</td><td>矿物质补充剂</td><td>$1,251M</td><td class="down">4.4%</td><td style="font-size:12px;">Pure Encapsulations / THORNE / Nature Made</td></tr><tr><td>4</td><td>消化营养补充剂</td><td>$856M</td><td class="down">1.6%</td><td style="font-size:12px;">Physician‘s CHOICE / Garden of Life / Culturelle</td></tr><tr><td>5</td><td>混合维生素和矿物质补充剂</td><td>$816M</td><td class="down">1.2%</td><td style="font-size:12px;">Prevagen / THORNE / Pure Encapsulations</td></tr><tr><td>6</td><td>氨基酸营养补充剂</td><td>$725M</td><td class="down">2.5%</td><td style="font-size:12px;">Optimum Nutrition / THORNE / Nutricost</td></tr><tr><td>7</td><td>必需脂肪酸营养补充剂</td><td>$694M</td><td class="down">0.8%</td><td style="font-size:12px;">Nordic Naturals / Sports Research / Nature Made</td></tr><tr><td>8</td><td>抗氧化营养补充剂</td><td>$573M</td><td class="down">4.1%</td><td style="font-size:12px;">Qunol / Humann / Pure Encapsulations</td></tr><tr><td>9</td><td>胶原蛋白补充剂</td><td>$571M</td><td class="down">1.5%</td><td style="font-size:12px;">Vital Proteins / Sports Research / Micro Ingredients</td></tr><tr><td>10</td><td>草药和营养睡眠补充剂</td><td>$233M</td><td class="down">2.0%</td><td style="font-size:12px;">Natrol / OLLY / Relaxium</td></tr></tbody></table></div>
+      </div>
+    </div>
+    <div class="cat-detail-panel" id="cat-detail-家居用品" style="display:none;">
+      <div class="card" style="margin-bottom:14px;">
+        <div class="card-title">家居用品 · 类目深度分析</div>
+        <div class="card-subtitle">年GMV $9.0B · 72子类目 · CN品牌755个 · CN GMV占比14.3% · MoM +4.2%</div>
+        <div class="bullet-list">
+          <div class="bullet-item green"><div class="bullet-title">① 核心结论</div><div class="bullet-body">家居用品品类年GMV $9.0B，中国品牌GMV占比14.3%，处于中等渗透水平，存在结构性提升空间。</div></div>
+          <div class="bullet-item"><div class="bullet-title">② 核心发现：Top 3子类目</div><div class="bullet-body">纸和塑料家居用品（CN 30.8%，TOP3: Amazon Basics / Hefty / Glad） · 家庭清洁（CN 2.1%，TOP3: ProtectaClear / Bounty / Clorox） · 洗衣用品（CN 3.1%，TOP3: Tide / Downy / Gain）</div></div>
+          <div class="bullet-item amber"><div class="bullet-title">③ 结构归因</div><div class="bullet-body">18个子类目CN份额>30%（纸和塑料家居用品、家用清洁工具、吸湿器等），贡献了品类内CN GMV的主体；7个高GMV子类目CN份额<5%（家庭清洁、洗衣用品、纸巾、卫生纸和喷等），是品类内最大的CN增量空间</div></div>
+          <div class="bullet-item green"><div class="bullet-title">④ 机会判断</div><div class="bullet-body">低渗透+大规模：适合作为BD优先赛道，优先找有GMP/FDA/CE认证的中国品牌；品类处于增长通道（MoM +4.2%），增量市场更容忍新进入者；可从CN高渗透子类目（如纸和塑料家居用品）向低渗透子类目延伸</div></div>
+          <div class="bullet-item"><div class="bullet-title">⑤ 前瞻观察</div><div class="bullet-body">大品类(9B级)的CN渗透率提升路径长，需3-5年周期规划；品类高度细分（72个子类目），建议聚焦1-2个子类目打透再横向扩展</div></div>
         </div>
       </div>
-    </section>
-
-    <!-- Quadrant + Top Subcategories -->
-    <section class="section">
-      <div class="section-header"><div class="section-title">品类 GMV × CN份额 象限</div></div>
-      <div class="card"><div class="chart-lg" id="chart-quadrant"></div></div>
-    </section>
-
-    <!-- Top CN Subcategories -->
-    <section class="section">
-      <div class="section-header"><div class="section-title">中国品牌高份额子类目 Top 15（按子类目年GMV排名）</div></div>
       <div class="card">
-        <div style="overflow-x:auto;">
-          <table>
-            <thead><tr><th>#</th><th>子类目</th><th>一级类目</th><th>年GMV</th><th>CN GMV%</th><th>TOP3品牌</th></tr></thead>
-            <tbody><tr>
-      <td>1</td><td><b>皮肤护理产品</b></td><td>个人护理产品</td>
-      <td>$6,423M</td>
-      <td class="">3.0%</td>
-      <td style="font-size:12px;">La Roche-Posay / medicube / CeraVe</td>
-    </tr><tr>
-      <td>2</td><td><b>运动营养产品</b></td><td>饮食和运动营养</td>
-      <td>$4,064M</td>
-      <td class="">1.6%</td>
-      <td style="font-size:12px;">Optimum Nutrition / Nutricost / Dymatize</td>
-    </tr><tr>
-      <td>3</td><td><b>口腔护理产品</b></td><td>个人护理产品</td>
-      <td>$2,270M</td>
-      <td class="">8.2%</td>
-      <td style="font-size:12px;">Philips Sonicare / Oral-B / Crest</td>
-    </tr><tr>
-      <td>4</td><td><b>维生素补充剂</b></td><td>维生素矿物质和补充剂</td>
-      <td>$2,043M</td>
-      <td class="">0.2%</td>
-      <td style="font-size:12px;">Nature Made / THORNE / MARYRUTH‘S</td>
-    </tr><tr>
-      <td>5</td><td><b>纸和塑料家居用品</b></td><td>家居用品</td>
-      <td>$2,033M</td>
-      <td class="up">30.8%</td>
-      <td style="font-size:12px;">Amazon Basics / Hefty / Glad</td>
-    </tr><tr>
-      <td>6</td><td><b>非处方药</b></td><td>保健产品</td>
-      <td>$1,919M</td>
-      <td class="">5.1%</td>
-      <td style="font-size:12px;">Amazon Basic Care / Tylenol / Vicks</td>
-    </tr><tr>
-      <td>7</td><td><b>家庭清洁</b></td><td>家居用品</td>
-      <td>$1,730M</td>
-      <td class="">2.1%</td>
-      <td style="font-size:12px;">ProtectaClear / Bounty / Clorox</td>
-    </tr><tr>
-      <td>8</td><td><b>运动营养蛋白</b></td><td>运动营养产品</td>
-      <td>$1,659M</td>
-      <td class="">0.1%</td>
-      <td style="font-size:12px;">Dymatize / Ensure / Isopure</td>
-    </tr><tr>
-      <td>9</td><td><b>草药补充剂</b></td><td>维生素矿物质和补充剂</td>
-      <td>$1,599M</td>
-      <td class="">3.0%</td>
-      <td style="font-size:12px;">Grüns / RYZE SUPERFOODS / Metamucil</td>
-    </tr><tr>
-      <td>10</td><td><b>移动和日常生活辅助设备</b></td><td>家用医疗用品和设备</td>
-      <td>$1,413M</td>
-      <td class="up">47.7%</td>
-      <td style="font-size:12px;">Drive Medical / Medline / VOCIC</td>
-    </tr><tr>
-      <td>11</td><td><b>剃须和脱毛产品</b></td><td>个人护理产品</td>
-      <td>$1,291M</td>
-      <td class="">16.2%</td>
-      <td style="font-size:12px;">Norelco / Gillette / Braun</td>
-    </tr><tr>
-      <td>12</td><td><b>尿布护理</b></td><td>婴儿和儿童护理产品</td>
-      <td>$1,269M</td>
-      <td class="">1.8%</td>
-      <td style="font-size:12px;">Pampers / HUGGIES / The Honest Company</td>
-    </tr><tr>
-      <td>13</td><td><b>矿物质补充剂</b></td><td>维生素矿物质和补充剂</td>
-      <td>$1,251M</td>
-      <td class="">4.4%</td>
-      <td style="font-size:12px;">Pure Encapsulations / THORNE / Nature Made</td>
-    </tr><tr>
-      <td>14</td><td><b>洗衣用品</b></td><td>家居用品</td>
-      <td>$1,162M</td>
-      <td class="">3.1%</td>
-      <td style="font-size:12px;">Tide / Downy / Gain</td>
-    </tr><tr>
-      <td>15</td><td><b>按摩工具和设备</b></td><td>健康与放松产品</td>
-      <td>$1,145M</td>
-      <td class="up">56.2%</td>
-      <td style="font-size:12px;">RENPHO / TheraGun / Hyperice</td>
-    </tr></tbody>
-          </table>
+        <div class="card-title">Top 10 子类目明细</div>
+        <div style="overflow-x:auto;"><table>
+          <thead><tr><th>#</th><th>子类目</th><th>年GMV</th><th>CN GMV%</th><th>TOP3品牌</th></tr></thead>
+          <tbody><tr><td>1</td><td>纸和塑料家居用品</td><td>$2,033M</td><td class="up">30.8%</td><td style="font-size:12px;">Amazon Basics / Hefty / Glad</td></tr><tr><td>2</td><td>家庭清洁</td><td>$1,730M</td><td class="down">2.1%</td><td style="font-size:12px;">ProtectaClear / Bounty / Clorox</td></tr><tr><td>3</td><td>洗衣用品</td><td>$1,162M</td><td class="down">3.1%</td><td style="font-size:12px;">Tide / Downy / Gain</td></tr><tr><td>4</td><td>纸巾、卫生纸和喷雾器</td><td>$982M</td><td class="down">1.0%</td><td style="font-size:12px;">Charmin / Cottonelle / Amazon Basics</td></tr><tr><td>5</td><td>家用清洁工具</td><td>$852M</td><td class="up">43.7%</td><td style="font-size:12px;">Swiffer / O-Cedar / MR.SIGA</td></tr><tr><td>6</td><td>家用电池</td><td>$693M</td><td class="">16.3%</td><td style="font-size:12px;">Amazon Basics / DURACELL / Energizer</td></tr><tr><td>7</td><td>洗碗用品</td><td>$399M</td><td class="down">0.6%</td><td style="font-size:12px;">Finish / Cascade / Dawn</td></tr><tr><td>8</td><td>空气清新剂供应</td><td>$303M</td><td class="down">1.3%</td><td style="font-size:12px;">Febreze / Air Wick / Glade</td></tr><tr><td>9</td><td>室内害虫防治</td><td>$144M</td><td class="">7.0%</td><td style="font-size:12px;">Mighty Mint / GOOTOP / Ortho</td></tr><tr><td>10</td><td>商业洗衣清洁用品</td><td>$130M</td><td class="down">0.0%</td><td style="font-size:12px;">Tide / Arm & Hammer / Febreze</td></tr></tbody></table></div>
+      </div>
+    </div>
+    <div class="cat-detail-panel" id="cat-detail-保健产品" style="display:none;">
+      <div class="card" style="margin-bottom:14px;">
+        <div class="card-title">保健产品 · 类目深度分析</div>
+        <div class="card-subtitle">年GMV $7.1B · 79子类目 · CN品牌789个 · CN GMV占比15.4% · MoM +1.4%</div>
+        <div class="bullet-list">
+          <div class="bullet-item green"><div class="bullet-title">① 核心结论</div><div class="bullet-body">保健产品品类年GMV $7.1B，中国品牌GMV占比15.4%，处于中等渗透水平，存在结构性提升空间。</div></div>
+          <div class="bullet-item"><div class="bullet-title">② 核心发现：Top 3子类目</div><div class="bullet-body">非处方药（CN 5.1%，TOP3: Amazon Basic Care / Tylenol / Vicks） · 急救用品（CN 30.5%，TOP3: Purell / LifeVac / Comfytemp） · 失禁和造口产品（CN 6.7%，TOP3: Depend / Poise / Always Discreet）</div></div>
+          <div class="bullet-item amber"><div class="bullet-title">③ 结构归因</div><div class="bullet-body">15个子类目CN份额>30%（急救用品、替代药物产品、睡眠和打鼾辅助工等），贡献了品类内CN GMV的主体；4个高GMV子类目CN份额<5%（女性保健产品、女性护理、眼部护理产品等），是品类内最大的CN增量空间</div></div>
+          <div class="bullet-item green"><div class="bullet-title">④ 机会判断</div><div class="bullet-body">品类处于增长通道（MoM +1.4%），增量市场更容忍新进入者；可从CN高渗透子类目（如急救用品）向低渗透子类目延伸</div></div>
+          <div class="bullet-item"><div class="bullet-title">⑤ 前瞻观察</div><div class="bullet-body">大品类(7B级)的CN渗透率提升路径长，需3-5年周期规划；品类高度细分（79个子类目），建议聚焦1-2个子类目打透再横向扩展</div></div>
         </div>
       </div>
+      <div class="card">
+        <div class="card-title">Top 10 子类目明细</div>
+        <div style="overflow-x:auto;"><table>
+          <thead><tr><th>#</th><th>子类目</th><th>年GMV</th><th>CN GMV%</th><th>TOP3品牌</th></tr></thead>
+          <tbody><tr><td>1</td><td>非处方药</td><td>$1,919M</td><td class="">5.1%</td><td style="font-size:12px;">Amazon Basic Care / Tylenol / Vicks</td></tr><tr><td>2</td><td>急救用品</td><td>$1,072M</td><td class="up">30.5%</td><td style="font-size:12px;">Purell / LifeVac / Comfytemp</td></tr><tr><td>3</td><td>失禁和造口产品</td><td>$857M</td><td class="">6.7%</td><td style="font-size:12px;">Depend / Poise / Always Discreet</td></tr><tr><td>4</td><td>替代药物产品</td><td>$496M</td><td class="up">41.0%</td><td style="font-size:12px;">SVA ORGANICS / Air-Scent / Boiron</td></tr><tr><td>5</td><td>女性保健产品</td><td>$450M</td><td class="down">0.5%</td><td style="font-size:12px;">O Positiv / Ritual / Clearblue</td></tr><tr><td>6</td><td>女性护理</td><td>$417M</td><td class="down">2.0%</td><td style="font-size:12px;">Always / Rael / Tampax</td></tr><tr><td>7</td><td>足部保健产品</td><td>$381M</td><td class="">24.1%</td><td style="font-size:12px;">PowerStep / Dr. Scholl‘s / Superfeet</td></tr><tr><td>8</td><td>睡眠和打鼾辅助工具</td><td>$311M</td><td class="up">34.9%</td><td style="font-size:12px;">intake / Breathe Right / nodpod</td></tr><tr><td>9</td><td>眼部护理产品</td><td>$242M</td><td class="down">0.2%</td><td style="font-size:12px;">Systane / Refresh / LUMIFY</td></tr><tr><td>10</td><td>糖尿病护理产品</td><td>$215M</td><td class="">17.7%</td><td style="font-size:12px;">Lingo / Stelo / Ascensia</td></tr></tbody></table></div>
+      </div>
+    </div>
+    <div class="cat-detail-panel" id="cat-detail-饮食和运动营养" style="display:none;">
+      <div class="card" style="margin-bottom:14px;">
+        <div class="card-title">饮食和运动营养 · 类目深度分析</div>
+        <div class="card-subtitle">年GMV $5.9B · 37子类目 · CN品牌215个 · CN GMV占比1.6% · MoM -3.0%</div>
+        <div class="bullet-list">
+          <div class="bullet-item green"><div class="bullet-title">① 核心结论</div><div class="bullet-body">饮食和运动营养是健康与家庭赛道中规模最大的低渗透品类之一（年GMV $5.9B，CN仅1.6%），中国品牌在此品类几乎空白，是BD优先级最高的赛道。</div></div>
+          <div class="bullet-item"><div class="bullet-title">② 核心发现：Top 3子类目</div><div class="bullet-body">运动营养产品（CN 1.6%，TOP3: Optimum Nutrition / Nutricost / Dymatize） · 减肥产品（CN 2.8%，TOP3: Serene Herbs / Metamucil / Benefiber） · 运动营养耐力和能量产品（CN 2.1%，TOP3: Neuro / Rosabella / GU Energy）</div></div>
+          <div class="bullet-item amber"><div class="bullet-title">③ 结构归因</div><div class="bullet-body">1个子类目CN份额>30%（条形图工具等），贡献了品类内CN GMV的主体；8个高GMV子类目CN份额<5%（运动营养产品、减肥产品、运动营养耐力和能等），是品类内最大的CN增量空间</div></div>
+          <div class="bullet-item green"><div class="bullet-title">④ 机会判断</div><div class="bullet-body">低渗透+大规模：适合作为BD优先赛道，优先找有GMP/FDA/CE认证的中国品牌；可从CN高渗透子类目（如条形图工具）向低渗透子类目延伸</div></div>
+          <div class="bullet-item"><div class="bullet-title">⑤ 前瞻观察</div><div class="bullet-body">大品类(6B级)的CN渗透率提升路径长，需3-5年周期规划；FDA监管窗口期（2026成分定义扩大化）是CN品牌进入的最佳时机；品类高度细分（37个子类目），建议聚焦1-2个子类目打透再横向扩展</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Top 10 子类目明细</div>
+        <div style="overflow-x:auto;"><table>
+          <thead><tr><th>#</th><th>子类目</th><th>年GMV</th><th>CN GMV%</th><th>TOP3品牌</th></tr></thead>
+          <tbody><tr><td>1</td><td>运动营养产品</td><td>$4,064M</td><td class="down">1.6%</td><td style="font-size:12px;">Optimum Nutrition / Nutricost / Dymatize</td></tr><tr><td>2</td><td>减肥产品</td><td>$539M</td><td class="down">2.8%</td><td style="font-size:12px;">Serene Herbs / Metamucil / Benefiber</td></tr><tr><td>3</td><td>运动营养耐力和能量产品</td><td>$423M</td><td class="down">2.1%</td><td style="font-size:12px;">Neuro / Rosabella / GU Energy</td></tr><tr><td>4</td><td>营养棒和饮料</td><td>$360M</td><td class="down">0.0%</td><td style="font-size:12px;">Quest / Pure Protein / Built Bar</td></tr><tr><td>5</td><td>瓶装饮料、水和饮料混合物</td><td>$164M</td><td class="down">0.0%</td><td style="font-size:12px;">Premier Protein / Oikos / Atkins</td></tr><tr><td>6</td><td>混合维生素和矿物质补充剂</td><td>$67M</td><td class="down">0.0%</td><td style="font-size:12px;">PreserVision / Fully Loaded Bullseye / THORNE</td></tr><tr><td>7</td><td>必需脂肪酸营养补充剂</td><td>$62M</td><td class="down">0.0%</td><td style="font-size:12px;">Nordic Naturals / Carlson / Standard Process Inc.</td></tr><tr><td>8</td><td>早餐和谷物棒</td><td>$58M</td><td class="down">0.0%</td><td style="font-size:12px;">ALOHA / think! / Quest</td></tr><tr><td>9</td><td>草药补充剂</td><td>$41M</td><td class="down">0.0%</td><td style="font-size:12px;">Force Factor / Snap Supplements / NaturaLife Labs</td></tr><tr><td>10</td><td>矿物质补充剂</td><td>$39M</td><td class="down">0.0%</td><td style="font-size:12px;">Life Extension / Pure Encapsulations / NOW Foods</td></tr></tbody></table></div>
+      </div>
+    </div>
+    <div class="cat-detail-panel" id="cat-detail-运动营养产品" style="display:none;">
+      <div class="card" style="margin-bottom:14px;">
+        <div class="card-title">运动营养产品 · 类目深度分析</div>
+        <div class="card-subtitle">年GMV $4.7B · 37子类目 · CN品牌234个 · CN GMV占比1.6% · MoM -3.8%</div>
+        <div class="bullet-list">
+          <div class="bullet-item green"><div class="bullet-title">① 核心结论</div><div class="bullet-body">运动营养产品是健康与家庭赛道中规模最大的低渗透品类之一（年GMV $4.7B，CN仅1.6%），中国品牌在此品类几乎空白，是BD优先级最高的赛道。</div></div>
+          <div class="bullet-item"><div class="bullet-title">② 核心发现：Top 3子类目</div><div class="bullet-body">运动营养蛋白（CN 0.1%，TOP3: Dymatize / Ensure / Isopure） · 氨基酸营养补充剂（CN 3.7%，TOP3: Optimum Nutrition / THORNE / Nutricost） · 运动营养电解质替代饮料（CN 2.3%，TOP3: Liquid I.V. / Drink LMNT / Ultima Replenisher）</div></div>
+          <div class="bullet-item amber"><div class="bullet-title">③ 结构归因</div><div class="bullet-body">2个子类目CN份额>30%（条形图工具、运动营养产品等），贡献了品类内CN GMV的主体；10个高GMV子类目CN份额<5%（运动营养蛋白、氨基酸营养补充剂、运动营养电解质替等），是品类内最大的CN增量空间</div></div>
+          <div class="bullet-item green"><div class="bullet-title">④ 机会判断</div><div class="bullet-body">低渗透+大规模：适合作为BD优先赛道，优先找有GMP/FDA/CE认证的中国品牌；可从CN高渗透子类目（如条形图工具）向低渗透子类目延伸</div></div>
+          <div class="bullet-item"><div class="bullet-title">⑤ 前瞻观察</div><div class="bullet-body">FDA监管窗口期（2026成分定义扩大化）是CN品牌进入的最佳时机；品类高度细分（37个子类目），建议聚焦1-2个子类目打透再横向扩展</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Top 10 子类目明细</div>
+        <div style="overflow-x:auto;"><table>
+          <thead><tr><th>#</th><th>子类目</th><th>年GMV</th><th>CN GMV%</th><th>TOP3品牌</th></tr></thead>
+          <tbody><tr><td>1</td><td>运动营养蛋白</td><td>$1,659M</td><td class="down">0.1%</td><td style="font-size:12px;">Dymatize / Ensure / Isopure</td></tr><tr><td>2</td><td>氨基酸营养补充剂</td><td>$992M</td><td class="down">3.7%</td><td style="font-size:12px;">Optimum Nutrition / THORNE / Nutricost</td></tr><tr><td>3</td><td>运动营养电解质替代饮料</td><td>$827M</td><td class="down">2.3%</td><td style="font-size:12px;">Liquid I.V. / Drink LMNT / Ultima Replenisher</td></tr><tr><td>4</td><td>运动营养预训练产品</td><td>$321M</td><td class="down">0.1%</td><td style="font-size:12px;">Nutricost / Humann / RAW</td></tr><tr><td>5</td><td>瓶装饮料、水和饮料混合物</td><td>$162M</td><td class="down">0.0%</td><td style="font-size:12px;">Premier Protein / Oikos / Atkins</td></tr><tr><td>6</td><td>运动营养睾酮补充剂</td><td>$117M</td><td class="down">3.5%</td><td style="font-size:12px;">Nugenix / MARS MEN / Prime Labs</td></tr><tr><td>7</td><td>营养棒和饮料</td><td>$111M</td><td class="down">0.0%</td><td style="font-size:12px;">Quest / Pure Protein / Built Bar</td></tr><tr><td>8</td><td>脂肪燃烧器补充剂</td><td>$83M</td><td class="down">0.4%</td><td style="font-size:12px;">InnoSupps / Lemme / Nutrimend IQ</td></tr><tr><td>9</td><td>运动营养健康零食和饮料</td><td>$77M</td><td class="down">0.0%</td><td style="font-size:12px;">Quest / Atkins / Wilde Chips</td></tr><tr><td>10</td><td>振动瓶</td><td>$64M</td><td class="">11.5%</td><td style="font-size:12px;">VELOMIX / BlenderBottle / YETI</td></tr></tbody></table></div>
+      </div>
+    </div>
+    <div class="cat-detail-panel" id="cat-detail-家用医疗用品和设备" style="display:none;">
+      <div class="card" style="margin-bottom:14px;">
+        <div class="card-title">家用医疗用品和设备 · 类目深度分析</div>
+        <div class="card-subtitle">年GMV $3.2B · 65子类目 · CN品牌1488个 · CN GMV占比40.2% · MoM -0.8%</div>
+        <div class="bullet-list">
+          <div class="bullet-item green"><div class="bullet-title">① 核心结论</div><div class="bullet-body">家用医疗用品和设备是中国品牌在健康与家庭赛道渗透最深的品类之一（CN GMV占比40.2%），65个子类目中中国品牌已在多个子类目建立规模优势。</div></div>
+          <div class="bullet-item"><div class="bullet-title">② 核心发现：Top 3子类目</div><div class="bullet-body">移动和日常生活辅助设备（CN 47.7%，TOP3: Drive Medical / Medline / VOCIC） · 支撑、夹板和支架（CN 35.3%，TOP3: Modvel / FREETOO / FEATOL） · 活动、健康和健康监测器（CN 30.4%，TOP3: Littmann / Omron / iHealth）</div></div>
+          <div class="bullet-item amber"><div class="bullet-title">③ 结构归因</div><div class="bullet-body">35个子类目CN份额>30%（移动和日常生活辅、支撑、夹板和支架、活动、健康和健康等），贡献了品类内CN GMV的主体；1个高GMV子类目CN份额<5%（家庭医学测试等），是品类内最大的CN增量空间</div></div>
+          <div class="bullet-item green"><div class="bullet-title">④ 机会判断</div><div class="bullet-body">可从CN高渗透子类目（如移动和日常生活辅助设）向低渗透子类目延伸</div></div>
+          <div class="bullet-item"><div class="bullet-title">⑤ 前瞻观察</div><div class="bullet-body">品类高度细分（65个子类目），建议聚焦1-2个子类目打透再横向扩展</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Top 10 子类目明细</div>
+        <div style="overflow-x:auto;"><table>
+          <thead><tr><th>#</th><th>子类目</th><th>年GMV</th><th>CN GMV%</th><th>TOP3品牌</th></tr></thead>
+          <tbody><tr><td>1</td><td>移动和日常生活辅助设备</td><td>$1,413M</td><td class="up">47.7%</td><td style="font-size:12px;">Drive Medical / Medline / VOCIC</td></tr><tr><td>2</td><td>支撑、夹板和支架</td><td>$573M</td><td class="up">35.3%</td><td style="font-size:12px;">Modvel / FREETOO / FEATOL</td></tr><tr><td>3</td><td>活动、健康和健康监测器</td><td>$506M</td><td class="up">30.4%</td><td style="font-size:12px;">Littmann / Omron / iHealth</td></tr><tr><td>4</td><td>职业和物理治疗辅助设备</td><td>$326M</td><td class="up">49.9%</td><td style="font-size:12px;">TENS 7000 / AUVON / THERABAND</td></tr><tr><td>5</td><td>家庭医学测试</td><td>$187M</td><td class="down">3.0%</td><td style="font-size:12px;">Clearblue / AncestryDNA / Easy@Home</td></tr><tr><td>6</td><td>医用压缩衣</td><td>$78M</td><td class="up">30.2%</td><td style="font-size:12px;">Truform / Amazon Basics / CHARMKING</td></tr><tr><td>7</td><td>骨科用品</td><td>$47M</td><td class="up">60.9%</td><td style="font-size:12px;">Osteo / MOYOAMA / Wuronsa</td></tr><tr><td>8</td><td>医疗程序面罩</td><td>$12M</td><td class="up">56.1%</td><td style="font-size:12px;">Litepak / NNPCBT / Borje</td></tr><tr><td>9</td><td>浴室地垫</td><td>$7M</td><td class="up">89.6%</td><td style="font-size:12px;">ZIKIBL / Bosap / FEATHER & STITCH NEW YORK</td></tr><tr><td>10</td><td>急救用品</td><td>$6M</td><td class="down">0.0%</td><td style="font-size:12px;">Boogie / TheraICE</td></tr></tbody></table></div>
+      </div>
+    </div>
+    <div class="cat-detail-panel" id="cat-detail-口腔护理产品" style="display:none;">
+      <div class="card" style="margin-bottom:14px;">
+        <div class="card-title">口腔护理产品 · 类目深度分析</div>
+        <div class="card-subtitle">年GMV $3.0B · 25子类目 · CN品牌1109个 · CN GMV占比13.9% · MoM -4.1%</div>
+        <div class="bullet-list">
+          <div class="bullet-item green"><div class="bullet-title">① 核心结论</div><div class="bullet-body">口腔护理产品品类年GMV $3.0B，中国品牌GMV占比13.9%，处于中等渗透水平，存在结构性提升空间。</div></div>
+          <div class="bullet-item"><div class="bullet-title">② 核心发现：Top 3子类目</div><div class="bullet-body">牙刷和配件（CN 17.1%，TOP3: Philips Sonicare / Oral-B / Aquasonic） · 牙线和牙签（CN 22.7%，TOP3: Waterpik / COSLUS / Cocolab） · 牙膏（CN 3.8%，TOP3: Crest / Colgate / Sensodyne）</div></div>
+          <div class="bullet-item amber"><div class="bullet-title">③ 结构归因</div><div class="bullet-body">3个子类目CN份额>30%（牙科护理套件、口腔护理产品、体检用品和耗材等），贡献了品类内CN GMV的主体；2个高GMV子类目CN份额<5%（牙膏、漱口水等），是品类内最大的CN增量空间</div></div>
+          <div class="bullet-item green"><div class="bullet-title">④ 机会判断</div><div class="bullet-body">低渗透+大规模：适合作为BD优先赛道，优先找有GMP/FDA/CE认证的中国品牌；可从CN高渗透子类目（如牙科护理套件）向低渗透子类目延伸</div></div>
+          <div class="bullet-item"><div class="bullet-title">⑤ 前瞻观察</div><div class="bullet-body">持续跟踪品类结构与CN品牌动态</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Top 10 子类目明细</div>
+        <div style="overflow-x:auto;"><table>
+          <thead><tr><th>#</th><th>子类目</th><th>年GMV</th><th>CN GMV%</th><th>TOP3品牌</th></tr></thead>
+          <tbody><tr><td>1</td><td>牙刷和配件</td><td>$872M</td><td class="">17.1%</td><td style="font-size:12px;">Philips Sonicare / Oral-B / Aquasonic</td></tr><tr><td>2</td><td>牙线和牙签</td><td>$529M</td><td class="">22.7%</td><td style="font-size:12px;">Waterpik / COSLUS / Cocolab</td></tr><tr><td>3</td><td>牙膏</td><td>$527M</td><td class="down">3.8%</td><td style="font-size:12px;">Crest / Colgate / Sensodyne</td></tr><tr><td>4</td><td>牙齿美白产品</td><td>$261M</td><td class="">5.5%</td><td style="font-size:12px;">Crest / Opalescence / Lumineux</td></tr><tr><td>5</td><td>漱口水</td><td>$248M</td><td class="down">0.7%</td><td style="font-size:12px;">TheraBreath / Listerine / CloSYS</td></tr><tr><td>6</td><td>义齿护理</td><td>$188M</td><td class="">23.2%</td><td style="font-size:12px;">m3naturals / Fixodent / UEOFEN</td></tr><tr><td>7</td><td>婴儿和儿童牙科护理产品</td><td>$153M</td><td class="">13.2%</td><td style="font-size:12px;">Boka / Tom’s of Maine / Dr. Brown‘s</td></tr><tr><td>8</td><td>个人正畸用品</td><td>$40M</td><td class="">29.6%</td><td style="font-size:12px;">Retainer Brite / EverSmile / INVISALIGN</td></tr><tr><td>9</td><td>呼吸清新剂</td><td>$37M</td><td class="">15.1%</td><td style="font-size:12px;">Listerine / BioGaia / MENTOS</td></tr><tr><td>10</td><td>口腔干燥缓解产品</td><td>$33M</td><td class="down">0.0%</td><td style="font-size:12px;">Oracoat / biotène / Larine co</td></tr></tbody></table></div>
+      </div>
+    </div>
+    <div class="cat-detail-panel" id="cat-detail-婴儿和儿童护理产品" style="display:none;">
+      <div class="card" style="margin-bottom:14px;">
+        <div class="card-title">婴儿和儿童护理产品 · 类目深度分析</div>
+        <div class="card-subtitle">年GMV $2.1B · 34子类目 · CN品牌633个 · CN GMV占比4.3% · MoM -4.5%</div>
+        <div class="bullet-list">
+          <div class="bullet-item green"><div class="bullet-title">① 核心结论</div><div class="bullet-body">婴儿和儿童护理产品是健康与家庭赛道中规模最大的低渗透品类之一（年GMV $2.1B，CN仅4.3%），中国品牌在此品类几乎空白，是BD优先级最高的赛道。</div></div>
+          <div class="bullet-item"><div class="bullet-title">② 核心发现：Top 3子类目</div><div class="bullet-body">尿布护理（CN 1.8%，TOP3: Pampers / HUGGIES / The Honest Company） · 婴儿和儿童个人护理产品（CN 1.8%，TOP3: Aveeno Baby / Aquaphor / Johnson‘s Baby） · 婴儿和儿童保健产品（CN 17.3%，TOP3: SmartyPants / MARYRUTH’S / GoodBaby）</div></div>
+          <div class="bullet-item amber"><div class="bullet-title">③ 结构归因</div><div class="bullet-body">5个子类目CN份额>30%（牙刷和配件、婴儿美容护肤产品、垃圾和回收容器等），贡献了品类内CN GMV的主体；2个高GMV子类目CN份额<5%（尿布护理、婴儿和儿童个人护等），是品类内最大的CN增量空间</div></div>
+          <div class="bullet-item green"><div class="bullet-title">④ 机会判断</div><div class="bullet-body">低渗透+大规模：适合作为BD优先赛道，优先找有GMP/FDA/CE认证的中国品牌；可从CN高渗透子类目（如牙刷和配件）向低渗透子类目延伸</div></div>
+          <div class="bullet-item"><div class="bullet-title">⑤ 前瞻观察</div><div class="bullet-body">FDA监管窗口期（2026成分定义扩大化）是CN品牌进入的最佳时机；品类高度细分（34个子类目），建议聚焦1-2个子类目打透再横向扩展</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Top 10 子类目明细</div>
+        <div style="overflow-x:auto;"><table>
+          <thead><tr><th>#</th><th>子类目</th><th>年GMV</th><th>CN GMV%</th><th>TOP3品牌</th></tr></thead>
+          <tbody><tr><td>1</td><td>尿布护理</td><td>$1,269M</td><td class="down">1.8%</td><td style="font-size:12px;">Pampers / HUGGIES / The Honest Company</td></tr><tr><td>2</td><td>婴儿和儿童个人护理产品</td><td>$383M</td><td class="down">1.8%</td><td style="font-size:12px;">Aveeno Baby / Aquaphor / Johnson‘s Baby</td></tr><tr><td>3</td><td>婴儿和儿童保健产品</td><td>$185M</td><td class="">17.3%</td><td style="font-size:12px;">SmartyPants / MARYRUTH’S / GoodBaby</td></tr><tr><td>4</td><td>婴儿和儿童牙科护理产品</td><td>$162M</td><td class="">13.6%</td><td style="font-size:12px;">Boka / Tom’s of Maine / Dr. Brown‘s</td></tr><tr><td>5</td><td>洗发水和护发素</td><td>$38M</td><td class="down">0.0%</td><td style="font-size:12px;">The Honest Company / GOONGBE</td></tr><tr><td>6</td><td>失禁和造口产品</td><td>$18M</td><td class="down">0.0%</td><td style="font-size:12px;">Ninjamas</td></tr><tr><td>7</td><td>其他</td><td>$10M</td><td class="down">0.8%</td><td style="font-size:12px;">Amazon Elements / GOONGBE / Boon</td></tr><tr><td>8</td><td>牙刷和配件</td><td>$8M</td><td class="up">33.9%</td><td style="font-size:12px;">Philips Sonicare / Kuicur / Burst</td></tr><tr><td>9</td><td>婴儿美容护肤产品</td><td>$5M</td><td class="up">88.0%</td><td style="font-size:12px;">WXA / Safety 1st / Forever Personalized</td></tr><tr><td>10</td><td>身体护肤品</td><td>$5M</td><td class="down">0.0%</td><td style="font-size:12px;">ATTITUDE / Hempz</td></tr></tbody></table></div>
+      </div>
+    </div>
+    <div class="cat-detail-panel" id="cat-detail-健康与放松产品" style="display:none;">
+      <div class="card" style="margin-bottom:14px;">
+        <div class="card-title">健康与放松产品 · 类目深度分析</div>
+        <div class="card-subtitle">年GMV $2.1B · 43子类目 · CN品牌1611个 · CN GMV占比49.2% · MoM -5.2%</div>
+        <div class="bullet-list">
+          <div class="bullet-item green"><div class="bullet-title">① 核心结论</div><div class="bullet-body">健康与放松产品是中国品牌在健康与家庭赛道渗透最深的品类之一（CN GMV占比49.2%），43个子类目中中国品牌已在多个子类目建立规模优势。</div></div>
+          <div class="bullet-item"><div class="bullet-title">② 核心发现：Top 3子类目</div><div class="bullet-body">按摩工具和设备（CN 56.2%，TOP3: RENPHO / TheraGun / Hyperice） · 替代药物产品（CN 43.6%，TOP3: Boiron / SVA ORGANICS / Air-Scent） · 应用程序启用的活动跟踪器（CN 63.0%，TOP3: WHOOP / OURA / ZOOROO）</div></div>
+          <div class="bullet-item amber"><div class="bullet-title">③ 结构归因</div><div class="bullet-body">13个子类目CN份额>30%（按摩工具和设备、替代药物产品、应用程序启用的活等），贡献了品类内CN GMV的主体</div></div>
+          <div class="bullet-item green"><div class="bullet-title">④ 机会判断</div><div class="bullet-body">可从CN高渗透子类目（如按摩工具和设备）向低渗透子类目延伸</div></div>
+          <div class="bullet-item"><div class="bullet-title">⑤ 前瞻观察</div><div class="bullet-body">品类高度细分（43个子类目），建议聚焦1-2个子类目打透再横向扩展</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Top 10 子类目明细</div>
+        <div style="overflow-x:auto;"><table>
+          <thead><tr><th>#</th><th>子类目</th><th>年GMV</th><th>CN GMV%</th><th>TOP3品牌</th></tr></thead>
+          <tbody><tr><td>1</td><td>按摩工具和设备</td><td>$1,145M</td><td class="up">56.2%</td><td style="font-size:12px;">RENPHO / TheraGun / Hyperice</td></tr><tr><td>2</td><td>替代药物产品</td><td>$794M</td><td class="up">43.6%</td><td style="font-size:12px;">Boiron / SVA ORGANICS / Air-Scent</td></tr><tr><td>3</td><td>应用程序启用的活动跟踪器</td><td>$33M</td><td class="up">63.0%</td><td style="font-size:12px;">WHOOP / OURA / ZOOROO</td></tr><tr><td>4</td><td>健身和活动监视器</td><td>$26M</td><td class="">11.1%</td><td style="font-size:12px;">Etekcity / GE / InBody</td></tr><tr><td>5</td><td>蜡烛和烛台</td><td>$24M</td><td class="">7.6%</td><td style="font-size:12px;">Capri Blue / Bath & Body Works / Chesapeake Bay Candle</td></tr><tr><td>6</td><td>呼吸辅助设备和附件</td><td>$13M</td><td class="down">1.4%</td><td style="font-size:12px;">Boost Oxygen / Ventisera / RevO2</td></tr><tr><td>7</td><td>蜡烛制作用品</td><td>$11M</td><td class="">9.2%</td><td style="font-size:12px;">P&J Trading / fclayvts / Plant Guru</td></tr><tr><td>8</td><td>非处方药</td><td>$6M</td><td class="down">0.0%</td><td style="font-size:12px;">Zicam / PIN RID / Boiron</td></tr><tr><td>9</td><td>其他</td><td>$6M</td><td class="">23.8%</td><td style="font-size:12px;">Dianne’s Custom Candles / Apple / POLAR</td></tr><tr><td>10</td><td>浴室配件</td><td>$4M</td><td class="up">100.0%</td><td style="font-size:12px;">RENPHO</td></tr></tbody></table></div>
+      </div>
+    </div>
+    <div class="cat-detail-panel" id="cat-detail-销售和交易" style="display:none;">
+      <div class="card" style="margin-bottom:14px;">
+        <div class="card-title">销售和交易 · 类目深度分析</div>
+        <div class="card-subtitle">年GMV $1.6B · 96子类目 · CN品牌1个 · CN GMV占比0.0% · MoM -7.6%</div>
+        <div class="bullet-list">
+          <div class="bullet-item green"><div class="bullet-title">① 核心结论</div><div class="bullet-body">销售和交易是健康与家庭赛道中规模最大的低渗透品类之一（年GMV $1.6B，CN仅0.0%），中国品牌在此品类几乎空白，是BD优先级最高的赛道。</div></div>
+          <div class="bullet-item"><div class="bullet-title">② 核心发现：Top 3子类目</div><div class="bullet-body">维生素补充剂（CN 0.0%，TOP3: Nature Made / NatureWise / Garden of Life） · 运动营养蛋白（CN 0.0%，TOP3: Dymatize / Isopure / NOW Foods） · 非处方药（CN 0.0%，TOP3: Tylenol / MiraLAX / Amazon Basic Care）</div></div>
+          <div class="bullet-item amber"><div class="bullet-title">③ 结构归因</div><div class="bullet-body">11个高GMV子类目CN份额<5%（维生素补充剂、运动营养蛋白、非处方药等），是品类内最大的CN增量空间</div></div>
+          <div class="bullet-item green"><div class="bullet-title">④ 机会判断</div><div class="bullet-body">低渗透+大规模：适合作为BD优先赛道，优先找有GMP/FDA/CE认证的中国品牌</div></div>
+          <div class="bullet-item"><div class="bullet-title">⑤ 前瞻观察</div><div class="bullet-body">FDA监管窗口期（2026成分定义扩大化）是CN品牌进入的最佳时机；品类高度细分（96个子类目），建议聚焦1-2个子类目打透再横向扩展</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Top 10 子类目明细</div>
+        <div style="overflow-x:auto;"><table>
+          <thead><tr><th>#</th><th>子类目</th><th>年GMV</th><th>CN GMV%</th><th>TOP3品牌</th></tr></thead>
+          <tbody><tr><td>1</td><td>维生素补充剂</td><td>$154M</td><td class="down">0.0%</td><td style="font-size:12px;">Nature Made / NatureWise / Garden of Life</td></tr><tr><td>2</td><td>运动营养蛋白</td><td>$129M</td><td class="down">0.0%</td><td style="font-size:12px;">Dymatize / Isopure / NOW Foods</td></tr><tr><td>3</td><td>非处方药</td><td>$128M</td><td class="down">0.0%</td><td style="font-size:12px;">Tylenol / MiraLAX / Amazon Basic Care</td></tr><tr><td>4</td><td>家庭清洁</td><td>$127M</td><td class="down">0.0%</td><td style="font-size:12px;">Clorox / Lysol / Drano</td></tr><tr><td>5</td><td>运动营养电解质替代饮料</td><td>$117M</td><td class="down">0.0%</td><td style="font-size:12px;">Liquid I.V. / Nuun / Elete Citrilyte Add-in</td></tr><tr><td>6</td><td>氨基酸营养补充剂</td><td>$91M</td><td class="down">0.0%</td><td style="font-size:12px;">Optimum Nutrition / NOW Foods / MuscleTech</td></tr><tr><td>7</td><td>垃圾袋</td><td>$83M</td><td class="down">0.0%</td><td style="font-size:12px;">Hefty / Hippo Sak / Glad</td></tr><tr><td>8</td><td>草药补充剂</td><td>$76M</td><td class="down">0.0%</td><td style="font-size:12px;">Metamucil / NatureWise / NOW Foods</td></tr><tr><td>9</td><td>消化营养补充剂</td><td>$72M</td><td class="down">0.0%</td><td style="font-size:12px;">Garden of Life / Vitafusion / Metamucil</td></tr><tr><td>10</td><td>混合维生素和矿物质补充剂</td><td>$60M</td><td class="down">0.0%</td><td style="font-size:12px;">PreserVision / NOW Foods / Life Extension</td></tr></tbody></table></div>
+      </div>
+    </div>
+    <div class="cat-detail-panel" id="cat-detail-视觉产品" style="display:none;">
+      <div class="card" style="margin-bottom:14px;">
+        <div class="card-title">视觉产品 · 类目深度分析</div>
+        <div class="card-subtitle">年GMV $0.7B · 20子类目 · CN品牌1287个 · CN GMV占比28.3% · MoM -8.1%</div>
+        <div class="bullet-list">
+          <div class="bullet-item green"><div class="bullet-title">① 核心结论</div><div class="bullet-body">视觉产品品类年GMV $0.7B，中国品牌GMV占比28.3%，处于中等渗透水平，存在结构性提升空间。</div></div>
+          <div class="bullet-item"><div class="bullet-title">② 核心发现：Top 3子类目</div><div class="bullet-body">阅读眼镜（CN 54.7%，TOP3: Gaoye / Peepers by PeeperSpecs / JOLISU） · 眼部护理产品（CN 0.4%，TOP3: Systane / Refresh / LUMIFY） · 眼镜护理产品（CN 34.3%，TOP3: ZEISS / Wowflash / Koala Lifestyle）</div></div>
+          <div class="bullet-item amber"><div class="bullet-title">③ 结构归因</div><div class="bullet-body">8个子类目CN份额>30%（阅读眼镜、眼镜护理产品、电脑蓝光阻挡眼镜等），贡献了品类内CN GMV的主体；1个高GMV子类目CN份额<5%（眼部护理产品等），是品类内最大的CN增量空间</div></div>
+          <div class="bullet-item green"><div class="bullet-title">④ 机会判断</div><div class="bullet-body">可从CN高渗透子类目（如阅读眼镜）向低渗透子类目延伸</div></div>
+          <div class="bullet-item"><div class="bullet-title">⑤ 前瞻观察</div><div class="bullet-body">持续跟踪品类结构与CN品牌动态</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Top 10 子类目明细</div>
+        <div style="overflow-x:auto;"><table>
+          <thead><tr><th>#</th><th>子类目</th><th>年GMV</th><th>CN GMV%</th><th>TOP3品牌</th></tr></thead>
+          <tbody><tr><td>1</td><td>阅读眼镜</td><td>$187M</td><td class="up">54.7%</td><td style="font-size:12px;">Gaoye / Peepers by PeeperSpecs / JOLISU</td></tr><tr><td>2</td><td>眼部护理产品</td><td>$178M</td><td class="down">0.4%</td><td style="font-size:12px;">Systane / Refresh / LUMIFY</td></tr><tr><td>3</td><td>眼镜护理产品</td><td>$88M</td><td class="up">34.3%</td><td style="font-size:12px;">ZEISS / Wowflash / Koala Lifestyle</td></tr><tr><td>4</td><td>隐形眼镜护理产品</td><td>$86M</td><td class="">8.6%</td><td style="font-size:12px;">Biotrue / Opti-Free / Clear Care</td></tr><tr><td>5</td><td>电脑蓝光阻挡眼镜</td><td>$72M</td><td class="up">50.9%</td><td style="font-size:12px;">livho / Gaoye / ANYLUV</td></tr><tr><td>6</td><td>眼镜架</td><td>$42M</td><td class="">13.2%</td><td style="font-size:12px;">Gaoye / Meta / Versace</td></tr><tr><td>7</td><td>医用眼罩</td><td>$10M</td><td class="up">55.2%</td><td style="font-size:12px;">Ortopad / THSIREE / OPTHOPATCH</td></tr><tr><td>8</td><td>其他</td><td>$3M</td><td class="down">1.8%</td><td style="font-size:12px;">OCuSOFT / Well-Kept / Edglete</td></tr><tr><td>9</td><td>女式配饰</td><td>$0M</td><td class="up">100.0%</td><td style="font-size:12px;">VISOONE</td></tr><tr><td>10</td><td>照相机和照片清洁器</td><td>$0M</td><td class="down">0.0%</td><td style="font-size:12px;">SPUDZ</td></tr></tbody></table></div>
+      </div>
+    </div>
+    <div class="cat-detail-panel" id="cat-detail-文具和礼品包装用品" style="display:none;">
+      <div class="card" style="margin-bottom:14px;">
+        <div class="card-title">文具和礼品包装用品 · 类目深度分析</div>
+        <div class="card-subtitle">年GMV $0.5B · 27子类目 · CN品牌1735个 · CN GMV占比83.3% · MoM +6.4%</div>
+        <div class="bullet-list">
+          <div class="bullet-item green"><div class="bullet-title">① 核心结论</div><div class="bullet-body">文具和礼品包装用品是中国品牌在健康与家庭赛道渗透最深的品类之一（CN GMV占比83.3%），27个子类目中中国品牌已在多个子类目建立规模优势。</div></div>
+          <div class="bullet-item"><div class="bullet-title">② 核心发现：Top 3子类目</div><div class="bullet-body">礼品包装用品（CN 85.0%，TOP3: woric / WRAPAHOLIC / Hallmark） · 文具（CN 28.6%，TOP3: American Greetings / Layneria / CAREFOR） · 食品服务一次性用品（CN 100.0%，TOP3: SUREHOME）</div></div>
+          <div class="bullet-item amber"><div class="bullet-title">③ 结构归因</div><div class="bullet-body">23个子类目CN份额>30%（礼品包装用品、食品服务一次性用、聚乙烯和塑料包装等），贡献了品类内CN GMV的主体</div></div>
+          <div class="bullet-item green"><div class="bullet-title">④ 机会判断</div><div class="bullet-body">品类处于增长通道（MoM +6.4%），增量市场更容忍新进入者；可从CN高渗透子类目（如礼品包装用品）向低渗透子类目延伸</div></div>
+          <div class="bullet-item"><div class="bullet-title">⑤ 前瞻观察</div><div class="bullet-body">持续跟踪品类结构与CN品牌动态</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Top 10 子类目明细</div>
+        <div style="overflow-x:auto;"><table>
+          <thead><tr><th>#</th><th>子类目</th><th>年GMV</th><th>CN GMV%</th><th>TOP3品牌</th></tr></thead>
+          <tbody><tr><td>1</td><td>礼品包装用品</td><td>$432M</td><td class="up">85.0%</td><td style="font-size:12px;">woric / WRAPAHOLIC / Hallmark</td></tr><tr><td>2</td><td>文具</td><td>$13M</td><td class="">28.6%</td><td style="font-size:12px;">American Greetings / Layneria / CAREFOR</td></tr><tr><td>3</td><td>食品服务一次性用品</td><td>$1M</td><td class="up">100.0%</td><td style="font-size:12px;">SUREHOME</td></tr><tr><td>4</td><td>聚乙烯和塑料包装袋</td><td>$1M</td><td class="up">100.0%</td><td style="font-size:12px;">Wowfit</td></tr><tr><td>5</td><td>书写用品和矫正用品</td><td>$1M</td><td class="up">30.8%</td><td style="font-size:12px;">MESMOS / Mooliwe / AIOMOB</td></tr><tr><td>6</td><td>党的恩惠</td><td>$1M</td><td class="up">100.0%</td><td style="font-size:12px;">Oletx / VABAMNA</td></tr><tr><td>7</td><td>缝纫装饰和装饰</td><td>$0M</td><td class="up">100.0%</td><td style="font-size:12px;">LEEQE</td></tr><tr><td>8</td><td>毯子和毯子</td><td>$0M</td><td class="up">100.0%</td><td style="font-size:12px;">CASTATEO / Willtown</td></tr><tr><td>9</td><td>其他</td><td>$0M</td><td class="up">37.1%</td><td style="font-size:12px;">Mr. Pen / Wentur / JollyFayre</td></tr><tr><td>10</td><td>纸和塑料家居用品</td><td>$0M</td><td class="up">100.0%</td><td style="font-size:12px;">FgfAk</td></tr></tbody></table></div>
+      </div>
+    </div>
     </section>
+
+    <section class="section"><div class="section-header"><div class="section-title">品类 GMV × CN份额 象限</div></div><div class="card"><div class="chart-lg" id="chart-quadrant"></div></div></section>
   </div>
-
 </div>
 
 <script>
@@ -522,16 +397,16 @@ document.querySelectorAll('#main-tabs .tab-btn').forEach(btn => {
     tooltip: { formatter: function(p){ return p.name+'<br/>GMV: $'+(p.value/1e9).toFixed(2)+'B'; } },
     series: [{ type: 'treemap', visibleMin: 300, label: { show: true, formatter: function(p){ return p.name+'\n$'+(p.value/1e9).toFixed(1)+'B'; } }, data: [{"name": "个人护理产品", "value": 11349709170.640007}, {"name": "维生素矿物质和补充剂", "value": 10050803147.100002}, {"name": "家居用品", "value": 9010428754.759998}, {"name": "保健产品", "value": 7095389300.170001}, {"name": "饮食和运动营养", "value": 5911573225.079999}, {"name": "运动营养产品", "value": 4659023529.009999}, {"name": "家用医疗用品和设备", "value": 3228438050.83}, {"name": "口腔护理产品", "value": 2997166165.59}, {"name": "婴儿和儿童护理产品", "value": 2094858689.6200006}, {"name": "健康与放松产品", "value": 2088421063.27}, {"name": "销售和交易", "value": 1568428549.170001}, {"name": "视觉产品", "value": 667635039.4}, {"name": "文具和礼品包装用品", "value": 450944123.7299999}] }]
   });
+  c1.on('click', function(params){ if(params.name){ selectCat(params.name); } });
   window.addEventListener('resize', function(){ c1.resize(); });
 })();
 
-// Trend Chart (dual line)
+// Trend
 (function(){
   var td = [{"month": "2024-11", "total": 4910.2, "cn": 403.9, "cn_share": 8.2}, {"month": "2024-12", "total": 4294.8, "cn": 422.0, "cn_share": 9.8}, {"month": "2025-01", "total": 4157.3, "cn": 326.7, "cn_share": 7.9}, {"month": "2025-02", "total": 4389.4, "cn": 351.0, "cn_share": 8.0}, {"month": "2025-03", "total": 4489.8, "cn": 350.1, "cn_share": 7.8}, {"month": "2025-04", "total": 4517.2, "cn": 357.8, "cn_share": 7.9}, {"month": "2025-05", "total": 4810.0, "cn": 413.2, "cn_share": 8.6}, {"month": "2025-06", "total": 5085.0, "cn": 406.7, "cn_share": 8.0}, {"month": "2025-07", "total": 5562.6, "cn": 474.7, "cn_share": 8.5}, {"month": "2025-08", "total": 4743.3, "cn": 468.5, "cn_share": 9.9}, {"month": "2025-09", "total": 4824.6, "cn": 453.0, "cn_share": 9.4}, {"month": "2025-10", "total": 4830.2, "cn": 465.2, "cn_share": 9.6}, {"month": "2025-11", "total": 5517.6, "cn": 610.7, "cn_share": 11.1}, {"month": "2025-12", "total": 5168.5, "cn": 709.6, "cn_share": 13.7}, {"month": "2026-01", "total": 4811.1, "cn": 529.8, "cn_share": 11.0}, {"month": "2026-02", "total": 4969.6, "cn": 532.4, "cn_share": 10.7}, {"month": "2026-03", "total": 5072.6, "cn": 537.5, "cn_share": 10.6}, {"month": "2026-04", "total": 5013.8, "cn": 543.0, "cn_share": 10.8}];
   var c2 = echarts.init(document.getElementById('chart-trend'));
   c2.setOption({
-    tooltip: { trigger: 'axis' },
-    legend: { data: ['总GMV(M$)', 'CN品牌GMV(M$)', 'CN份额%'], top: 5 },
+    tooltip: { trigger: 'axis' }, legend: { data: ['总GMV(M$)','CN品牌GMV(M$)','CN份额%'], top: 5 },
     xAxis: { type: 'category', data: td.map(d=>d.month) },
     yAxis: [{ type: 'value', name: 'M$' }, { type: 'value', name: '%', min: 0, max: 20 }],
     series: [
@@ -549,14 +424,22 @@ document.querySelectorAll('#main-tabs .tab-btn').forEach(btn => {
   var c3 = echarts.init(document.getElementById('chart-quadrant'));
   c3.setOption({
     tooltip: { formatter: function(p){ return p.name+'<br/>GMV: $'+p.value[0].toFixed(2)+'B<br/>CN GMV%: '+p.value[1].toFixed(1)+'%'; } },
-    xAxis: { name: '年GMV (B$)', type: 'value' },
-    yAxis: { name: 'CN品牌GMV占比 (%)', type: 'value' },
+    xAxis: { name: '年GMV (B$)', type: 'value' }, yAxis: { name: 'CN品牌GMV占比 (%)', type: 'value' },
     series: [{ type: 'scatter', symbolSize: function(v){ return Math.sqrt(v[0])*18; }, data: qd,
       label: { show: true, formatter: function(p){ return p.name; }, fontSize: 11, position: 'top' },
       markLine: { silent: true, data: [{ yAxis: 20, label: { formatter: 'CN 20%线' }, lineStyle: { color: '#f59e0b', type: 'dashed' } }] }
     }]
   });
+  c3.on('click', function(params){ if(params.name){ selectCat(params.name); } });
   window.addEventListener('resize', function(){ c3.resize(); });
 })();
+
+// Category deep-dive
+function selectCat(name) {
+  document.querySelectorAll('.cat-detail-panel').forEach(p => p.style.display = 'none');
+  var panel = document.getElementById('cat-detail-' + name);
+  if (panel) { panel.style.display = 'block'; panel.scrollIntoView({behavior:'smooth',block:'center'}); }
+  document.getElementById('cat-selector').value = name;
+}
 </script>
 </body></html>
