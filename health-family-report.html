@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>健康与家庭行业报告 · 2026Q1（v1.0）</title>
+<title>健康与家庭行业报告 · 2026Q1（v2.0）</title>
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -24,6 +24,9 @@ body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.overview-grid { display: grid; grid-template-columns: 280px 1fr; gap: 16px; align-items: stretch; }
+.kpi-column { display: flex; flex-direction: column; gap: 14px; }
+.kpi-column .kpi-card { flex: 1; display: flex; flex-direction: column; justify-content: center; }
 .card { background: #fff; border-radius: 12px; padding: 20px; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
 .card-title { font-size: 15px; font-weight: 600; color: #0f172a; margin-bottom: 2px; }
 .card-subtitle { font-size: 12px; color: #94a3b8; margin-bottom: 14px; }
@@ -48,206 +51,466 @@ body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft
 .bullet-title { font-size: 13px; font-weight: 600; color: #0f172a; margin-bottom: 4px; }
 .bullet-body { font-size: 13px; color: #334155; line-height: 1.7; }
 table { width: 100%; border-collapse: collapse; font-size: 13px; }
-th { text-align: left; padding: 10px 12px; background: #f8fafc; font-weight: 600; color: #475569; border-bottom: 2px solid #e2e8f0; font-size: 12px; cursor: pointer; user-select: none; }
+th { text-align: left; padding: 10px 12px; background: #f8fafc; font-weight: 600; color: #475569; border-bottom: 2px solid #e2e8f0; font-size: 12px; }
 td { padding: 10px 12px; border-bottom: 1px solid #f1f5f9; color: #1e293b; }
 tr:hover td { background: #f8fafc; }
 .up { color: #059669; font-weight: 600; }
 .down { color: #dc2626; font-weight: 600; }
 .tag { display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; }
-.tag-green { background: #ecfdf5; color: #065f46; }
-.tag-red { background: #fef2f2; color: #991b1b; }
-.tag-amber { background: #fffbeb; color: #92400e; }
+.tag-p0 { background: #fef3c7; color: #92400e; }
+.tag-p1 { background: #e0e7ff; color: #3730a3; }
+.tag-p2 { background: #e2e8f0; color: #475569; }
+.tag-a { background: #ecfdf5; color: #065f46; }
+.tag-b { background: #fffbeb; color: #92400e; }
+.source-block { background: #f8fafc; border-left: 4px solid #3b82f6; border-radius: 8px; padding: 16px; margin-bottom: 16px; font-size: 13px; color: #64748b; line-height: 1.8; }
 .news-card { background: #fff; border-radius: 12px; padding: 18px; border: 1px solid #e2e8f0; margin-bottom: 14px; }
 .news-category { font-size: 11px; color: #3b82f6; font-weight: 600; letter-spacing: 1px; margin-bottom: 6px; }
 .news-title { font-size: 15px; font-weight: 600; color: #0f172a; margin-bottom: 6px; }
 .news-body { font-size: 13px; color: #475569; line-height: 1.7; }
-.source-block { background: #f8fafc; border-left: 4px solid #3b82f6; border-radius: 8px; padding: 16px; margin-bottom: 16px; font-size: 13px; color: #64748b; line-height: 1.8; }
-@media (max-width: 960px) { .app { padding: 16px; } .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
+@media (max-width: 960px) { .app { padding: 16px; } .grid-2, .grid-3, .grid-4, .overview-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
 <div class="app">
   <header class="header">
     <div class="header-title">健康与家庭行业报告</div>
-    <div class="header-sub">US Amazon · 13品类 · 616子类目 · 2026Q1 · v1.0 · 钛动科技</div>
+    <div class="header-sub">US Amazon · 13品类 · 616子类目 · 2026Q1 · v2.0 · 钛动科技</div>
   </header>
 
   <div class="tabs" id="main-tabs">
-    <button class="tab-btn active" data-page="page-overview">市场总览</button>
+    <button class="tab-btn active" data-page="page-leads">新客线索</button>
+    <button class="tab-btn" data-page="page-market">市场大盘</button>
     <button class="tab-btn" data-page="page-news">行业动态</button>
-    <button class="tab-btn" data-page="page-category">品类格局</button>
-    <button class="tab-btn" data-page="page-brands">中国品牌机会</button>
   </div>
 
-  <!-- ========== TAB 1: 市场总览 ========== -->
-  <div class="page active" id="page-overview">
+  <!-- ================================================================ -->
+  <!-- TAB 1: 新客线索 -->
+  <!-- ================================================================ -->
+  <div class="page active" id="page-leads">
     <section class="section">
-      <div class="exec-summary">
-        <div class="exec-label">EXECUTIVE SUMMARY · 市场总览</div>
-        <div class="exec-body">
-          <div class="exec-head">US Amazon健康与家庭大盘 <b>$61B</b>（13品类·616子类目），中国品牌GMV占比仅 <span class="exec-up">11.2%</span>，在<span class="exec-up">维生素矿物质($10.1B)</span>和<span class="exec-up">个人护理($11.4B)</span>等超大品类中几乎空白</div>
-          <div class="exec-line">中国品牌已在家用医疗设备（<b>40.2%</b>）、健康与放松（<b>49.2%</b>）、文具礼品（<b>83.3%</b>）三个品类建立显著优势。最大BD机会在维生素/运动营养/个人护理/婴儿护理四大低渗透高规模品类。</div>
-        </div>
+      <div class="source-block">
+        <strong>信源与画像规则</strong><br>
+        <strong>纳入标准</strong>：中国出海健康与家庭企业，有2025-2026年PR/展会/FDA/平台动态，且存在平台/运营缺口<br>
+        <strong>优先级</strong>：S=强事件钩子+品牌/合规基础+平台增量缺口·立即分发 | A=明确品牌化基础+一个强钩子·补平台后分发 | B=方向正确但事件弱·跟踪观察<br>
+        <strong>证据等级</strong>：A=官方PR/官网/FDA/展会官方 | B=权威媒体可支撑但较旧<br>
+        <strong>画像标签</strong>：画像A=预算/合规/品牌化 | 画像B=PR/展会/新品窗口 | 画像C=平台缺口（Amazon↔TikTok互补）<br>
+        <strong>信源</strong>：PR Newswire / Business Wire / FDA数据库 / CES-Vitafoods-Cosmoprof官网 · 检索日期：2026-05-15
       </div>
     </section>
 
     <section class="section">
       <div class="grid-4" style="margin-bottom:18px;">
-        <div class="kpi-card"><div class="kpi-label">大盘年GMV</div><div class="kpi-value">$61.2B</div><div class="kpi-sub">US Amazon 13品类合计</div></div>
-        <div class="kpi-card"><div class="kpi-label">月度销额</div><div class="kpi-value">$5.0B</div><div class="kpi-sub">2026-04 月度数据</div></div>
-        <div class="kpi-card"><div class="kpi-label">中国品牌GMV占比</div><div class="kpi-value" style="color:#f59e0b;">11.2%</div><div class="kpi-sub">加权平均</div></div>
-        <div class="kpi-card"><div class="kpi-label">子类目数</div><div class="kpi-value">616</div><div class="kpi-sub">覆盖13个一级类目</div></div>
+        <div class="kpi-card"><div class="kpi-label">优先线索</div><div class="kpi-value" style="color:#059669;">16</div><div class="kpi-sub">全部带事件钩子+BD话术</div></div>
+        <div class="kpi-card"><div class="kpi-label">S级·立即分发</div><div class="kpi-value">9</div><div class="kpi-sub">强钩子+品牌+缺口三位一体</div></div>
+        <div class="kpi-card"><div class="kpi-label">A级·补平台后分发</div><div class="kpi-value">6</div><div class="kpi-sub">品牌化基础+一个强钩子</div></div>
+        <div class="kpi-card"><div class="kpi-label">A级证据</div><div class="kpi-value">11</div><div class="kpi-sub">官方PR/展会/FDA硬证据</div></div>
       </div>
     </section>
 
     <section class="section">
-      <div class="section-header"><div class="section-title">13品类 GMV 排名</div><div class="section-desc">年GMV降序 · 中国品牌份额标色（绿=高渗透·红=低渗透）</div></div>
+      <div class="section-header"><div class="section-title">PR拓客优先线索清单（16条）</div><div class="section-desc">S级优先建联 · 每条均含事件钩子+BD切入点+建议欢迎语</div></div>
+      <div class="card">
+        <div style="overflow-x:auto;">
+          <table style="min-width:1200px;">
+            <thead><tr>
+              <th>优先级</th><th>品牌</th><th>母公司/主体</th><th>国家</th><th>赛道</th><th>细分类目</th><th>证据</th><th>事件钩子</th><th>BD切入点</th>
+            </tr></thead>
+            <tbody><tr>
+      <td><span class="tag tag-p0">S</span></td>
+      <td><b>Natural Field</b></td>
+      <td style="font-size:12px;">西安天丰生物/ Natural Field</td>
+      <td>中国·西安</td>
+      <td>健康营养</td>
+      <td style="font-size:12px;">健康老龄化/脂质体递送</td>
+      <td><span class="tag tag-a">A</span></td>
+      <td style="font-size:12px;max-width:280px;">在2026 Vitafoods Europe展示NFco-Loading脂质体平台与NF TriSolve健康老龄化配方</td>
+      <td style="font-size:12px;">以健康老龄化、NMN/CoQ10递送效率为内容钩子，适合做欧洲展后PR+KOL科普</td>
+    </tr><tr>
+      <td><span class="tag tag-p0">S</span></td>
+      <td><b>SynbioTech</b></td>
+      <td style="font-size:12px;">SYNBIO TECH INC.</td>
+      <td>中国台湾·高雄</td>
+      <td>健康营养</td>
+      <td style="font-size:12px;">益生菌/后生元/女性健康老龄化</td>
+      <td><span class="tag tag-a">A</span></td>
+      <td style="font-size:12px;max-width:280px;">将于2026 Vitafoods Europe发布面向女性健康老龄化的微生物组平台</td>
+      <td style="font-size:12px;">女性健康老龄化是细分强场景，可做专业内容、医生/KOL教育和展后PR放大</td>
+    </tr><tr>
+      <td><span class="tag tag-p0">S</span></td>
+      <td><b>Yuwell 鱼跃医疗</b></td>
+      <td style="font-size:12px;">江苏鱼跃医疗设备股份有限公司</td>
+      <td>中国·江苏</td>
+      <td>家用医疗</td>
+      <td style="font-size:12px;">呼吸健康/慢病管理/急救/智能穿戴</td>
+      <td><span class="tag tag-a">A</span></td>
+      <td style="font-size:12px;max-width:280px;">2026 CES首次亮相，展示呼吸健康、慢病管理、急救、智能穿戴产品组合</td>
+      <td style="font-size:12px;">从CES展后声量承接切入：呼吸健康、血压管理、移动制氧等品类需要海外消费者教育</td>
+    </tr><tr>
+      <td><span class="tag tag-p0">S</span></td>
+      <td><b>iHealth</b></td>
+      <td style="font-size:12px;">iHealth Labs / 九安医疗生态</td>
+      <td>中国/美国</td>
+      <td>家用医疗</td>
+      <td style="font-size:12px;">血压计/体温计/Covid测试/健康监测</td>
+      <td><span class="tag tag-a">A</span></td>
+      <td style="font-size:12px;max-width:280px;">2025 Amazon Prime Day针对热销健康产品做最高54%折扣，Track血压计为Amazon类目#1卖家</td>
+      <td style="font-size:12px;">以Amazon强势单品切TikTok：家庭血压监测、父母健康、节日健康礼物</td>
+    </tr><tr>
+      <td><span class="tag tag-p0">S</span></td>
+      <td><b>Viatom / Wellue</b></td>
+      <td style="font-size:12px;">深圳维亿魄科技有限公司</td>
+      <td>中国·深圳</td>
+      <td>家用医疗/数字健康</td>
+      <td style="font-size:12px;">血氧/血压/睡眠/心电监测</td>
+      <td><span class="tag tag-a">A</span></td>
+      <td style="font-size:12px;max-width:280px;">FDA 510(k)可查到Viatom Checkme Pro健康监测仪与血压计记录</td>
+      <td style="font-size:12px;">用FDA合规+居家监测切入，适合做睡眠血氧/心电/血压场景科普</td>
+    </tr><tr>
+      <td><span class="tag tag-p1">A</span></td>
+      <td><b>Lepu Health / Lepu Medical</b></td>
+      <td style="font-size:12px;">乐普医疗</td>
+      <td>中国·北京</td>
+      <td>家用医疗/专业医疗</td>
+      <td style="font-size:12px;">心电/血压/心血管监测</td>
+      <td><span class="tag tag-a">A</span></td>
+      <td style="font-size:12px;max-width:280px;">MEDICA 2025展商资料展示便携式血压+ECG设备，可同步App实时监测与报告分享</td>
+      <td style="font-size:12px;">以心血管家庭监测和App报告分享切入，适合医生/KOL科普与B2B2C转化</td>
+    </tr><tr>
+      <td><span class="tag tag-p0">S</span></td>
+      <td><b>Laifen 徕芬</b></td>
+      <td style="font-size:12px;">深圳术叶创新科技有限公司</td>
+      <td>中国·深圳</td>
+      <td>个人护理</td>
+      <td style="font-size:12px;">高速吹风机/电动牙刷/剃须刀</td>
+      <td><span class="tag tag-a">A</span></td>
+      <td style="font-size:12px;max-width:280px;">2026 CES展示新一代智能个人护理产品；2026女性月发布Mini吹风机与Wave Pro口腔护理新品</td>
+      <td style="font-size:12px;">以新品Mini吹风机、Wave Pro口腔护理切入，做TikTok/YouTube测评和礼物季内容</td>
+    </tr><tr>
+      <td><span class="tag tag-p0">S</span></td>
+      <td><b>Ulike</b></td>
+      <td style="font-size:12px;">Ulike Group</td>
+      <td>中国</td>
+      <td>个人护理/美容仪</td>
+      <td style="font-size:12px;">家用IPL脱毛</td>
+      <td><span class="tag tag-a">A</span></td>
+      <td style="font-size:12px;max-width:280px;">2025 IFA展示Air 10等家用护肤科技；2025 holiday campaign强调全球家用脱毛品牌定位</td>
+      <td style="font-size:12px;">用IFA新品+FDA cleared媒体背书切入，适合美妆/生活方式达人矩阵</td>
+    </tr><tr>
+      <td><span class="tag tag-p1">A</span></td>
+      <td><b>AMIRO 觅光</b></td>
+      <td style="font-size:12px;">深圳宗匠科技/AMIRO</td>
+      <td>中国·深圳</td>
+      <td>美容个护</td>
+      <td style="font-size:12px;">LED光疗/RF美容仪/IPL/化妆镜</td>
+      <td><span class="tag tag-b">B</span></td>
+      <td style="font-size:12px;max-width:280px;">AMIRO官网显示国际高科技美护品牌，产品覆盖RF、LED、IPL；此前PR发布L1 LED光疗面罩</td>
+      <td style="font-size:12px;">以高客单美容仪测评、抗老场景、LED/RF科普切入</td>
+    </tr><tr>
+      <td><span class="tag tag-p0">S</span></td>
+      <td><b>Momcozy</b></td>
+      <td style="font-size:12px;">Momcozy</td>
+      <td>中国/香港</td>
+      <td>母婴/女性健康</td>
+      <td style="font-size:12px;">可穿戴吸奶器/哺乳用品/产后护理</td>
+      <td><span class="tag tag-a">A</span></td>
+      <td style="font-size:12px;max-width:280px;">2026母亲节与Postpartum Support International合作；官方称覆盖60+国家、服务500万+妈妈</td>
+      <td style="font-size:12px;">以母亲节公益合作、可穿戴吸奶器、产后支持切入，适合母婴达人与真实用户故事</td>
+    </tr><tr>
+      <td><span class="tag tag-p1">A</span></td>
+      <td><b>Bob and Brad</b></td>
+      <td style="font-size:12px;">Bob and Brad / 中国供应链待核</td>
+      <td>美国IP/中国供应链可能</td>
+      <td>健康恢复</td>
+      <td style="font-size:12px;">筋膜枪/按摩恢复</td>
+      <td><span class="tag tag-b">B</span></td>
+      <td style="font-size:12px;max-width:280px;">Amazon官方店多款按摩枪，C2/T2等产品强调物理治疗师背书与FSA/HSA eligible</td>
+      <td style="font-size:12px;">以办公室肩颈、运动恢复、父母礼物场景切入，适合达人测评和直播转化</td>
+    </tr><tr>
+      <td><span class="tag tag-p1">A</span></td>
+      <td><b>RENPHO</b></td>
+      <td style="font-size:12px;">RENPHO</td>
+      <td>中国/全球DTC</td>
+      <td>健康家居/体重管理</td>
+      <td style="font-size:12px;">智能体脂秤/按摩/健康设备</td>
+      <td><span class="tag tag-b">C</span></td>
+      <td style="font-size:12px;max-width:280px;">2025 Amazon Prime Big Deal Days前，RENPHO智能秤被媒体列为健康工具折扣产品，支持Apple Health/Fitbit/Samsung Health同步</td>
+      <td style="font-size:12px;">以新年健康管理、体脂秤App同步、家庭健康打卡切入，适合健身/生活方式达人</td>
+    </tr><tr>
+      <td><span class="tag tag-p1">A</span></td>
+      <td><b>Comfier</b></td>
+      <td style="font-size:12px;">Comfier</td>
+      <td>中国/全球电商</td>
+      <td>健康放松</td>
+      <td style="font-size:12px;">足部按摩器/背部按摩垫/颈部按摩</td>
+      <td><span class="tag tag-b">C</span></td>
+      <td style="font-size:12px;max-width:280px;">Amazon在售2025款Shiatsu足部按摩器、背部按摩垫等多款家庭放松产品</td>
+      <td style="font-size:12px;">以父母礼物、办公室久坐、足底放松和节日礼物切入</td>
+    </tr><tr>
+      <td><span class="tag tag-p0">S</span></td>
+      <td><b>Levoit</b></td>
+      <td style="font-size:12px;">VeSync</td>
+      <td>中国/美国运营</td>
+      <td>健康环境/智能家居</td>
+      <td style="font-size:12px;">空气净化器/加湿器/风扇/滤芯</td>
+      <td><span class="tag tag-a">A</span></td>
+      <td style="font-size:12px;max-width:280px;">2026年4月Levoit进入澳大利亚Harvey Norman线上渠道；官方博客发布2026最佳空气净化器场景内容</td>
+      <td style="font-size:12px;">以澳洲渠道扩张、居家办公空气质量、过敏季内容切入</td>
+    </tr><tr>
+      <td><span class="tag tag-p1">A</span></td>
+      <td><b>Dreo</b></td>
+      <td style="font-size:12px;">Dreo</td>
+      <td>中国/全球DTC</td>
+      <td>健康环境/智能家居</td>
+      <td style="font-size:12px;">空气舒适/风扇/加湿/厨房小电</td>
+      <td><span class="tag tag-a">A</span></td>
+      <td style="font-size:12px;max-width:280px;">2026 CES发布TurboCool雾化风扇系列及AIoT方向，2026夏季线也围绕TurboCool展开</td>
+      <td style="font-size:12px;">以夏季降温、户外/室内场景、AIoT智能控制切入，适合TikTok场景短视频</td>
+    </tr><tr>
+      <td><span class="tag tag-p2">B</span></td>
+      <td><b>Oclean</b></td>
+      <td style="font-size:12px;">Oclean</td>
+      <td>中国·深圳</td>
+      <td>口腔护理</td>
+      <td style="font-size:12px;">AI/WiFi智能电动牙刷</td>
+      <td><span class="tag tag-b">B</span></td>
+      <td style="font-size:12px;max-width:280px;">2024发布X Ultra WiFi/AI智能声波牙刷，官方称覆盖40+市场、300+专利</td>
+      <td style="font-size:12px;">以AI刷牙指导、儿童/成人口腔习惯、牙医KOL测评切入</td>
+    </tr></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header"><div class="section-title">BD话术速查</div><div class="section-desc">每条线索对应的加好友话术 + 承接话术 + 注意事项</div></div>
+      <div class="card">
+        <div style="overflow-x:auto;">
+          <table style="min-width:900px;">
+            <thead><tr><th>品牌</th><th>加好友后1-3句话</th><th>微信/手机承接话术</th><th>注意事项</th></tr></thead>
+            <tbody><tr>
+      <td><b>Natural Field</b></td>
+      <td style="font-size:12px;">您好，我是钛动科技达人增长BD紫依。刚关注到在2026 Vitafoods Europe展示NFco-Loading脂质体平台与NF TriSolve健康老龄化配方，这个节点其实很适合做海外PR承接和达人内容放大，所以想和您简单交流下。</td>
+      <td style="font-size:12px;">我们服务过大疆、追觅、华为、美的、安克等品牌的全球化营销，主要做TikTok/YouTube/Instagram达人建联和内容增长。方便的话可以留个手机号或加下微信，我发您一版更具体的海外达人合作思路。</td>
+      <td style="font-size:12px;color:#dc2626;">健康/医疗类避免承诺疗效；以场景教育、产品认知、展会/新品声量承接为主。</td>
+    </tr><tr>
+      <td><b>SynbioTech</b></td>
+      <td style="font-size:12px;">您好，我是钛动科技达人增长BD紫依。刚关注到将于2026 Vitafoods Europe发布面向女性健康老龄化的微生物组平台，这个节点其实很适合做海外PR承接和达人内容放大，所以想和您简单交流下。</td>
+      <td style="font-size:12px;">我们服务过大疆、追觅、华为、美的、安克等品牌的全球化营销，主要做TikTok/YouTube/Instagram达人建联和内容增长。方便的话可以留个手机号或加下微信，我发您一版更具体的海外达人合作思路。</td>
+      <td style="font-size:12px;color:#dc2626;">健康/医疗类避免承诺疗效；以场景教育、产品认知、展会/新品声量承接为主。</td>
+    </tr><tr>
+      <td><b>Yuwell 鱼跃医疗</b></td>
+      <td style="font-size:12px;">您好，我是钛动科技达人增长BD紫依。刚关注到2026 CES首次亮相，展示呼吸健康、慢病管理、急救、智能穿戴产品组合，这个节点其实很适合做海外PR承接和达人内容放大，所以想和您简单交流下。</td>
+      <td style="font-size:12px;">我们服务过大疆、追觅、华为、美的、安克等品牌的全球化营销，主要做TikTok/YouTube/Instagram达人建联和内容增长。方便的话可以留个手机号或加下微信，我发您一版更具体的海外达人合作思路。</td>
+      <td style="font-size:12px;color:#dc2626;">健康/医疗类避免承诺疗效；以场景教育、产品认知、展会/新品声量承接为主。</td>
+    </tr><tr>
+      <td><b>iHealth</b></td>
+      <td style="font-size:12px;">您好，我是钛动科技达人增长BD紫依。刚关注到2025 Amazon Prime Day针对热销健康产品做最高54%折扣，Track血压计为Amazon类目#1卖家，这个节点其实很适合做海外PR承接和达人内容放大，所以想和您简单交流下。</td>
+      <td style="font-size:12px;">我们服务过大疆、追觅、华为、美的、安克等品牌的全球化营销，主要做TikTok/YouTube/Instagram达人建联和内容增长。方便的话可以留个手机号或加下微信，我发您一版更具体的海外达人合作思路。</td>
+      <td style="font-size:12px;color:#dc2626;">健康/医疗类避免承诺疗效；以场景教育、产品认知、展会/新品声量承接为主。</td>
+    </tr><tr>
+      <td><b>Viatom / Wellue</b></td>
+      <td style="font-size:12px;">您好，我是钛动科技达人增长BD紫依。刚关注到FDA 510(k)可查到Viatom Checkme Pro健康监测仪与血压计记录，这个节点其实很适合做海外PR承接和达人内容放大，所以想和您简单交流下。</td>
+      <td style="font-size:12px;">我们服务过大疆、追觅、华为、美的、安克等品牌的全球化营销，主要做TikTok/YouTube/Instagram达人建联和内容增长。方便的话可以留个手机号或加下微信，我发您一版更具体的海外达人合作思路。</td>
+      <td style="font-size:12px;color:#dc2626;">健康/医疗类避免承诺疗效；以场景教育、产品认知、展会/新品声量承接为主。</td>
+    </tr><tr>
+      <td><b>Lepu Health / Lepu Medical</b></td>
+      <td style="font-size:12px;">您好，我是钛动科技达人增长BD紫依。刚关注到MEDICA 2025展商资料展示便携式血压+ECG设备，可同步App实时监测与报告分享，这个节点其实很适合做海外PR承接和达人内容放大，所以想和您简单交流下。</td>
+      <td style="font-size:12px;">我们服务过大疆、追觅、华为、美的、安克等品牌的全球化营销，主要做TikTok/YouTube/Instagram达人建联和内容增长。方便的话可以留个手机号或加下微信，我发您一版更具体的海外达人合作思路。</td>
+      <td style="font-size:12px;color:#dc2626;">健康/医疗类避免承诺疗效；以场景教育、产品认知、展会/新品声量承接为主。</td>
+    </tr><tr>
+      <td><b>Laifen 徕芬</b></td>
+      <td style="font-size:12px;">您好，我是钛动科技达人增长BD紫依。刚关注到2026 CES展示新一代智能个人护理产品；2026女性月发布Mini吹风机与Wave Pro口腔护理新品，这个节点其实很适合做海外PR承接和达人内容放大，所以想和您简单交流下。</td>
+      <td style="font-size:12px;">我们服务过大疆、追觅、华为、美的、安克等品牌的全球化营销，主要做TikTok/YouTube/Instagram达人建联和内容增长。方便的话可以留个手机号或加下微信，我发您一版更具体的海外达人合作思路。</td>
+      <td style="font-size:12px;color:#dc2626;">健康/医疗类避免承诺疗效；以场景教育、产品认知、展会/新品声量承接为主。</td>
+    </tr><tr>
+      <td><b>Ulike</b></td>
+      <td style="font-size:12px;">您好，我是钛动科技达人增长BD紫依。刚关注到2025 IFA展示Air 10等家用护肤科技；2025 holiday campaign强调全球家用脱毛品牌定位，这个节点其实很适合做海外PR承接和达人内容放大，所以想和您简单交流下。</td>
+      <td style="font-size:12px;">我们服务过大疆、追觅、华为、美的、安克等品牌的全球化营销，主要做TikTok/YouTube/Instagram达人建联和内容增长。方便的话可以留个手机号或加下微信，我发您一版更具体的海外达人合作思路。</td>
+      <td style="font-size:12px;color:#dc2626;">健康/医疗类避免承诺疗效；以场景教育、产品认知、展会/新品声量承接为主。</td>
+    </tr><tr>
+      <td><b>AMIRO 觅光</b></td>
+      <td style="font-size:12px;">您好，我是钛动科技达人增长BD紫依。刚关注到AMIRO官网显示国际高科技美护品牌，产品覆盖RF、LED、IPL；此前PR发布L1 LED光疗面罩，这个节点其实很适合做海外PR承接和达人内容放大，所以想和您简单交流下。</td>
+      <td style="font-size:12px;">我们服务过大疆、追觅、华为、美的、安克等品牌的全球化营销，主要做TikTok/YouTube/Instagram达人建联和内容增长。方便的话可以留个手机号或加下微信，我发您一版更具体的海外达人合作思路。</td>
+      <td style="font-size:12px;color:#dc2626;">健康/医疗类避免承诺疗效；以场景教育、产品认知、展会/新品声量承接为主。</td>
+    </tr><tr>
+      <td><b>Momcozy</b></td>
+      <td style="font-size:12px;">您好，我是钛动科技达人增长BD紫依。刚关注到2026母亲节与Postpartum Support International合作；官方称覆盖60+国家、服务500万+妈妈，这个节点其实很适合做海外PR承接和达人内容放大，所以想和您简单交流下。</td>
+      <td style="font-size:12px;">我们服务过大疆、追觅、华为、美的、安克等品牌的全球化营销，主要做TikTok/YouTube/Instagram达人建联和内容增长。方便的话可以留个手机号或加下微信，我发您一版更具体的海外达人合作思路。</td>
+      <td style="font-size:12px;color:#dc2626;">健康/医疗类避免承诺疗效；以场景教育、产品认知、展会/新品声量承接为主。</td>
+    </tr><tr>
+      <td><b>Bob and Brad</b></td>
+      <td style="font-size:12px;">您好，我是钛动科技达人增长BD紫依。刚关注到Amazon官方店多款按摩枪，C2/T2等产品强调物理治疗师背书与FSA/HSA eligible，这个节点其实很适合做海外PR承接和达人内容放大，所以想和您简单交流下。</td>
+      <td style="font-size:12px;">我们服务过大疆、追觅、华为、美的、安克等品牌的全球化营销，主要做TikTok/YouTube/Instagram达人建联和内容增长。方便的话可以留个手机号或加下微信，我发您一版更具体的海外达人合作思路。</td>
+      <td style="font-size:12px;color:#dc2626;">健康/医疗类避免承诺疗效；以场景教育、产品认知、展会/新品声量承接为主。</td>
+    </tr><tr>
+      <td><b>RENPHO</b></td>
+      <td style="font-size:12px;">您好，我是钛动科技达人增长BD紫依。刚关注到2025 Amazon Prime Big Deal Days前，RENPHO智能秤被媒体列为健康工具折扣产品，支持Apple Health/Fitbit/Samsung Health同步，这个节点其实很适合做海外PR承接和达人内容放大，所以想和您简单交流下。</td>
+      <td style="font-size:12px;">我们服务过大疆、追觅、华为、美的、安克等品牌的全球化营销，主要做TikTok/YouTube/Instagram达人建联和内容增长。方便的话可以留个手机号或加下微信，我发您一版更具体的海外达人合作思路。</td>
+      <td style="font-size:12px;color:#dc2626;">健康/医疗类避免承诺疗效；以场景教育、产品认知、展会/新品声量承接为主。</td>
+    </tr><tr>
+      <td><b>Comfier</b></td>
+      <td style="font-size:12px;">您好，我是钛动科技达人增长BD紫依。刚关注到Amazon在售2025款Shiatsu足部按摩器、背部按摩垫等多款家庭放松产品，这个节点其实很适合做海外PR承接和达人内容放大，所以想和您简单交流下。</td>
+      <td style="font-size:12px;">我们服务过大疆、追觅、华为、美的、安克等品牌的全球化营销，主要做TikTok/YouTube/Instagram达人建联和内容增长。方便的话可以留个手机号或加下微信，我发您一版更具体的海外达人合作思路。</td>
+      <td style="font-size:12px;color:#dc2626;">健康/医疗类避免承诺疗效；以场景教育、产品认知、展会/新品声量承接为主。</td>
+    </tr><tr>
+      <td><b>Levoit</b></td>
+      <td style="font-size:12px;">您好，我是钛动科技达人增长BD紫依。刚关注到2026年4月Levoit进入澳大利亚Harvey Norman线上渠道；官方博客发布2026最佳空气净化器场景内容，这个节点其实很适合做海外PR承接和达人内容放大，所以想和您简单交流下。</td>
+      <td style="font-size:12px;">我们服务过大疆、追觅、华为、美的、安克等品牌的全球化营销，主要做TikTok/YouTube/Instagram达人建联和内容增长。方便的话可以留个手机号或加下微信，我发您一版更具体的海外达人合作思路。</td>
+      <td style="font-size:12px;color:#dc2626;">健康/医疗类避免承诺疗效；以场景教育、产品认知、展会/新品声量承接为主。</td>
+    </tr><tr>
+      <td><b>Dreo</b></td>
+      <td style="font-size:12px;">您好，我是钛动科技达人增长BD紫依。刚关注到2026 CES发布TurboCool雾化风扇系列及AIoT方向，2026夏季线也围绕TurboCool展开，这个节点其实很适合做海外PR承接和达人内容放大，所以想和您简单交流下。</td>
+      <td style="font-size:12px;">我们服务过大疆、追觅、华为、美的、安克等品牌的全球化营销，主要做TikTok/YouTube/Instagram达人建联和内容增长。方便的话可以留个手机号或加下微信，我发您一版更具体的海外达人合作思路。</td>
+      <td style="font-size:12px;color:#dc2626;">健康/医疗类避免承诺疗效；以场景教育、产品认知、展会/新品声量承接为主。</td>
+    </tr><tr>
+      <td><b>Oclean</b></td>
+      <td style="font-size:12px;">您好，我是钛动科技达人增长BD紫依。刚关注到2024发布X Ultra WiFi/AI智能声波牙刷，官方称覆盖40+市场、300+专利，这个节点其实很适合做海外PR承接和达人内容放大，所以想和您简单交流下。</td>
+      <td style="font-size:12px;">我们服务过大疆、追觅、华为、美的、安克等品牌的全球化营销，主要做TikTok/YouTube/Instagram达人建联和内容增长。方便的话可以留个手机号或加下微信，我发您一版更具体的海外达人合作思路。</td>
+      <td style="font-size:12px;color:#dc2626;">健康/医疗类避免承诺疗效；以场景教育、产品认知、展会/新品声量承接为主。</td>
+    </tr></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header"><div class="section-title">评分规则</div></div>
+      <div class="card">
+        <table>
+          <thead><tr><th>字段</th><th>定义/使用规则</th></tr></thead>
+          <tbody><tr><td><b>优先级S</b></td><td style="font-size:12px;">同时具备强事件钩子、品牌/合规基础、平台增量缺口；可立即分发BD。</td></tr><tr><td><b>优先级A</b></td><td style="font-size:12px;">至少具备明确品牌化基础+一个强钩子；需补平台/联系人后分发。</td></tr><tr><td><b>优先级B</b></td><td style="font-size:12px;">品牌方向正确但近期事件弱或中国主体不确定；先跟踪或做benchmark。</td></tr><tr><td><b>证据等级A</b></td><td style="font-size:12px;">官方PR/官网公告/FDA/展会官方资料，可直接作为欢迎语事件钩子。</td></tr><tr><td><b>证据等级B</b></td><td style="font-size:12px;">官方渠道或权威媒体可支撑，但时间较旧或事件不够强。</td></tr><tr><td><b>证据等级C</b></td><td style="font-size:12px;">电商页/媒体购物稿/搜索结果，可辅助判断，不建议单独作为强钩子。</td></tr><tr><td><b>画像A</b></td><td style="font-size:12px;">合规、认证、融资/上市、Amazon销售验证、DTC成熟、品牌化证据。</td></tr><tr><td><b>画像B</b></td><td style="font-size:12px;">PR、展会、新品、公益合作、渠道扩张等可触发BD建联的时间窗口。</td></tr><tr><td><b>画像C</b></td><td style="font-size:12px;">Amazon强但TikTok弱、DTC强但平台弱、海外渠道扩张但达人内容缺口。</td></tr><tr><td><b>医疗/健康合规提醒</b></td><td style="font-size:12px;">所有医疗/补充剂话术避免疗效承诺；只用“科普、教育、内容增长、合规市场沟通”。</td></tr></tbody></table></div></section></div>
+  <!-- ================================================================ -->
+  <!-- TAB 2: 市场大盘 (3C v2.6 风格) -->
+  <!-- ================================================================ -->
+  <div class="page" id="page-market">
+    <section class="section">
+      <div class="source-block">
+        <strong>数据口径</strong><br>
+        <strong>数据来源</strong>：Amazon.com Sorftime导出 · 聚合13个一级类目616个子类目 · 2026-04（含24月趋势）<br>
+        <strong>中国品牌判定</strong>：母公司注册地为中国大陆/香港/台湾<br>
+        <strong>货币</strong>：USD · 年GMV为近12个月滚动合计 · 月销额为2026-04单月
+      </div>
+    </section>
+
+    <!-- Exec Summary -->
+    <section class="section">
+      <div class="exec-summary">
+        <div class="exec-label">EXECUTIVE SUMMARY · 市场总览</div>
+        <div class="exec-body">
+          <div class="exec-head">US Amazon健康与家庭大盘 <b>$61B</b>，中国品牌GMV占比仅 <span class="exec-up">11.2%</span></div>
+          <div class="exec-line">最大低渗透品类：<b>维生素矿物质$10.1B（CN 2.0%）</b> · <b>个人护理$11.4B（CN 6.4%）</b> · <b>运动营养$10.6B（CN 1.6%）</b></div>
+          <div class="exec-line">中国品牌优势品类：家用医疗设备<b>40.2%</b> · 健康与放松<b>49.2%</b> · 文具礼品<b>83.3%</b> · 已识别<b>8,843</b>个中国品牌</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- KPI + Treemap -->
+    <section class="section">
+      <div class="overview-grid">
+        <div class="kpi-column">
+          <div class="kpi-card"><div class="kpi-label">大盘年GMV</div><div class="kpi-value">$61.2B</div><div class="kpi-sub">US Amazon 13品类</div></div>
+          <div class="kpi-card"><div class="kpi-label">月度销额</div><div class="kpi-value">$5.0B</div><div class="kpi-sub">2026-04</div></div>
+          <div class="kpi-card"><div class="kpi-label">CN品牌GMV占比</div><div class="kpi-value" style="color:#f59e0b;">11.2%</div><div class="kpi-sub">加权平均</div></div>
+          <div class="kpi-card"><div class="kpi-label">子类目</div><div class="kpi-value">616</div><div class="kpi-sub">13个一级类目</div></div>
+        </div>
+        <div class="card" style="padding:12px;"><div class="chart-lg" id="chart-treemap" style="height:520px;"></div></div>
+      </div>
+    </section>
+
+    <!-- Insights -->
+    <section class="section">
+      <div class="bullet-list">
+        <div class="bullet-item green"><div class="bullet-title">品类1：个人护理（$11.4B）——最大蛋糕，皮肤护理$6.4B中CN仅3.0%</div><div class="bullet-body">皮肤护理是Amazon健康与家庭赛道中GMV最高的单一子类目，但中国品牌渗透率极低。剃须和脱毛（CN 16.2%）有所突破——美容设备+光疗是中国3C制造能力的自然延伸。</div></div>
+        <div class="bullet-item amber"><div class="bullet-title">品类2：维生素矿物质（$10.1B）——FDA窗口期，成分定义扩大化利好新进入者</div><div class="bullet-body">2026年3月FDA里程碑会议拟扩大"膳食成分"定义（肽类/下一代益生菌），GRAS改革推进中。CN品牌占比仅2.0%，但SPINS数据显示NMN/Sea Moss/Colostrum等新成分正在崛起，中国原料端有优势。</div></div>
+        <div class="bullet-item"><div class="bullet-title">品类3：家用医疗设备（$3.2B）——CN品牌40.2%，已有规模但集中在移动辅助/支架</div><div class="bullet-body">CES 2026显示居家诊断（睡眠实验室/激素监测/智能卫生巾）和AI健康管理是下一波。中国品牌在血压/血氧/心电监测等品类有FDA合规积累，可从"卖设备"升级到"卖健康数据服务"。</div></div>
+        <div class="bullet-item amber"><div class="bullet-title">品类4：婴儿护理（$2.1B）——智能化是中国特色突破口</div><div class="bullet-body">智能婴儿监视器市场2035年预计$89.85B（CAGR 34.5%）。中国工信部已将婴童智能化列为国家方向。毫米波雷达+AI呼吸监测+自适应哄睡成为中国品牌差异化武器。</div></div>
+      </div>
+    </section>
+
+    <!-- Category Table -->
+    <section class="section">
+      <div class="section-header"><div class="section-title">13品类GMV排名</div><div class="section-desc">年GMV降序 · CN GMV占比标色（绿≥20% · 红&lt;5%）</div></div>
       <div class="card">
         <div style="overflow-x:auto;">
           <table style="min-width:1000px;">
-            <thead><tr><th>#</th><th>品类</th><th>年GMV</th><th>月销额</th><th>子类目</th><th>产品数</th><th>品牌数</th><th>CN品牌数</th><th>CN品牌占比</th><th>CN GMV占比</th></tr></thead>
+            <thead><tr><th>#</th><th>品类</th><th>年GMV</th><th>月销额</th><th>子类目</th><th>产品数</th><th>品牌数</th><th>CN品牌数</th><th>CN品牌%</th><th>CN GMV%</th></tr></thead>
             <tbody><tr>
-      <td>1</td>
-      <td><b>个人护理产品</b></td>
-      <td>$11.3B</td>
-      <td>$955M</td>
-      <td>39</td>
-      <td>5,008</td>
-      <td>1,811</td>
-      <td>388</td>
-      <td>21.4%</td>
+      <td>1</td><td><b>个人护理产品</b></td>
+      <td>$11.3B</td><td>$955M</td>
+      <td>39</td><td>5,008</td>
+      <td>1,811</td><td>388</td><td>21.4%</td>
       <td class="">6.4%</td>
     </tr><tr>
-      <td>2</td>
-      <td><b>维生素矿物质和补充剂</b></td>
-      <td>$10.1B</td>
-      <td>$824M</td>
-      <td>42</td>
-      <td>5,000</td>
-      <td>2,452</td>
-      <td>210</td>
-      <td>8.6%</td>
+      <td>2</td><td><b>维生素矿物质和补充剂</b></td>
+      <td>$10.1B</td><td>$824M</td>
+      <td>42</td><td>5,000</td>
+      <td>2,452</td><td>210</td><td>8.6%</td>
       <td class="down">2.0%</td>
     </tr><tr>
-      <td>3</td>
-      <td><b>家居用品</b></td>
-      <td>$9.0B</td>
-      <td>$762M</td>
-      <td>72</td>
-      <td>5,000</td>
-      <td>2,083</td>
-      <td>755</td>
-      <td>36.2%</td>
+      <td>3</td><td><b>家居用品</b></td>
+      <td>$9.0B</td><td>$762M</td>
+      <td>72</td><td>5,000</td>
+      <td>2,083</td><td>755</td><td>36.2%</td>
       <td class="">14.3%</td>
     </tr><tr>
-      <td>4</td>
-      <td><b>保健产品</b></td>
-      <td>$7.1B</td>
-      <td>$609M</td>
-      <td>79</td>
-      <td>5,000</td>
-      <td>2,499</td>
-      <td>789</td>
-      <td>31.6%</td>
+      <td>4</td><td><b>保健产品</b></td>
+      <td>$7.1B</td><td>$609M</td>
+      <td>79</td><td>5,000</td>
+      <td>2,499</td><td>789</td><td>31.6%</td>
       <td class="">15.4%</td>
     </tr><tr>
-      <td>5</td>
-      <td><b>饮食和运动营养</b></td>
-      <td>$5.9B</td>
-      <td>$466M</td>
-      <td>37</td>
-      <td>5,000</td>
-      <td>2,406</td>
-      <td>215</td>
-      <td>8.9%</td>
+      <td>5</td><td><b>饮食和运动营养</b></td>
+      <td>$5.9B</td><td>$466M</td>
+      <td>37</td><td>5,000</td>
+      <td>2,406</td><td>215</td><td>8.9%</td>
       <td class="down">1.6%</td>
     </tr><tr>
-      <td>6</td>
-      <td><b>运动营养产品</b></td>
-      <td>$4.7B</td>
-      <td>$358M</td>
-      <td>37</td>
-      <td>5,000</td>
-      <td>2,666</td>
-      <td>234</td>
-      <td>8.8%</td>
+      <td>6</td><td><b>运动营养产品</b></td>
+      <td>$4.7B</td><td>$358M</td>
+      <td>37</td><td>5,000</td>
+      <td>2,666</td><td>234</td><td>8.8%</td>
       <td class="down">1.6%</td>
     </tr><tr>
-      <td>7</td>
-      <td><b>家用医疗用品和设备</b></td>
-      <td>$3.2B</td>
-      <td>$287M</td>
-      <td>65</td>
-      <td>5,000</td>
-      <td>2,619</td>
-      <td>1,488</td>
-      <td>56.8%</td>
+      <td>7</td><td><b>家用医疗用品和设备</b></td>
+      <td>$3.2B</td><td>$287M</td>
+      <td>65</td><td>5,000</td>
+      <td>2,619</td><td>1,488</td><td>56.8%</td>
       <td class="up">40.2%</td>
     </tr><tr>
-      <td>8</td>
-      <td><b>口腔护理产品</b></td>
-      <td>$3.0B</td>
-      <td>$227M</td>
-      <td>25</td>
-      <td>5,000</td>
-      <td>2,408</td>
-      <td>1,109</td>
-      <td>46.1%</td>
+      <td>8</td><td><b>口腔护理产品</b></td>
+      <td>$3.0B</td><td>$227M</td>
+      <td>25</td><td>5,000</td>
+      <td>2,408</td><td>1,109</td><td>46.1%</td>
       <td class="">13.9%</td>
     </tr><tr>
-      <td>9</td>
-      <td><b>婴儿和儿童护理产品</b></td>
-      <td>$2.1B</td>
-      <td>$148M</td>
-      <td>34</td>
-      <td>5,000</td>
-      <td>2,227</td>
-      <td>633</td>
-      <td>28.4%</td>
+      <td>9</td><td><b>婴儿和儿童护理产品</b></td>
+      <td>$2.1B</td><td>$148M</td>
+      <td>34</td><td>5,000</td>
+      <td>2,227</td><td>633</td><td>28.4%</td>
       <td class="down">4.3%</td>
     </tr><tr>
-      <td>10</td>
-      <td><b>健康与放松产品</b></td>
-      <td>$2.1B</td>
-      <td>$162M</td>
-      <td>43</td>
-      <td>5,000</td>
-      <td>2,579</td>
-      <td>1,611</td>
-      <td>62.5%</td>
+      <td>10</td><td><b>健康与放松产品</b></td>
+      <td>$2.1B</td><td>$162M</td>
+      <td>43</td><td>5,000</td>
+      <td>2,579</td><td>1,611</td><td>62.5%</td>
       <td class="up">49.2%</td>
     </tr><tr>
-      <td>11</td>
-      <td><b>销售和交易</b></td>
-      <td>$1.6B</td>
-      <td>$117M</td>
-      <td>96</td>
-      <td>2,765</td>
-      <td>1,265</td>
-      <td>1</td>
-      <td>0.1%</td>
+      <td>11</td><td><b>销售和交易</b></td>
+      <td>$1.6B</td><td>$117M</td>
+      <td>96</td><td>2,765</td>
+      <td>1,265</td><td>1</td><td>0.1%</td>
       <td class="down">0.0%</td>
     </tr><tr>
-      <td>12</td>
-      <td><b>视觉产品</b></td>
-      <td>$0.7B</td>
-      <td>$48M</td>
-      <td>20</td>
-      <td>5,000</td>
-      <td>2,047</td>
-      <td>1,287</td>
-      <td>62.9%</td>
+      <td>12</td><td><b>视觉产品</b></td>
+      <td>$0.7B</td><td>$48M</td>
+      <td>20</td><td>5,000</td>
+      <td>2,047</td><td>1,287</td><td>62.9%</td>
       <td class="up">28.3%</td>
     </tr><tr>
-      <td>13</td>
-      <td><b>文具和礼品包装用品</b></td>
-      <td>$0.5B</td>
-      <td>$40M</td>
-      <td>27</td>
-      <td>5,000</td>
-      <td>2,061</td>
-      <td>1,735</td>
-      <td>84.2%</td>
+      <td>13</td><td><b>文具和礼品包装用品</b></td>
+      <td>$0.5B</td><td>$40M</td>
+      <td>27</td><td>5,000</td>
+      <td>2,061</td><td>1,735</td><td>84.2%</td>
       <td class="up">83.3%</td>
     </tr></tbody>
           </table>
@@ -255,267 +518,118 @@ tr:hover td { background: #f8fafc; }
       </div>
     </section>
 
+    <!-- Quadrant Chart -->
     <section class="section">
-      <div class="section-header"><div class="section-title">品类 GMV 分布</div></div>
-      <div class="card"><div class="chart" id="chart-treemap"></div></div>
-    </section>
-  </div>
-
-  <!-- ========== TAB 2: 行业动态 ========== -->
-  <div class="page" id="page-news">
-    <section class="section">
-      <div class="source-block">
-        <strong>信源说明</strong> · 行业动态基于公开信源检索（CES 2026 / Cosmoprof Bologna 2026 / FDA公告 / 券商研报 / 行业媒体），聚焦2026年Q1-Q2关键事件。<strong>注：本模块为行业新闻聚合，非一手数据实证，仅供BD团队做行业叙事参考。</strong>
-      </div>
+      <div class="section-header"><div class="section-title">品类 GMV × 中国品牌份额 象限</div></div>
+      <div class="card"><div class="chart-lg" id="chart-quadrant"></div></div>
     </section>
 
+    <!-- Top Subcategories -->
     <section class="section">
-      <div class="section-header"><div class="section-title">FDA监管：2026年补充剂行业最大变量</div></div>
-      <div class="news-card">
-        <div class="news-category">REGULATORY · 2026-03-27</div>
-        <div class="news-title">FDA召开里程碑会议：拟扩大"膳食成分"定义</div>
-        <div class="news-body">FDA公开讨论将<b>肽类、下一代益生菌</b>等纳入膳食补充剂合法成分。FDA食品最高官员Kyle Diamantas承认"行业30年巨变，监管框架基本未变"，释放现代化信号。消费者权益组织持反对立场。贸易团体CRN/NPA/UNPA联合推动，但强调需配套NDI安全通路。</div>
-      </div>
-      <div class="news-card">
-        <div class="news-category">LEGISLATION · 2026-Q1</div>
-        <div class="news-title">《膳食补充剂上市法案2026》推出 + GRAS改革推进</div>
-        <div class="news-body">联邦补充剂注册制度取得立法进展（CRN支持/NPA反对）。同时FDA考虑将<b>自我确认GRAS改为强制通知</b>，行业担忧FDA人手不足。药物优先排除条款（影响NAC/NMN等热门成分）争取永久性立法修正。</div>
-      </div>
-      <div class="news-card">
-        <div class="news-category">STATE · 2026-Q1</div>
-        <div class="news-title">纽约州18+年龄限制法 + 各州碎片化监管蔓延</div>
-        <div class="news-body">纽约州率先对减肥/增肌类补充剂实施<b>18岁以上购买限制</b>，CRN已上诉至最高法院。密歇根/伊利诺伊/马萨诸塞/新泽西/加州/弗吉尼亚跟进。CRN推动《膳食补充剂监管统一法案》建立联邦优先权。</div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-header"><div class="section-title">CES 2026：健康照护四大趋势</div></div>
-      <div class="news-card">
-        <div class="news-category">CES 2026 · DIGITAL HEALTH</div>
-        <div class="news-title">AI成为消费健康核心基础设施</div>
-        <div class="news-body">CES 2026健康照护创新奖重点：<b>AI驱动多模态生理数据整合</b>（Withings Body Scan 2 90秒测60+生物标记）、预防医学居家化（汗液贴片追踪乳酸/皮质醇、智能镜30秒面部视频评估心脏年龄）、复健机器人轻量化平民化、AI融合多感官介面早期识别认知衰退（三星Brain Health）。AI医疗市场预计2034年达<b>$8,864亿</b>。</div>
-      </div>
-      <div class="news-card">
-        <div class="news-category">CES 2026 · BEAUTY TECH</div>
-        <div class="news-title">光疗全面爆发 + 设备即包装 + AI皮肤诊断临床化</div>
-        <div class="news-body">欧莱雅四款光疗产品（LED面膜/眼罩/红外美发棒/蛋白组学皮肤分析仪）、LG超薄LED眼贴获创新奖、科玛韩国AI疤痕治疗仪获<b>美妆科技最佳创新奖</b>（压电微喷射+RGB LED+CNN深度学习）。Nuon Medical"设备即包装"生态将传感器/治疗/连接嵌入产品包装。</div>
-      </div>
-      <div class="news-card">
-        <div class="news-category">CES 2026 · HOME MEDICAL</div>
-        <div class="news-title">居家睡眠实验室 + 智能卫生巾 + 激素监测走向消费级</div>
-        <div class="news-body">Wis Medical无线软贴片居家复制完整睡眠实验室、Vivoo智能卫生巾嵌入式化学检测、Nutrix tSense全球首款唾液睾酮传感器（3分钟）、Mira Ultra4居家16分钟测四种激素。医疗级诊断向消费级便携化是2026年最明确的硬件趋势。</div>
-      </div>
-      <div class="news-card">
-        <div class="news-category">CES 2026 · BABY CARE</div>
-        <div class="news-title">母嬰智能化成中国国家战略方向</div>
-        <div class="news-body">中国工信部等六部门《实施方案》将婴童产品智能化列为国家方向。智能婴儿监视器市场2035年预计<b>$89.85亿</b>（CAGR 34.5%）。Babycare AI天才小丑鴨上市首月销售额破200万元。毫米波雷达+AI呼吸监测+自适应哄睡成为标配。</div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-header"><div class="section-title">Cosmoprof Bologna 2026 · 美妆供应链六大趋势</div></div>
-      <div class="bullet-list">
-        <div class="bullet-item green"><div class="bullet-title">趋势1：长寿科学（Longevity Science）</div><div class="bullet-body">NAD+激活剂、端粒保护、12项衰老标志系统性应对。Vagheggi NAD+日霜+智能瓶盖（红光/微电流/热/振动），焕肤效果≈8.2年。</div></div>
-        <div class="bullet-item"><div class="bullet-title">趋势2：微生物组协同（Microbiome Alignment）</div><div class="bullet-body">益生菌指甲修复系统、头皮微生态护理。Glamlac Exonail 神经酰胺-胆固醇-脂肪酸+外泌体启发植物囊泡+益生菌。</div></div>
-        <div class="bullet-item amber"><div class="bullet-title">趋势3：生物技术活性成分</div><div class="bullet-body">外泌体启发植物囊泡、升级回收农业副产品。Framesi升级回收奶薊种子专利仿生微复合物用于角蛋白修复。</div></div>
-        <div class="bullet-item green"><div class="bullet-title">趋势4：「设备+配方」系统化</div><div class="bullet-body">包装盖变身治疗引擎，配方与递送协同增效。这是BD最值得关注的赛道：中国3C制造能力可直接迁移至美容设备ODM。</div></div>
-        <div class="bullet-item"><div class="bullet-title">趋势5：可持續即设计基因</div><div class="bullet-body">CAHM Europe QPearl清洁珍珠系统CO₂减排放99%，系统级创新而非事后绿色标签。</div></div>
-        <div class="bullet-item amber"><div class="bullet-title">趋势6：从「看起來好」到「感觉好」</div><div class="bullet-body">美丽进化为整体健康体验，感官质地+情绪连结+仪式感。3C BU可结合传感技术切入情绪健康硬件。</div></div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-header"><div class="section-title">补充剂成分趋势（SPINS 2026 Q1）</div></div>
-      <div class="card">
-        <div class="grid-2">
-          <div>
-            <div class="card-title" style="color:#059669;">上升成分</div>
-            <div style="font-size:13px;color:#334155;line-height:2.2;margin-top:8px;">
-              <p>Sea Moss（海藻）</p><p>Shilajit（喜来芝）</p><p>Saffron（藏红花）</p>
-              <p>Acetyl L-Carnitine（乙酰左旋肉碱）</p><p>Colostrum（牛初乳）</p>
-              <p>NMN（烟酰胺单核苷酸）</p><p>Protein & Fiber（蛋白+纤维类别）</p>
-            </div>
-          </div>
-          <div>
-            <div class="card-title" style="color:#dc2626;">下降成分</div>
-            <div style="font-size:13px;color:#334155;line-height:2.2;margin-top:8px;">
-              <p>Weight Loss（减肥类）</p><p>Cleanse/Detox（排毒类）</p><p>Cold & Flu（感冒流感类）</p>
-              <p>Joint Health（关节健康）</p><p>Respiratory Health（呼吸健康）</p>
-            </div>
-          </div>
-        </div>
-        <div style="font-size:12px;color:#94a3b8;margin-top:12px;">趋势品类：情绪支持 · 解酒护肝 · 健康老龄化 · GLP-1支持（Ozempic等减肥药用户群） · 剂型趋势：软糖继续双位数CAGR增长</div>
-      </div>
-    </section>
-  </div>
-
-  <!-- ========== TAB 3: 品类格局 ========== -->
-  <div class="page" id="page-category">
-    <section class="section">
-      <div class="section-header"><div class="section-title">Top 20 子类目排名（按年GMV）</div><div class="section-desc">616个子类目中GMV最高的20个，标色=中国品牌GMV占比（绿≥30%·红&lt;5%）</div></div>
+      <div class="section-header"><div class="section-title">Top 20 子类目</div></div>
       <div class="card">
         <div style="overflow-x:auto;">
-          <table style="min-width:800px;">
-            <thead><tr><th>#</th><th>子类目</th><th>一级类目</th><th>年GMV</th><th>月销额</th><th>品牌数</th><th>CN GMV%</th></tr></thead>
+          <table>
+            <thead><tr><th>#</th><th>子类目</th><th>一级类目</th><th>年GMV</th><th>CN GMV%</th></tr></thead>
             <tbody><tr>
-      <td>1</td>
-      <td><b>皮肤护理产品</b></td>
+      <td>1</td><td><b>皮肤护理产品</b></td>
       <td>个人护理产品</td>
       <td>$6,422.8M</td>
-      <td>$559.9M</td>
-      <td>882</td>
       <td class="down">3.0%</td>
     </tr><tr>
-      <td>2</td>
-      <td><b>运动营养产品</b></td>
+      <td>2</td><td><b>运动营养产品</b></td>
       <td>饮食和运动营养</td>
       <td>$4,064.4M</td>
-      <td>$314.8M</td>
-      <td>1203</td>
       <td class="down">1.6%</td>
     </tr><tr>
-      <td>3</td>
-      <td><b>口腔护理产品</b></td>
+      <td>3</td><td><b>口腔护理产品</b></td>
       <td>个人护理产品</td>
       <td>$2,270.3M</td>
-      <td>$179.9M</td>
-      <td>302</td>
       <td class="">8.2%</td>
     </tr><tr>
-      <td>4</td>
-      <td><b>维生素补充剂</b></td>
+      <td>4</td><td><b>维生素补充剂</b></td>
       <td>维生素矿物质和补充剂</td>
       <td>$2,042.8M</td>
-      <td>$157.7M</td>
-      <td>289</td>
       <td class="down">0.2%</td>
     </tr><tr>
-      <td>5</td>
-      <td><b>纸和塑料家居用品</b></td>
+      <td>5</td><td><b>纸和塑料家居用品</b></td>
       <td>家居用品</td>
       <td>$2,032.7M</td>
-      <td>$135.9M</td>
-      <td>420</td>
       <td class="up">30.8%</td>
     </tr><tr>
-      <td>6</td>
-      <td><b>非处方药</b></td>
+      <td>6</td><td><b>非处方药</b></td>
       <td>保健产品</td>
       <td>$1,918.9M</td>
-      <td>$161.2M</td>
-      <td>516</td>
       <td class="">5.1%</td>
     </tr><tr>
-      <td>7</td>
-      <td><b>家庭清洁</b></td>
+      <td>7</td><td><b>家庭清洁</b></td>
       <td>家居用品</td>
       <td>$1,729.5M</td>
-      <td>$186.1M</td>
-      <td>427</td>
       <td class="down">2.1%</td>
     </tr><tr>
-      <td>8</td>
-      <td><b>运动营养蛋白</b></td>
+      <td>8</td><td><b>运动营养蛋白</b></td>
       <td>运动营养产品</td>
       <td>$1,659.2M</td>
-      <td>$114.9M</td>
-      <td>574</td>
       <td class="down">0.1%</td>
     </tr><tr>
-      <td>9</td>
-      <td><b>草药补充剂</b></td>
+      <td>9</td><td><b>草药补充剂</b></td>
       <td>维生素矿物质和补充剂</td>
       <td>$1,599.4M</td>
-      <td>$133.3M</td>
-      <td>413</td>
       <td class="down">3.0%</td>
     </tr><tr>
-      <td>10</td>
-      <td><b>移动和日常生活辅助设备</b></td>
+      <td>10</td><td><b>移动和日常生活辅助设备</b></td>
       <td>家用医疗用品和设备</td>
       <td>$1,413.4M</td>
-      <td>$133.3M</td>
-      <td>1310</td>
       <td class="up">47.7%</td>
     </tr><tr>
-      <td>11</td>
-      <td><b>剃须和脱毛产品</b></td>
+      <td>11</td><td><b>剃须和脱毛产品</b></td>
       <td>个人护理产品</td>
       <td>$1,290.9M</td>
-      <td>$106.3M</td>
-      <td>215</td>
       <td class="">16.2%</td>
     </tr><tr>
-      <td>12</td>
-      <td><b>尿布护理</b></td>
+      <td>12</td><td><b>尿布护理</b></td>
       <td>婴儿和儿童护理产品</td>
       <td>$1,269.3M</td>
-      <td>$86.0M</td>
-      <td>411</td>
       <td class="down">1.8%</td>
     </tr><tr>
-      <td>13</td>
-      <td><b>矿物质补充剂</b></td>
+      <td>13</td><td><b>矿物质补充剂</b></td>
       <td>维生素矿物质和补充剂</td>
       <td>$1,250.6M</td>
-      <td>$104.1M</td>
-      <td>314</td>
       <td class="down">4.4%</td>
     </tr><tr>
-      <td>14</td>
-      <td><b>洗衣用品</b></td>
+      <td>14</td><td><b>洗衣用品</b></td>
       <td>家居用品</td>
       <td>$1,162.3M</td>
-      <td>$99.8M</td>
-      <td>225</td>
       <td class="down">3.1%</td>
     </tr><tr>
-      <td>15</td>
-      <td><b>按摩工具和设备</b></td>
+      <td>15</td><td><b>按摩工具和设备</b></td>
       <td>健康与放松产品</td>
       <td>$1,145.0M</td>
-      <td>$85.7M</td>
-      <td>1279</td>
       <td class="up">56.2%</td>
     </tr><tr>
-      <td>16</td>
-      <td><b>急救用品</b></td>
+      <td>16</td><td><b>急救用品</b></td>
       <td>保健产品</td>
       <td>$1,072.1M</td>
-      <td>$89.9M</td>
-      <td>519</td>
       <td class="up">30.5%</td>
     </tr><tr>
-      <td>17</td>
-      <td><b>氨基酸营养补充剂</b></td>
+      <td>17</td><td><b>氨基酸营养补充剂</b></td>
       <td>运动营养产品</td>
       <td>$991.7M</td>
-      <td>$76.7M</td>
-      <td>695</td>
       <td class="down">3.7%</td>
     </tr><tr>
-      <td>18</td>
-      <td><b>纸巾、卫生纸和喷雾器</b></td>
+      <td>18</td><td><b>纸巾、卫生纸和喷雾器</b></td>
       <td>家居用品</td>
       <td>$982.3M</td>
-      <td>$83.9M</td>
-      <td>90</td>
       <td class="down">1.0%</td>
     </tr><tr>
-      <td>19</td>
-      <td><b>牙刷和配件</b></td>
+      <td>19</td><td><b>牙刷和配件</b></td>
       <td>口腔护理产品</td>
       <td>$872.1M</td>
-      <td>$57.9M</td>
-      <td>537</td>
       <td class="">17.1%</td>
     </tr><tr>
-      <td>20</td>
-      <td><b>失禁和造口产品</b></td>
+      <td>20</td><td><b>失禁和造口产品</b></td>
       <td>保健产品</td>
       <td>$856.8M</td>
-      <td>$76.9M</td>
-      <td>140</td>
       <td class="">6.7%</td>
     </tr></tbody>
           </table>
@@ -523,459 +637,177 @@ tr:hover td { background: #f8fafc; }
       </div>
     </section>
 
+    <!-- CN Brand Top 20 -->
     <section class="section">
-      <div class="section-header"><div class="section-title">品类 GMV vs 中国品牌份额 象限</div></div>
-      <div class="card"><div class="chart-lg" id="chart-quadrant"></div></div>
-    </section>
-
-    <section class="section">
-      <div class="section-header"><div class="section-title">Top 10 品牌（全行业·含非CN）</div></div>
+      <div class="section-header"><div class="section-title">中国品牌 Top 20（全行业·按年GMV）</div></div>
       <div class="card">
         <div style="overflow-x:auto;">
           <table>
-            <thead><tr><th>#</th><th>品牌</th><th>是否中国</th><th>国籍</th><th>主要类目</th><th>年GMV</th><th>均价</th></tr></thead>
+            <thead><tr><th>#</th><th>品牌</th><th>主要类目</th><th>一级类目</th><th>年GMV</th><th>Listing数</th></tr></thead>
             <tbody><tr>
-      <td>1</td>
-      <td><b>Amazon Basics</b></td>
-      <td class="">否</td>
-      <td>美国</td>
-      <td>纸和塑料家居用品</td>
-      <td>$658.7M</td>
-      <td>$15.26896154767184</td>
-    </tr><tr>
-      <td>2</td>
-      <td><b>Hefty</b></td>
-      <td class="">否</td>
-      <td>美国</td>
-      <td>纸和塑料家居用品</td>
-      <td>$444.2M</td>
-      <td>$14.09635664392269</td>
-    </tr><tr>
-      <td>3</td>
-      <td><b>Pampers</b></td>
-      <td class="">否</td>
-      <td>美国</td>
-      <td>尿布护理</td>
-      <td>$433.5M</td>
-      <td>$43.45121531475835</td>
-    </tr><tr>
-      <td>4</td>
-      <td><b>THORNE</b></td>
-      <td class="">否</td>
-      <td>美国</td>
-      <td>氨基酸营养补充剂</td>
-      <td>$400.8M</td>
-      <td>$44.63702311146102</td>
-    </tr><tr>
-      <td>5</td>
-      <td><b>Pure Encapsulations</b></td>
-      <td class="">否</td>
-      <td>美国</td>
-      <td>矿物质补充剂</td>
-      <td>$344.2M</td>
-      <td>$36.84439998087537</td>
-    </tr><tr>
-      <td>6</td>
-      <td><b>Oral-B</b></td>
-      <td class="">否</td>
-      <td>美国</td>
-      <td>牙刷和配件</td>
-      <td>$340.5M</td>
-      <td>$64.02992858191121</td>
-    </tr><tr>
-      <td>7</td>
-      <td><b>La Roche-Posay</b></td>
-      <td class="">否</td>
-      <td>美国</td>
-      <td>皮肤护理产品</td>
-      <td>$335.8M</td>
-      <td>$35.30320414831913</td>
-    </tr><tr>
-      <td>8</td>
-      <td><b>Oral-B</b></td>
-      <td class="">否</td>
-      <td>美国</td>
-      <td>口腔护理产品</td>
-      <td>$306.6M</td>
-      <td>$66.05336048063722</td>
-    </tr><tr>
-      <td>9</td>
-      <td><b>Nature Made</b></td>
-      <td class="">否</td>
-      <td>美国</td>
-      <td>维生素补充剂</td>
-      <td>$286.4M</td>
-      <td>$17.74215626243192</td>
-    </tr><tr>
-      <td>10</td>
-      <td><b>Sports Research</b></td>
-      <td class="">否</td>
-      <td>美国</td>
-      <td>维生素补充剂</td>
-      <td>$281.7M</td>
-      <td>$27.07499789089219</td>
-    </tr></tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <!-- ========== TAB 4: 中国品牌机会 ========== -->
-  <div class="page" id="page-brands">
-    <section class="section">
-      <div class="exec-summary">
-        <div class="exec-label">CN BRAND LANDSCAPE</div>
-        <div class="exec-body">
-          <div class="exec-head">Amazon健康与家庭赛道已识别 <span class="exec-up">8,843</span> 个中国品牌，覆盖13个一级类目</div>
-          <div class="exec-line">中国品牌在家用医疗设备（<b>56.8%品牌数占比</b>）、健康与放松（<b>62.5%</b>）、视觉产品（<b>62.9%</b>）三个品类已有高密度布局。维生素矿物质（8.6%）和运动营养（8.8%）虽品牌数少但单品牌产出潜力大。</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-header"><div class="section-title">中国品牌 Top 30（按年GMV排名）</div><div class="section-desc">来自13品类底表Sheet 2「中国品牌目标客户」</div></div>
-      <div class="card">
-        <div style="overflow-x:auto;">
-          <table style="min-width:900px;">
-            <thead><tr><th>#</th><th>品牌</th><th>主要类目</th><th>一级类目</th><th>年GMV</th><th>月销额</th><th>Listing数</th><th>均价</th></tr></thead>
-            <tbody><tr>
-      <td>1</td>
-      <td><b>RENPHO</b></td>
+      <td>1</td><td><b>RENPHO</b></td>
       <td style="font-size:12px;">按摩工具和设备</td>
       <td>健康与放松产品</td>
       <td>$96.4M</td>
-      <td>$4.5M</td>
       <td>30</td>
-      <td>96.92587213696011</td>
     </tr><tr>
-      <td>2</td>
-      <td><b>COSLUS</b></td>
+      <td>2</td><td><b>COSLUS</b></td>
       <td style="font-size:12px;">牙线和牙签</td>
       <td>口腔护理产品</td>
       <td>$50.8M</td>
-      <td>$3.9M</td>
       <td>20</td>
-      <td>29.1095732574198</td>
     </tr><tr>
-      <td>3</td>
-      <td><b>UEOFEN</b></td>
+      <td>3</td><td><b>UEOFEN</b></td>
       <td style="font-size:12px;">义齿护理</td>
       <td>口腔护理产品</td>
       <td>$46.9M</td>
-      <td>$1.0M</td>
       <td>5</td>
-      <td>36.99918723143355</td>
     </tr><tr>
-      <td>4</td>
-      <td><b>JOYMOOP</b></td>
+      <td>4</td><td><b>JOYMOOP</b></td>
       <td style="font-size:12px;">家用清洁工具</td>
       <td>家居用品</td>
       <td>$46.0M</td>
-      <td>$2.3M</td>
       <td>8</td>
-      <td>38.83215845610006</td>
     </tr><tr>
-      <td>5</td>
-      <td><b>MR.SIGA</b></td>
+      <td>5</td><td><b>MR.SIGA</b></td>
       <td style="font-size:12px;">家用清洁工具</td>
       <td>家居用品</td>
       <td>$45.9M</td>
-      <td>$3.7M</td>
       <td>32</td>
-      <td>18.86319470487783</td>
     </tr><tr>
-      <td>6</td>
-      <td><b>Dealusy</b></td>
+      <td>6</td><td><b>Dealusy</b></td>
       <td style="font-size:12px;">纸和塑料家居用品</td>
       <td>家居用品</td>
       <td>$42.2M</td>
-      <td>$3.1M</td>
       <td>18</td>
-      <td>25.70860006995276</td>
     </tr><tr>
-      <td>7</td>
-      <td><b>Comfytemp</b></td>
+      <td>7</td><td><b>Comfytemp</b></td>
       <td style="font-size:12px;">急救用品</td>
       <td>保健产品</td>
       <td>$41.8M</td>
-      <td>$3.1M</td>
       <td>28</td>
-      <td>43.99749187571938</td>
     </tr><tr>
-      <td>8</td>
-      <td><b>RENPHO</b></td>
+      <td>8</td><td><b>RENPHO</b></td>
       <td style="font-size:12px;">急救用品</td>
       <td>保健产品</td>
       <td>$41.6M</td>
-      <td>$2.7M</td>
       <td>8</td>
-      <td>58.87267995851138</td>
     </tr><tr>
-      <td>9</td>
-      <td><b>COMFIER</b></td>
+      <td>9</td><td><b>COMFIER</b></td>
       <td style="font-size:12px;">按摩工具和设备</td>
       <td>健康与放松产品</td>
       <td>$34.3M</td>
-      <td>$2.3M</td>
       <td>43</td>
-      <td>117.3157808760289</td>
     </tr><tr>
-      <td>10</td>
-      <td><b>BOB AND BRAD</b></td>
+      <td>10</td><td><b>BOB AND BRAD</b></td>
       <td style="font-size:12px;">按摩工具和设备</td>
       <td>健康与放松产品</td>
       <td>$31.3M</td>
-      <td>$1.9M</td>
       <td>27</td>
-      <td>151.5391969544238</td>
     </tr><tr>
-      <td>11</td>
-      <td><b>AUVON</b></td>
+      <td>11</td><td><b>AUVON</b></td>
       <td style="font-size:12px;">职业和物理治疗辅助设备</td>
       <td>家用医疗用品和设备</td>
       <td>$30.3M</td>
-      <td>$2.4M</td>
       <td>33</td>
-      <td>22.94707660579226</td>
     </tr><tr>
-      <td>12</td>
-      <td><b>HOMLAND</b></td>
+      <td>12</td><td><b>HOMLAND</b></td>
       <td style="font-size:12px;">移动和日常生活辅助设备</td>
       <td>家用医疗用品和设备</td>
       <td>$28.9M</td>
-      <td>$2.3M</td>
       <td>20</td>
-      <td>72.67962695646273</td>
     </tr><tr>
-      <td>13</td>
-      <td><b>Osteo</b></td>
+      <td>13</td><td><b>Osteo</b></td>
       <td style="font-size:12px;">骨科用品</td>
       <td>家用医疗用品和设备</td>
       <td>$28.7M</td>
-      <td>$0.7M</td>
       <td>4</td>
-      <td>40.66576330472681</td>
     </tr><tr>
-      <td>14</td>
-      <td><b>COSLUS</b></td>
+      <td>14</td><td><b>COSLUS</b></td>
       <td style="font-size:12px;">口腔护理产品</td>
       <td>个人护理产品</td>
       <td>$27.0M</td>
-      <td>$2.4M</td>
       <td>14</td>
-      <td>26.95322181919301</td>
     </tr><tr>
-      <td>15</td>
-      <td><b>UEOFEN</b></td>
+      <td>15</td><td><b>UEOFEN</b></td>
       <td style="font-size:12px;">口腔护理产品</td>
       <td>个人护理产品</td>
       <td>$26.9M</td>
-      <td>$1.0M</td>
       <td>2</td>
-      <td>36.75423244017615</td>
     </tr><tr>
-      <td>16</td>
-      <td><b>Ulike</b></td>
+      <td>16</td><td><b>Ulike</b></td>
       <td style="font-size:12px;">剃须和脱毛产品</td>
       <td>个人护理产品</td>
       <td>$25.1M</td>
-      <td>$2.5M</td>
       <td>4</td>
-      <td>347.0450480956653</td>
     </tr><tr>
-      <td>17</td>
-      <td><b>RENPHO</b></td>
+      <td>17</td><td><b>RENPHO</b></td>
       <td style="font-size:12px;">活动、健康和健康监测器</td>
       <td>家用医疗用品和设备</td>
       <td>$24.9M</td>
-      <td>$2.5M</td>
       <td>12</td>
-      <td>97.57912664981211</td>
     </tr><tr>
-      <td>18</td>
-      <td><b>Cozyplayer</b></td>
+      <td>18</td><td><b>Cozyplayer</b></td>
       <td style="font-size:12px;">移动和日常生活辅助设备</td>
       <td>家用医疗用品和设备</td>
       <td>$24.5M</td>
-      <td>$2.5M</td>
       <td>3</td>
-      <td>39.84727576287894</td>
     </tr><tr>
-      <td>19</td>
-      <td><b>AERLANG</b></td>
+      <td>19</td><td><b>AERLANG</b></td>
       <td style="font-size:12px;">按摩工具和设备</td>
       <td>健康与放松产品</td>
       <td>$22.3M</td>
-      <td>$0.8M</td>
       <td>9</td>
-      <td>34.52903420006986</td>
     </tr><tr>
-      <td>20</td>
-      <td><b>HOMEXCEL</b></td>
+      <td>20</td><td><b>HOMEXCEL</b></td>
       <td style="font-size:12px;">家用清洁工具</td>
       <td>家居用品</td>
       <td>$21.9M</td>
-      <td>$0.8M</td>
       <td>7</td>
-      <td>9.782655703175593</td>
-    </tr><tr>
-      <td>21</td>
-      <td><b>VALSOLE</b></td>
-      <td style="font-size:12px;">足部保健产品</td>
-      <td>保健产品</td>
-      <td>$20.4M</td>
-      <td>$1.4M</td>
-      <td>2</td>
-      <td>26.12469759258166</td>
-    </tr><tr>
-      <td>22</td>
-      <td><b>Wowflash</b></td>
-      <td style="font-size:12px;">失禁和造口产品</td>
-      <td>保健产品</td>
-      <td>$19.2M</td>
-      <td>$1.4M</td>
-      <td>2</td>
-      <td>25.44546652561769</td>
-    </tr><tr>
-      <td>23</td>
-      <td><b>Lamosi</b></td>
-      <td style="font-size:12px;">纸和塑料家居用品</td>
-      <td>家居用品</td>
-      <td>$18.6M</td>
-      <td>$1.8M</td>
-      <td>21</td>
-      <td>24.20484101647428</td>
-    </tr><tr>
-      <td>24</td>
-      <td><b>CINCOM</b></td>
-      <td style="font-size:12px;">按摩工具和设备</td>
-      <td>健康与放松产品</td>
-      <td>$18.5M</td>
-      <td>$1.1M</td>
-      <td>17</td>
-      <td>149.7391300950921</td>
-    </tr><tr>
-      <td>25</td>
-      <td><b>GoodBaby</b></td>
-      <td style="font-size:12px;">婴儿和儿童保健产品</td>
-      <td>婴儿和儿童护理产品</td>
-      <td>$18.1M</td>
-      <td>$1.3M</td>
-      <td>2</td>
-      <td>17.73908763271353</td>
-    </tr><tr>
-      <td>26</td>
-      <td><b>JOLLY CHEF</b></td>
-      <td style="font-size:12px;">纸和塑料家居用品</td>
-      <td>家居用品</td>
-      <td>$16.8M</td>
-      <td>$1.6M</td>
-      <td>27</td>
-      <td>24.04074002284496</td>
-    </tr><tr>
-      <td>27</td>
-      <td><b>FIT KING</b></td>
-      <td style="font-size:12px;">按摩工具和设备</td>
-      <td>健康与放松产品</td>
-      <td>$16.2M</td>
-      <td>$1.7M</td>
-      <td>22</td>
-      <td>196.2354122878259</td>
-    </tr><tr>
-      <td>28</td>
-      <td><b>FEATOL</b></td>
-      <td style="font-size:12px;">支撑、夹板和支架</td>
-      <td>家用医疗用品和设备</td>
-      <td>$16.0M</td>
-      <td>$1.7M</td>
-      <td>12</td>
-      <td>29.64221739811052</td>
-    </tr><tr>
-      <td>29</td>
-      <td><b>WALK·HERO COMFORT AND SUPPORT</b></td>
-      <td style="font-size:12px;">足部保健产品</td>
-      <td>保健产品</td>
-      <td>$15.9M</td>
-      <td>$1.6M</td>
-      <td>4</td>
-      <td>19.26588441683413</td>
-    </tr><tr>
-      <td>30</td>
-      <td><b>Boriwat</b></td>
-      <td style="font-size:12px;">按摩工具和设备</td>
-      <td>健康与放松产品</td>
-      <td>$14.9M</td>
-      <td>$0.5M</td>
-      <td>4</td>
-      <td>69.66668702847556</td>
     </tr></tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-header"><div class="section-title">高机会品类 × 低CN渗透 → BD优先级矩阵</div></div>
-      <div class="grid-2">
-        <div class="card" style="border-left:4px solid #10b981;">
-          <div class="card-title">S级 · 最大蛋糕+最低渗透</div>
-          <div style="font-size:13px;color:#334155;line-height:2;margin-top:8px;">
-            <p><b>维生素矿物质</b>：$10.1B · CN GMV 2.0%</p>
-            <p><b>个人护理</b>：$11.3B · CN GMV 6.4%（皮肤护理$6.4B仅3%）</p>
-            <p><b>运动营养</b>：$10.6B · CN GMV 1.6%</p>
-          </div>
-        </div>
-        <div class="card" style="border-left:4px solid #f59e0b;">
-          <div class="card-title">A级 · 大规模+较低渗透</div>
-          <div style="font-size:13px;color:#334155;line-height:2;margin-top:8px;">
-            <p><b>婴儿和儿童护理</b>：$2.1B · CN GMV 4.3%</p>
-            <p><b>口腔护理</b>：$3.0B · CN GMV 13.9%</p>
-            <p><b>保健产品</b>：$7.1B · CN GMV 15.4%</p>
-          </div>
-        </div>
-        <div class="card" style="border-left:4px solid #3b82f6;">
-          <div class="card-title">守成级 · CN已有优势</div>
-          <div style="font-size:13px;color:#334155;line-height:2;margin-top:8px;">
-            <p><b>家用医疗设备</b>：$3.2B · CN GMV 40.2%</p>
-            <p><b>健康与放松</b>：$2.1B · CN GMV 49.2%</p>
-            <p><b>视觉产品</b>：$0.7B · CN GMV 28.3%</p>
-          </div>
-        </div>
-        <div class="card" style="border-left:4px solid #94a3b8;">
-          <div class="card-title">观望级 · CN已红海</div>
-          <div style="font-size:13px;color:#334155;line-height:2;margin-top:8px;">
-            <p><b>文具和礼品包装</b>：$0.5B · CN GMV 83.3%</p>
-            <p>→ 建议转TikTok/独立站增量渠道</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-header"><div class="section-title">待补数据清单</div></div>
-      <div class="card">
-        <div style="overflow-x:auto;">
-          <table>
-            <thead><tr><th>优先级</th><th>数据类型</th><th>期望信源</th><th>能填充的模块</th><th>责任方</th></tr></thead>
-            <tbody>
-              <tr><td><span class="tag tag-red">高</span></td><td><b>PR拓客线索（健康与家庭行业）</b></td><td>PR Newswire / Business Wire / 展会官网</td><td>新增「新客线索」Tab</td><td>Wale提供</td></tr>
-              <tr><td><span class="tag tag-red">高</span></td><td><b>达人营销数据（Nox聚星）</b></td><td>Nox聚星 · 健康/美容/母婴类达人</td><td>新增「达人营销」Tab</td><td>内部自建</td></tr>
-              <tr><td><span class="tag tag-red">高</span></td><td><b>DE/UK/JP多市场数据</b></td><td>Sorftime导出德国/英国/日本站</td><td>「区域市场」Tab</td><td>内部自建</td></tr>
-              <tr><td><span class="tag tag-amber">中</span></td><td><b>品牌销量趋势（月度环比）</b></td><td>Sheet 4 品牌销量趋势（已有·未展示）</td><td>「品类格局」Tab趋势图</td><td>内部自建</td></tr>
-              <tr><td><span class="tag tag-amber">中</span></td><td><b>买点话术分析</b></td><td>Sheet 5 品类买点话术（已有·未展示）</td><td>「品类格局」Tab话术标签云</td><td>内部自建</td></tr>
-              <tr><td><span class="tag tag-amber">中</span></td><td><b>展会日历（2026年健康与家庭）</b></td><td>Natural Products Expo / Vitafoods / MEDICA等</td><td>「行业动态」Tab</td><td>内部自建</td></tr>
-            </tbody>
           </table>
         </div>
       </div>
     </section>
   </div>
 
-</div>
+  <!-- ================================================================ -->
+  <!-- TAB 3: 行业动态 -->
+  <!-- ================================================================ -->
+  <div class="page" id="page-news">
+    <section class="section">
+      <div class="source-block"><strong>信源说明</strong> · 行业动态基于公开信源检索（CES 2026 / Cosmoprof Bologna 2026 / FDA公告 / 券商研报 / 行业媒体），聚焦2026年Q1-Q2关键事件。本模块为行业新闻聚合，非一手实证数据，仅供BD团队做行业叙事参考。</div>
+    </section>
 
+    <section class="section">
+      <div class="section-header"><div class="section-title">FDA监管：2026年补充剂行业最大变量</div></div>
+      <div class="news-card"><div class="news-category">REGULATORY · 2026-03-27</div><div class="news-title">FDA召开里程碑会议：拟扩大"膳食成分"定义</div><div class="news-body">FDA公开讨论将<b>肽类、下一代益生菌</b>等纳入膳食补充剂合法成分。FDA食品最高官员Kyle Diamantas承认"行业30年巨变，监管框架基本未变"，释放现代化信号。HHS部长RFK Jr.公开自称"肽类大粉丝"，誓言"结束FDA对补充剂的战争"。</div></div>
+      <div class="news-card"><div class="news-category">LEGISLATION · 2026-Q1</div><div class="news-title">《膳食补充剂上市法案2026》+ GRAS改革 + 纽约州18+限制法</div><div class="news-body">联邦补充剂注册制度立法进展；FDA考虑将自我确认GRAS改为强制通知；纽约州率先对减肥/增肌补充剂实施18+购买限制（CRN已上诉至最高法），多州跟进。CRN推动联邦统一法案。</div></div>
+      <div class="news-card"><div class="news-category">TRENDS · SPINS 2026 Q1</div><div class="news-title">成分趋势：Sea Moss / Shilajit / NMN上升，情绪支持/解酒/GLP-1支持成热门品类</div><div class="news-body">上升成分：Sea Moss、Shilajit、Saffron、Acetyl L-Carnitine、Colostrum、NMN。热门品类：情绪支持、解酒护肝、健康老龄化、GLP-1支持（Ozempic用户群）。剂型趋势：软糖继续双位数CAGR增长。</div></div>
+    </section>
+
+    <section class="section">
+      <div class="section-header"><div class="section-title">CES 2026：健康科技四大趋势</div></div>
+      <div class="bullet-list">
+        <div class="bullet-item green"><div class="bullet-title">趋势1：AI成为消费健康核心基础设施</div><div class="bullet-body">Withings Body Scan 2 90秒测60+生物标记；智能镜30秒面部视频评估心脏年龄；三星Brain Health AI分析步态/语音/睡眠早期识别认知衰退。AI医疗市场预计2034年达$8,864亿。</div></div>
+        <div class="bullet-item"><div class="bullet-title">趋势2：光疗全面爆发 + AI皮肤诊断临床化</div><div class="bullet-body">欧莱雅四款光疗产品（LED面膜/眼罩/红外美发棒/蛋白组学皮肤分析仪）；科玛韩国AI疤痕治疗仪获美妆科技最佳创新奖；Nuon Medical"设备即包装"将传感器/治疗嵌入包装。</div></div>
+        <div class="bullet-item amber"><div class="bullet-title">趋势3：居家诊断消费级化——睡眠实验室/激素监测/智能卫生巾</div><div class="bullet-body">Wis Medical无线贴片居家复制完整睡眠实验室；Vivoo智能卫生巾嵌入式化学检测；Nutrix tSense唾液睾酮传感器3分钟出结果；Mira Ultra4居家16分钟测四种激素。</div></div>
+        <div class="bullet-item"><div class="bullet-title">趋势4：母嬰智能化成中国国家战略</div><div class="bullet-body">中国工信部等六部门将婴童智能化列为国家方向。智能婴儿监视器2035年预计$89.85B（CAGR 34.5%）。Babycare AI天才小丑鴨首月销售额破200万元。</div></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header"><div class="section-title">Cosmoprof Bologna 2026 · 美妆供应链六大趋势</div></div>
+      <div class="bullet-list">
+        <div class="bullet-item green"><div class="bullet-title">「设备+配方」系统化——最值得BD关注的赛道</div><div class="bullet-body">Vagheggi NAD+日霜内置智能瓶盖（红光/微电流/热/振动），焕肤效果≈8.2年。包装盖变身治疗引擎，中国3C制造能力可直接迁移至美容设备ODM。</div></div>
+        <div class="bullet-item"><div class="bullet-title">长寿科学 / 微生物组协同 / 生物技术活性成分</div><div class="bullet-body">NAD+激活剂、端粒保护、外泌体启发植物囊泡、升级回收农业副产品（奶薊种子→角蛋白修复）。益生菌指甲修复系统、头皮微生态护理成为新战场。</div></div>
+        <div class="bullet-item amber"><div class="bullet-title">可持续即设计基因 + 从「看起來好」到「感觉好」</div><div class="bullet-body">QPearl清洁珍珠系统CO₂减排99%；美丽进化为整体健康体验——感官质地+情绪连结+仪式感。</div></div>
+      </div>
+    </section>
+  </div>
+</div>
 <script>
-// ===== TAB SWITCHING =====
+// Tab switching
 document.querySelectorAll('#main-tabs .tab-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('#main-tabs .tab-btn').forEach(b => b.classList.remove('active'));
@@ -986,33 +818,31 @@ document.querySelectorAll('#main-tabs .tab-btn').forEach(btn => {
   });
 });
 
-// ===== TREEMAP =====
+// Treemap
 (function(){
-  var data = [{"name": "个人护理产品", "value": 11349709170.640007}, {"name": "维生素矿物质和补充剂", "value": 10050803147.100002}, {"name": "家居用品", "value": 9010428754.759998}, {"name": "保健产品", "value": 7095389300.170001}, {"name": "饮食和运动营养", "value": 5911573225.079999}, {"name": "运动营养产品", "value": 4659023529.009999}, {"name": "家用医疗用品和设备", "value": 3228438050.83}, {"name": "口腔护理产品", "value": 2997166165.59}, {"name": "婴儿和儿童护理产品", "value": 2094858689.6200006}, {"name": "健康与放松产品", "value": 2088421063.27}, {"name": "销售和交易", "value": 1568428549.170001}, {"name": "视觉产品", "value": 667635039.4}, {"name": "文具和礼品包装用品", "value": 450944123.7299999}];
-  var chart = echarts.init(document.getElementById('chart-treemap'));
-  chart.setOption({
+  var treemapData = [{"name": "个人护理产品", "value": 11349709170.640007}, {"name": "维生素矿物质和补充剂", "value": 10050803147.100002}, {"name": "家居用品", "value": 9010428754.759998}, {"name": "保健产品", "value": 7095389300.170001}, {"name": "饮食和运动营养", "value": 5911573225.079999}, {"name": "运动营养产品", "value": 4659023529.009999}, {"name": "家用医疗用品和设备", "value": 3228438050.83}, {"name": "口腔护理产品", "value": 2997166165.59}, {"name": "婴儿和儿童护理产品", "value": 2094858689.6200006}, {"name": "健康与放松产品", "value": 2088421063.27}, {"name": "销售和交易", "value": 1568428549.170001}, {"name": "视觉产品", "value": 667635039.4}, {"name": "文具和礼品包装用品", "value": 450944123.7299999}];
+  var c1 = echarts.init(document.getElementById('chart-treemap'));
+  c1.setOption({
     tooltip: { formatter: function(p){ return p.name+'<br/>GMV: $'+(p.value/1e9).toFixed(2)+'B'; } },
-    series: [{ type: 'treemap', visibleMin: 300, label: { show: true, formatter: function(p){ return p.name+'\n$'+(p.value/1e9).toFixed(1)+'B'; } }, data: data }]
+    series: [{ type: 'treemap', visibleMin: 300, label: { show: true, formatter: function(p){ return p.name+'\n$'+(p.value/1e9).toFixed(1)+'B'; } }, data: treemapData }]
   });
-  window.addEventListener('resize', function(){ chart.resize(); });
+  window.addEventListener('resize', function(){ c1.resize(); });
 })();
 
-// ===== QUADRANT CHART =====
+// Quadrant
 (function(){
   var quadData = [{"name": "个人护理产品", "value": [11.349709170640008, 6.386764148244206]}, {"name": "维生素矿物质和补充剂", "value": [10.050803147100002, 1.996829842573309]}, {"name": "家居用品", "value": [9.010428754759998, 14.293678505615212]}, {"name": "保健产品", "value": [7.095389300170001, 15.40735526355431]}, {"name": "饮食和运动营养", "value": [5.911573225079999, 1.5529109814683328]}, {"name": "运动营养产品", "value": [4.659023529009999, 1.5947003205661252]}, {"name": "家用医疗用品和设备", "value": [3.22843805083, 40.15390520631842]}, {"name": "口腔护理产品", "value": [2.99716616559, 13.88844981561848]}, {"name": "婴儿和儿童护理产品", "value": [2.0948586896200005, 4.341026547515095]}, {"name": "健康与放松产品", "value": [2.0884210632699998, 49.17183221288188]}, {"name": "销售和交易", "value": [1.568428549170001, 0.000996442324528732]}, {"name": "视觉产品", "value": [0.6676350394, 28.310142407432735]}, {"name": "文具和礼品包装用品", "value": [0.4509441237299999, 83.30214325111555]}];
-  var chart2 = echarts.init(document.getElementById('chart-quadrant'));
-  chart2.setOption({
+  var c2 = echarts.init(document.getElementById('chart-quadrant'));
+  c2.setOption({
     tooltip: { formatter: function(p){ return p.name+'<br/>GMV: $'+p.value[0].toFixed(2)+'B<br/>CN GMV%: '+p.value[1].toFixed(1)+'%'; } },
-    xAxis: { name: '年GMV (B)', type: 'value' },
+    xAxis: { name: '年GMV (B$)', type: 'value' },
     yAxis: { name: '中国品牌GMV占比 (%)', type: 'value' },
-    series: [{
-      type: 'scatter', symbolSize: function(val){ return Math.sqrt(val[0])*12; },
-      data: quadData, label: { show: true, formatter: function(p){ return p.name; }, fontSize: 11, position: 'top' },
+    series: [{ type: 'scatter', symbolSize: function(v){ return Math.sqrt(v[0])*15; }, data: quadData,
+      label: { show: true, formatter: function(p){ return p.name; }, fontSize: 11, position: 'top' },
       markLine: { silent: true, data: [{ yAxis: 20, label: { formatter: 'CN 20%线' }, lineStyle: { color: '#f59e0b', type: 'dashed' } }] }
     }]
   });
-  window.addEventListener('resize', function(){ chart2.resize(); });
+  window.addEventListener('resize', function(){ c2.resize(); });
 })();
 </script>
-</body>
-</html>
+</body></html>
