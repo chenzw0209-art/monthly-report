@@ -99,7 +99,9 @@ td { padding: 10px 12px; border-bottom: 1px solid #f1f5f9; color: #1e293b; } tr:
       <div class="kpi-card"><div class="kpi-label">2026-04月销</div><div class="kpi-value">$5.01B</div><div class="kpi-sub">环比 -1.2%</div></div>
       <div class="kpi-card"><div class="kpi-label">CN品牌GMV占比</div><div class="kpi-value" style="color:#f59e0b;">11.2%</div><div class="kpi-sub">加权平均</div></div>
       <div class="kpi-card"><div class="kpi-label">子类目数</div><div class="kpi-value">616</div><div class="kpi-sub">13个一级类目</div></div>
-    </div><div class="card" style="padding:12px;"><div class="chart-lg" id="chart-trend-main"></div></div></div></section>
+    </div><div class="card" style="padding:12px;"><div class="chart-lg" id="chart-treemap"></div></div></div></section>
+
+    <section class="section"><div class="card"><div class="card-title">大盘 GMV 趋势（双线图）</div><div class="card-subtitle">近 24 个月 · 13 品类合计 · 总 GMV 与中国品牌 GMV · 鼠标悬停显示中国品牌份额占比</div><div class="chart-lg" id="chart-trend"></div></div></section>
 
     <section class="section"><div class="card"><div class="card-title">大盘洞察</div><div class="card-subtitle">基于 13 个品类的整体分析 · 大盘信号、增长结构、中国品牌信号、风险与机会</div><div class="bullet-list">
       <div class="bullet-item green"><div class="bullet-title">洞察1：维生素矿物质（$10.1B · CN 2.0%）——FDA窗口期是系统性入场机会</div><div class="bullet-body">2026年3月FDA里程碑会议拟扩大"膳食成分"定义，GRAS改革推进中。SPINS数据显示NMN、Sea Moss、Colostrum等新成分崛起，中国原料端有优势。同时碎片化监管（纽约18+限制法等）推高合规门槛，率先完成FDA GRAS/NDI认证的品牌将享受"监管溢价"。<b>BD建议：优先找有GMP认证+Vitafoods/CES参展记录+Amazon有Listing但无TikTok的品牌。</b></div></div>
@@ -151,27 +153,29 @@ document.querySelectorAll('#main-tabs .tab-btn').forEach(btn => {
 
 // Treemap
 (function(){
-var td = [{"month": "2024-11", "total": 4910.2, "cn": 403.9, "cn_share": 8.2}, {"month": "2024-12", "total": 4294.8, "cn": 422.0, "cn_share": 9.8}, {"month": "2025-01", "total": 4157.3, "cn": 326.7, "cn_share": 7.9}, {"month": "2025-02", "total": 4389.4, "cn": 351.0, "cn_share": 8.0}, {"month": "2025-03", "total": 4489.8, "cn": 350.1, "cn_share": 7.8}, {"month": "2025-04", "total": 4517.2, "cn": 357.8, "cn_share": 7.9}, {"month": "2025-05", "total": 4810.0, "cn": 413.2, "cn_share": 8.6}, {"month": "2025-06", "total": 5085.0, "cn": 406.7, "cn_share": 8.0}, {"month": "2025-07", "total": 5562.6, "cn": 474.7, "cn_share": 8.5}, {"month": "2025-08", "total": 4743.3, "cn": 468.5, "cn_share": 9.9}, {"month": "2025-09", "total": 4824.6, "cn": 453.0, "cn_share": 9.4}, {"month": "2025-10", "total": 4830.2, "cn": 465.2, "cn_share": 9.6}, {"month": "2025-11", "total": 5517.6, "cn": 610.7, "cn_share": 11.1}, {"month": "2025-12", "total": 5168.5, "cn": 709.6, "cn_share": 13.7}, {"month": "2026-01", "total": 4811.1, "cn": 529.8, "cn_share": 11.0}, {"month": "2026-02", "total": 4969.6, "cn": 532.4, "cn_share": 10.7}, {"month": "2026-03", "total": 5072.6, "cn": 537.5, "cn_share": 10.6}, {"month": "2026-04", "total": 5013.8, "cn": 543.0, "cn_share": 10.8}];
-    var c1 = echarts.init(document.getElementById('chart-trend-main'));
-  c1.setOption({{
-    tooltip: {{ trigger: 'axis' }},
-    legend: {{ data: ['总GMV(M$)','CN品牌GMV(M$)','CN份额%'], top: 5 }},
-    grid: {{ left: 50, right: 50, top: 40, bottom: 30 }},
-    xAxis: {{ type: 'category', data: td.map(d=>d.month) }},
-    yAxis: [{{ type: 'value', name: 'M$' }}, {{ type: 'value', name: '%', min: 0, max: 20 }}],
-    series: [
-      {{ name: '总GMV(M$)', type: 'line', data: td.map(d=>d.total), smooth: true, symbol:'none', lineStyle:{{color:'#3b82f6',width:2}}, areaStyle:{{color:{{type:'linear',x:0,y:0,x2:0,y2:1,colorStops:[{{offset:0,color:'rgba(59,130,246,0.3)'}},{{offset:1,color:'rgba(59,130,246,0.02)'}}]}}}} }},
-      {{ name: 'CN品牌GMV(M$)', type: 'line', data: td.map(d=>d.cn), smooth: true, symbol:'none', lineStyle:{{color:'#10b981',width:2}}, areaStyle:{{color:{{type:'linear',x:0,y:0,x2:0,y2:1,colorStops:[{{offset:0,color:'rgba(16,185,129,0.25)'}},{{offset:1,color:'rgba(16,185,129,0.02)'}}]}}}} }},
-      {{ name: 'CN份额%', type: 'line', yAxisIndex: 1, data: td.map(d=>d.cn_share), smooth: true, symbol:'none', lineStyle:{{color:'#f59e0b',type:'dashed',width:2}} }}
-    ]
-  }});
+  var c1 = echarts.init(document.getElementById('chart-treemap'));
+  c1.setOption({
+    tooltip: { formatter: function(p){ var v=p.value; return p.name+'<br/>GMV: $'+(v[0]/1e9).toFixed(2)+'B<br/>CN份额: '+v[1].toFixed(1)+'%'; } },
+    series: [{ type: 'treemap', visibleMin: 300, visualDimension: 1, colorMappingBy: 'value', label: { show: true, formatter: function(p){ var v=p.value; return p.name+'\n$'+(v[0]/1e9).toFixed(1)+'B\nCN '+v[1].toFixed(1)+'%'; } }, data: [{"name": "个人护理产品", "value": [11349709170.640007, 6.386764148244206]}, {"name": "维生素矿物质和补充剂", "value": [10050803147.100002, 1.996829842573309]}, {"name": "家居用品", "value": [9010428754.759998, 14.293678505615212]}, {"name": "保健产品", "value": [7095389300.170001, 15.40735526355431]}, {"name": "饮食和运动营养", "value": [5911573225.079999, 1.5529109814683328]}, {"name": "运动营养产品", "value": [4659023529.009999, 1.5947003205661252]}, {"name": "家用医疗用品和设备", "value": [3228438050.83, 40.15390520631842]}, {"name": "口腔护理产品", "value": [2997166165.59, 13.88844981561848]}, {"name": "婴儿和儿童护理产品", "value": [2094858689.6200006, 4.341026547515095]}, {"name": "健康与放松产品", "value": [2088421063.27, 49.17183221288188]}, {"name": "销售和交易", "value": [1568428549.170001, 0.000996442324528732]}, {"name": "视觉产品", "value": [667635039.4, 28.310142407432735]}, {"name": "文具和礼品包装用品", "value": [450944123.7299999, 83.30214325111555]}] }]
+  });
   c1.on('click', function(params){ if(params.name){ selectCat(params.name); } });
   window.addEventListener('resize', function(){ c1.resize(); });
 })();
 
 // Trend
 (function(){
-  
+  var td = [{"month": "2024-11", "total": 4910.2, "cn": 403.9, "cn_share": 8.2}, {"month": "2024-12", "total": 4294.8, "cn": 422.0, "cn_share": 9.8}, {"month": "2025-01", "total": 4157.3, "cn": 326.7, "cn_share": 7.9}, {"month": "2025-02", "total": 4389.4, "cn": 351.0, "cn_share": 8.0}, {"month": "2025-03", "total": 4489.8, "cn": 350.1, "cn_share": 7.8}, {"month": "2025-04", "total": 4517.2, "cn": 357.8, "cn_share": 7.9}, {"month": "2025-05", "total": 4810.0, "cn": 413.2, "cn_share": 8.6}, {"month": "2025-06", "total": 5085.0, "cn": 406.7, "cn_share": 8.0}, {"month": "2025-07", "total": 5562.6, "cn": 474.7, "cn_share": 8.5}, {"month": "2025-08", "total": 4743.3, "cn": 468.5, "cn_share": 9.9}, {"month": "2025-09", "total": 4824.6, "cn": 453.0, "cn_share": 9.4}, {"month": "2025-10", "total": 4830.2, "cn": 465.2, "cn_share": 9.6}, {"month": "2025-11", "total": 5517.6, "cn": 610.7, "cn_share": 11.1}, {"month": "2025-12", "total": 5168.5, "cn": 709.6, "cn_share": 13.7}, {"month": "2026-01", "total": 4811.1, "cn": 529.8, "cn_share": 11.0}, {"month": "2026-02", "total": 4969.6, "cn": 532.4, "cn_share": 10.7}, {"month": "2026-03", "total": 5072.6, "cn": 537.5, "cn_share": 10.6}, {"month": "2026-04", "total": 5013.8, "cn": 543.0, "cn_share": 10.8}];
+  var c2 = echarts.init(document.getElementById('chart-trend'));
+  c2.setOption({
+    tooltip: { trigger: 'axis' }, legend: { data: ['总GMV(M$)','CN品牌GMV(M$)','CN份额%'], top: 5 },
+    xAxis: { type: 'category', data: td.map(d=>d.month) },
+    yAxis: [{ type: 'value', name: 'M$' }, { type: 'value', name: '%', min: 0, max: 20 }],
+    series: [
+      { name: '总GMV(M$)', type: 'line', data: td.map(d=>d.total), smooth: true, lineStyle:{color:'#3b82f6'} },
+      { name: 'CN品牌GMV(M$)', type: 'line', data: td.map(d=>d.cn), smooth: true, lineStyle:{color:'#10b981'} },
+      { name: 'CN份额%', type: 'line', yAxisIndex: 1, data: td.map(d=>d.cn_share), smooth: true, lineStyle:{color:'#f59e0b',type:'dashed'} }
+    ]
+  });
   window.addEventListener('resize', function(){ c2.resize(); });
 })();
 
@@ -476,25 +480,5 @@ function selectCat(name) {
   });
 })();
 
-  var qd = [{"name": "个人护理产品", "value": [11.349709170640008, 6.386764148244206]}, {"name": "保健产品", "value": [7.095389300170001, 15.40735526355431]}, {"name": "健康与放松产品", "value": [2.0884210632699998, 49.17183221288188]}, {"name": "口腔护理产品", "value": [2.99716616559, 13.88844981561848]}, {"name": "婴儿和儿童护理产品", "value": [2.0948586896200005, 4.341026547515095]}, {"name": "家居用品", "value": [9.010428754759998, 14.293678505615212]}, {"name": "家用医疗用品和设备", "value": [3.22843805083, 40.15390520631842]}, {"name": "文具和礼品包装用品", "value": [0.4509441237299999, 83.30214325111555]}, {"name": "维生素矿物质和补充剂", "value": [10.050803147100002, 1.996829842573309]}, {"name": "视觉产品", "value": [0.6676350394, 28.310142407432735]}, {"name": "运动营养产品", "value": [4.659023529009999, 1.5947003205661252]}, {"name": "销售和交易", "value": [1.568428549170001, 0.000996442324528732]}, {"name": "饮食和运动营养", "value": [5.911573225079999, 1.5529109814683328]}];
-    var cq = echarts.init(document.getElementById('chart-quadrant'));
-    if (!cq) return;
-    cq.setOption({
-      tooltip: { formatter: function(p){ return p.name+'<br/>GMV: $'+p.value[0].toFixed(2)+'B<br/>CN GMV%: '+p.value[1].toFixed(1)+'%'; } },
-      xAxis: { name: '年GMV (B$)', type: 'value' },
-      yAxis: { name: 'CN品牌GMV占比 (%)', type: 'value' },
-      series: [{ type: 'scatter', symbolSize: function(v){ return Math.sqrt(v[0])*18; }, data: qd,
-        label: { show: true, formatter: function(p){ return p.name; }, fontSize: 11, position: 'top' },
-        markLine: { silent: true, data: [{ yAxis: 20, label: { formatter: 'CN 20%线' }, lineStyle: { color: '#f59e0b', type: 'dashed' } }] }
-      }]
-    });
-    cq.on('click', function(params){ if(params.name){ selectCat(params.name); } });
-    window.addEventListener('resize', function(){ cq.resize(); });
-  })();
 </script>
-</body></html
-    <section class="section">
-      <div class="section-header"><div class="section-title">品类 GMV × CN份额 象限</div></div>
-      <div class="card"><div class="chart-lg" id="chart-quadrant"></div></div>
-    </section>
->
+</body></html>
