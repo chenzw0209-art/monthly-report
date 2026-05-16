@@ -151,7 +151,8 @@ document.querySelectorAll('#main-tabs .tab-btn').forEach(btn => {
 
 // Treemap
 (function(){
-  var c1 = echarts.init(document.getElementById('chart-trend-main'));
+var td = [{"month": "2024-11", "total": 4910.2, "cn": 403.9, "cn_share": 8.2}, {"month": "2024-12", "total": 4294.8, "cn": 422.0, "cn_share": 9.8}, {"month": "2025-01", "total": 4157.3, "cn": 326.7, "cn_share": 7.9}, {"month": "2025-02", "total": 4389.4, "cn": 351.0, "cn_share": 8.0}, {"month": "2025-03", "total": 4489.8, "cn": 350.1, "cn_share": 7.8}, {"month": "2025-04", "total": 4517.2, "cn": 357.8, "cn_share": 7.9}, {"month": "2025-05", "total": 4810.0, "cn": 413.2, "cn_share": 8.6}, {"month": "2025-06", "total": 5085.0, "cn": 406.7, "cn_share": 8.0}, {"month": "2025-07", "total": 5562.6, "cn": 474.7, "cn_share": 8.5}, {"month": "2025-08", "total": 4743.3, "cn": 468.5, "cn_share": 9.9}, {"month": "2025-09", "total": 4824.6, "cn": 453.0, "cn_share": 9.4}, {"month": "2025-10", "total": 4830.2, "cn": 465.2, "cn_share": 9.6}, {"month": "2025-11", "total": 5517.6, "cn": 610.7, "cn_share": 11.1}, {"month": "2025-12", "total": 5168.5, "cn": 709.6, "cn_share": 13.7}, {"month": "2026-01", "total": 4811.1, "cn": 529.8, "cn_share": 11.0}, {"month": "2026-02", "total": 4969.6, "cn": 532.4, "cn_share": 10.7}, {"month": "2026-03", "total": 5072.6, "cn": 537.5, "cn_share": 10.6}, {"month": "2026-04", "total": 5013.8, "cn": 543.0, "cn_share": 10.8}];
+    var c1 = echarts.init(document.getElementById('chart-trend-main'));
   c1.setOption({{
     tooltip: {{ trigger: 'axis' }},
     legend: {{ data: ['总GMV(M$)','CN品牌GMV(M$)','CN份额%'], top: 5 }},
@@ -170,7 +171,7 @@ document.querySelectorAll('#main-tabs .tab-btn').forEach(btn => {
 
 // Trend
 (function(){
-  var td = [{"month": "2024-11", "total": 4910.2, "cn": 403.9, "cn_share": 8.2}, {"month": "2024-12", "total": 4294.8, "cn": 422.0, "cn_share": 9.8}, {"month": "2025-01", "total": 4157.3, "cn": 326.7, "cn_share": 7.9}, {"month": "2025-02", "total": 4389.4, "cn": 351.0, "cn_share": 8.0}, {"month": "2025-03", "total": 4489.8, "cn": 350.1, "cn_share": 7.8}, {"month": "2025-04", "total": 4517.2, "cn": 357.8, "cn_share": 7.9}, {"month": "2025-05", "total": 4810.0, "cn": 413.2, "cn_share": 8.6}, {"month": "2025-06", "total": 5085.0, "cn": 406.7, "cn_share": 8.0}, {"month": "2025-07", "total": 5562.6, "cn": 474.7, "cn_share": 8.5}, {"month": "2025-08", "total": 4743.3, "cn": 468.5, "cn_share": 9.9}, {"month": "2025-09", "total": 4824.6, "cn": 453.0, "cn_share": 9.4}, {"month": "2025-10", "total": 4830.2, "cn": 465.2, "cn_share": 9.6}, {"month": "2025-11", "total": 5517.6, "cn": 610.7, "cn_share": 11.1}, {"month": "2025-12", "total": 5168.5, "cn": 709.6, "cn_share": 13.7}, {"month": "2026-01", "total": 4811.1, "cn": 529.8, "cn_share": 11.0}, {"month": "2026-02", "total": 4969.6, "cn": 532.4, "cn_share": 10.7}, {"month": "2026-03", "total": 5072.6, "cn": 537.5, "cn_share": 10.6}, {"month": "2026-04", "total": 5013.8, "cn": 543.0, "cn_share": 10.8}];
+  
   window.addEventListener('resize', function(){ c2.resize(); });
 })();
 
@@ -475,5 +476,25 @@ function selectCat(name) {
   });
 })();
 
+[];
+    var cq = echarts.init(document.getElementById('chart-quadrant'));
+    if (!cq) return;
+    cq.setOption({
+      tooltip: { formatter: function(p){ return p.name+'<br/>GMV: $'+p.value[0].toFixed(2)+'B<br/>CN GMV%: '+p.value[1].toFixed(1)+'%'; } },
+      xAxis: { name: '年GMV (B$)', type: 'value' },
+      yAxis: { name: 'CN品牌GMV占比 (%)', type: 'value' },
+      series: [{ type: 'scatter', symbolSize: function(v){ return Math.sqrt(v[0])*18; }, data: qd,
+        label: { show: true, formatter: function(p){ return p.name; }, fontSize: 11, position: 'top' },
+        markLine: { silent: true, data: [{ yAxis: 20, label: { formatter: 'CN 20%线' }, lineStyle: { color: '#f59e0b', type: 'dashed' } }] }
+      }]
+    });
+    cq.on('click', function(params){ if(params.name){ selectCat(params.name); } });
+    window.addEventListener('resize', function(){ cq.resize(); });
+  })();
 </script>
-</body></html>
+</body></html
+    <section class="section">
+      <div class="section-header"><div class="section-title">品类 GMV × CN份额 象限</div></div>
+      <div class="card"><div class="chart-lg" id="chart-quadrant"></div></div>
+    </section>
+>
