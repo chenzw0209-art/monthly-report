@@ -171,9 +171,9 @@ document.querySelectorAll('#main-tabs .tab-btn').forEach(btn => {
     xAxis: { type: 'category', data: td.map(d=>d.month) },
     yAxis: [{ type: 'value', name: 'M$' }, { type: 'value', name: '%', min: 0, max: 20 }],
     series: [
-      { name: '总GMV(M$)', type: 'line', data: td.map(d=>d.total), smooth: true, lineStyle:{color:'#3b82f6'} },
-      { name: 'CN品牌GMV(M$)', type: 'line', data: td.map(d=>d.cn), smooth: true, lineStyle:{color:'#10b981'} },
-      { name: 'CN份额%', type: 'line', yAxisIndex: 1, data: td.map(d=>d.cn_share), smooth: true, lineStyle:{color:'#f59e0b',type:'dashed'} }
+      { name: '总GMV(M$)', type: 'line', data: td.map(d=>d.total), smooth: true, lineStyle:{color:'#3b82f6',width:2}, areaStyle:{color:{type:'linear',x:0,y:0,x2:0,y2:1,colorStops:[{offset:0,color:'rgba(59,130,246,0.3)'},{offset:1,color:'rgba(59,130,246,0.02)'}]}}, symbol:'none' },
+      { name: 'CN品牌GMV(M$)', type: 'line', data: td.map(d=>d.cn), smooth: true, lineStyle:{color:'#10b981',width:2}, areaStyle:{color:{type:'linear',x:0,y:0,x2:0,y2:1,colorStops:[{offset:0,color:'rgba(16,185,129,0.25)'},{offset:1,color:'rgba(16,185,129,0.02)'}]}}, symbol:'none' },
+      { name: 'CN份额%', type: 'line', yAxisIndex: 1, data: td.map(d=>d.cn_share), smooth: true, lineStyle:{color:'#f59e0b',type:'dashed',width:2}, symbol:'none' }
     ]
   });
   window.addEventListener('resize', function(){ c2.resize(); });
