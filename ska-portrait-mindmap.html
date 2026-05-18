@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SKA客户画像 - 思维导图</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  background: #f0f2f5;
+  overflow: hidden;
+  height: 100vh;
+}
+#toolbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 10;
+  background: #fff; padding: 8px 16px;
+  display: flex; gap: 8px; align-items: center;
+  box-shadow: 0 1px 4px rgba(0,0,0,.1);
+  flex-wrap: wrap;
+}
+#toolbar button {
+  padding: 6px 14px; border: 1px solid #d9d9d9; border-radius: 4px;
+  background: #fff; cursor: pointer; font-size: 13px;
+}
+#toolbar button:hover { border-color: #1677ff; color: #1677ff; }
+#toolbar button.active { background: #1677ff; color: #fff; border-color: #1677ff; }
+#chart { width: 100%; height: calc(100vh - 48px); margin-top: 48px; }
+.link { fill: none; stroke: #ccc; stroke-width: 1.5px; }
+.tooltip {
+  position: absolute; padding: 6px 10px;
+  background: rgba(0,0,0,0.75); color: #fff;
+  border-radius: 4px; font-size: 12px; pointer-events: none;
+  opacity: 0; transition: opacity 0.2s;
+}
+/* Legend */
+#legend {
+  position: fixed; bottom: 16px; right: 16px; z-index: 10;
+  background: #fff; border-radius: 8px; padding: 14px 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  font-size: 12px; line-height: 1.5; max-width: 420px;
+}
+#legend h4 { font-size: 13px; margin-bottom: 6px; color: #333; }
+#legend .section { margin-top: 8px; }
+#legend .section-title { font-weight: bold; color: #555; margin-bottom: 2px; }
+#legend .item { display: flex; align-items: center; gap: 6px; margin: 2px 0; white-space: nowrap; }
+#legend .item b { flex-shrink: 0; }
+#legend .swatch { width: 12px; height: 12px; min-width: 12px; border-radius: 3px; flex-shrink: 0; display: inline-block; }
+#legend .swatch.blue { background: #2196F3; border: 1px solid #1976D2; }
+#legend .swatch.red { background: #f44336; border: 1px solid #d32f2f; }
+#legend .swatch.lightblue { background: #4fc3f7; border: 1px solid #29b6f6; }
+#legend .swatch.orange { background: #ff7043; border: 1px solid #f4511e; }
+#legend .swatch.amber { background: #ffa726; border: 1px solid #fb8c00; }
+#legend .swatch.purple { background: #ab47bc; border: 1px solid #8e24aa; }
+#legend .swatch.indigo { background: #5c6bc0; border: 1px solid #3949ab; }
+#legend .swatch.pink { background: #ec407a; border: 1px solid #d81b60; }
+#legend .divider { border-top: 1px solid #eee; margin: 6px 0; }
+</style>
+</head>
+<body>
+<div id="toolbar">
+  <span style="font-weight:bold;margin-right:12px">SKA客户画像 · 思维导图</span>
+  <span style="flex:1"></span>
+  <button onclick="zoomIn()">放大 +</button>
+  <button onclick="zoomOut()">缩小 -</button>
+  <button onclick="resetZoom()">重置</button>
+  <button onclick="toggleLayout()">切换布局</button>
+  <span style="color:#999;font-size:11px;margin-left:4px">拖拽平移 | 滚轮缩放 | 点击折叠</span>
+</div>
+<div id="chart"></div>
+
+<!-- Legend + Definitions -->
+<div id="legend">
+  <h4>图例 & 定义说明</h4>
+
+  <div class="section">
+    <div class="section-title">高亮路径</div>
+    <div class="item"><span class="swatch blue"></span> <b>蓝线 · 核心护城河</b></div>
+    <div style="font-size:11px;color:#666;margin-left:18px">
+      ① AG→平台型业务→稳定运营→Hybrid<br>
+      ② EC→鞋靴→稳定运营
+    </div>
+    <div class="item"><span class="swatch red"></span> <b>红线 · 核心增长点</b></div>
+    <div style="font-size:11px;color:#666;margin-left:18px">
+      ① EC→3C→新品Launch→Hybrid<br>
+      ② EC→母婴→新品Launch→Agency-heavy
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <div class="section">
+    <div class="section-title">增长阶段</div>
+    <div class="item"><span class="swatch lightblue"></span> <b>出海冷启</b> — 海外刚起步，预算试探，月度波动大</div>
+    <div class="item"><span class="swatch orange"></span> <b>新品Launch</b> — 新品发布窗口期，达人需求集中爆发</div>
+    <div class="item"><span class="swatch amber"></span> <b>稳定运营</b> — 业务成熟，有年框/续约base load</div>
+  </div>
+
+  <div class="divider"></div>
+  <div class="section">
+    <div class="section-title">运营模式</div>
+    <div class="item"><span class="swatch indigo"></span> <b>Inhouse-dominant</b> — 客户inhouse为主，agency执行补充</div>
+    <div class="item"><span class="swatch purple"></span> <b>Hybrid</b> — campaign驱动，多品线/区域错位堆叠</div>
+    <div class="item"><span class="swatch pink"></span> <b>Agency-heavy</b> — 重度依赖agency，retainer&gt;15%高可触达</div>
+  </div>
+
+  <div class="divider"></div>
+  <div style="font-size:11px;color:#999">
+    格式: 名称 (营收占比, 利润占比) | 数据来源: VASC 2025.01-2026.05
+  </div>
+</div>
+
+<div class="tooltip" id="tooltip"></div>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+const data = {
+  "name": "SKA客户画像（40家） (100.0%, 100.0%)",
+  "children": [
+    {
+      "name": "AG (93.5%, 68.2%)",
+      "children": [
+        {
+          "name": "平台型业务 (90.2%, 78.5%)",
+          "children": [
+            {
+              "name": "稳定运营 (99.5%, 99.4%)",
+              "children": [
+                {
+                  "name": "Hybrid (98.9%, 98.5%)",
+                  "children": [
+                    {
+                      "name": "字节跳动 (77.4%, 80.6%)",
+                      "size": 1,
+                      "level": 5,
+                      "highlight": "blue"
+                    },
+                    {
+                      "name": "美团 (13.5%, 11.2%)",
+                      "size": 1,
+                      "level": 5,
+                      "highlight": "blue"
+                    },
+                    {
+                      "name": "京东 (7.8%, 6.8%)",
+                      "size": 1,
+                      "level": 5,
+                      "highlight": "blue"
+                    },
+                    {
+                      "name": "携程 (1.3%, 1.4%)",
+                      "size": 1,
+                      "level": 5,
+                      "highlight": "blue"
+                    }
+                  ],
+                  "level": 4,
+                  "highlight": "blue"
+                },
+                {
+                  "name": "Inhouse-dominant (1.0%, 0.6%)",
+                  "children": [
+                    {
+                      "name": "小红书 (100.0%, 100.0%)",
+                      "size": 1,
+                      "level": 5
+                    }
+                  ],
+                  "level": 4
+                },
+                {
+                  "name": "Agency-heavy (0.1%, 1.0%)",
+                  "children": [
+                    {
+                      "name": "Shopee (100.0%, 100.0%)",
+                      "size": 1,
+                      "level": 5
+                    }
+                  ],
+                  "level": 4
+                }
+              ],
+              "level": 3,
+              "highlight": "blue"
+            },
+            {
+              "name": "出海冷启 (0.5%, 0.6%)",
+              "children": [
+                {
+                  "name": "Inhouse-dominant (100.0%, 100.0%)",
+                  "children": [
+                    {
+                      "name": "滴滴 (100.0%, 100.0%)",
+                      "size": 1,
+                      "level": 5
+                    }
+                  ],
+                  "level": 4
+                }
+              ],
+              "level": 3
+            }
+          ],
+          "level": 2,
+          "highlight": "blue"
+        },
+        {
+          "name": "AI工具 (5.5%, 11.6%)",
+          "children": [
+            {
+              "name": "稳定运营 (94.1%, 93.7%)",
+              "children": [
+                {
+                  "name": "Inhouse-dominant (100.0%, 100.0%)",
+                  "children": [
+                    {
+                      "name": "Markable (100.0%, 100.0%)",
+                      "size": 1,
+                      "level": 5
+                    }
+                  ],
+                  "level": 4
+                }
+              ],
+              "level": 3
+            },
+            {
+              "name": "新品Launch (5.9%, 6.3%)",
+              "children": [
+                {
+                  "name": "Hybrid (64.8%, 66.3%)",
+                  "children": [
+                    {
+                      "name": "verdent AI (100.0%, 100.0%)",
+                      "size": 1,
+                      "level": 5
+                    }
+                  ],
+                  "level": 4
+                },
+                {
+                  "name": "Inhouse-dominant (35.2%, 33.7%)",
+                  "children": [
+                    {
+                      "name": "明日哆米 (100.0%, 100.0%)",
+                      "size": 1,
+                      "level": 5
+                    }
+                  ],
+                  "level": 4
+                }
+              ],
+              "level": 3
+            },
+            {
+              "name": "出海冷启 (0.0%, 0.0%)",
+              "children": [
+                {
+                  "name": "Inhouse-dominant (0.0%, 0.0%)",
+                  "children": [
+                    {
+                      "name": "KIMI (0.0%, 0.0%)",
+                      "size": 1,
+                      "level": 5
+                    },
+                    {
+                      "name": "Minimax (0.0%, 0.0%)",
+                      "size": 1,
+                      "level": 5
+                    }
+                  ],
+                  "level": 4
+                }
+              ],
+              "level": 3
+            }
+          ],
+          "level": 2
+        },
+        {
+          "name": "跨境工具 (1.0%, 3.7%)",
+          "children": [
+            {
+              "name": "稳定运营 (100.0%, 100.0%)",
+              "children": [
+                {
+                  "name": "Inhouse-dominant (100.0%, 100.0%)",
+                  "children": [
+                    {
+                      "name": "SKYORDER (100.0%, 100.0%)",
+                      "size": 1,
+                      "level": 5
+                    }
+                  ],
+                  "level": 4
+                }
+              ],
+              "level": 3
+            }
+          ],
+          "level": 2
+        },
+        {
+          "name": "金融工具 (1.1%, 2.4%)",
+          "children": [
+            {
+              "name": "稳定运营 (81.1%, 82.6%)",
+              "children": [
+                {
+                  "name": "Inhouse-dominant (100.0%, 100.0%)",
+                  "children": [
+                    {
+                      "name": "华盛通 (100.0%, 100.0%)",
+                      "size": 1,
+                      "level": 5
+                    }
+                  ],
+                  "level": 4
+                }
+              ],
+              "level": 3
+            },
+            {
+              "name": "出海冷启 (18.9%, 17.4%)",
+              "children": [
+                {
+                  "name": "Inhouse-dominant (100.0%, 100.0%)",
+                  "children": [
+                    {
+                      "name": "AFUN (100.0%, 100.0%)",
+                      "size": 1,
+                      "level": 5
+                    }
+                  ],
+                  "level": 4
+                }
+              ],
+              "level": 3
+            }
+          ],
+          "level": 2
+        },
+        {
+          "name": "游戏 (2.2%, 3.8%)",
+          "children": [
+            {
+              "name": "稳定运营 (92.6%, 77.2%)",
+              "children": [
+                {
+                  "name": "Hybrid (88.1%, 80.9%)",
+                  "children": [
+                    {
+                      "name": "mico world (50.5%, 51.3%)",
+                      "size": 1,
+                      "level": 5
+                    },
+                    {
+                      "name": "腾讯 (49.5%, 48.7%)",
+                      "size": 1,
+                      "level": 5
+                    }
+                  ],
+                  "level": 4
+                },
+                {
+                  "name": "Inhouse-dominant (9.9%, 13.9%)",
+                  "children": [
+                    {
+                      "name": "三七互娱 (100.0%, 100.0%)",
+                      "size": 1,
+                      "level": 5
+                    }
+                  ],
+                  "level": 4
+                },
+                {
+                  "name": "Agency-heavy (2.0%, 5.1%)",
+                  "children": [
+                    {
+                      "name": "米哈游 (100.0%, 100.0%)",
+                      "size": 1,
+                      "level": 5
+                    }
+                  ],
+                  "level": 4
+                }
+              ],
+              "level": 3
+            },
+            {
+              "name": "新品Launch (7.4%, 22.8%)",
+              "children": [
+                {
+                  "name": "Inhouse-dominant (100.0%, 100.0%)",
+                  "children": [
+                    {
+                      "name": "上海鹰角 (100.0%, 100.0%)",
+                      "size": 1,
+                      "level": 5
+                    }
+                  ],
+                  "level": 4
+                }
+              ],
+              "level": 3
+            }
+          ],
+          "level": 2
+        }
+      ],
+      "level": 1
+    },
+    {
+      "name": "EC (6.5%, 31.8%)",
+      "children": [
+        {
+          "name": "潮玩 (35.5%, 11.3%)",
+          "children": [
+            {
+              "name": "稳定运营 (100.0%, 100.0%)",
+              "children": [
+                {
+                  "name": "Inhouse-dominant (100.0%, 100.0%)",
+                  "children": [
+                    {
+                      "name": "泡泡玛特 (100.0%, 100.0%)",
+                      "size": 1,
+                      "level": 5
+                    }
+                  ],
+                  "level": 4
+                }
+              ],
+              "level": 3
+            }
+          ],
+          "level": 2
+        },
+        {
+          "name": "游戏 (25.8%, 12.4%)",
+          "children": [
+            {
+              "name": "稳定运营 (100.0%, 100.0%)",
+              "children": [
+                {
+                  "name": "Hybrid (67.9%, 85.8%)",
+                  "children": [
+                    {
+                      "name": "网易 (100.0%, 100.0%)",
+                      "size": 1,
+                      "level": 5
+                    }
+                  ],
+                  "level": 4
+                },
+                {
+                  "name": "Inhouse-dominant (32.1%, 14.2%)",
+                  "children": [
+                    {
+                      "name": "望尘科技 (100.0%, 100.0%)",
+                      "size": 1,
+                      "level": 5
+                    }
+                  ],
+                  "level": 4
+                }
+              ],
+              "level": 3
+            }
+          ],
+          "level": 2
+        },
+        {
+          "name": "美妆个护 (12.6%, 17.5%)",
+          "children": [
+            {
+              "name": "稳定运营 (100.0%, 100.0%)",
+              "children": [
+                {
+                  "name": "Hybrid (100.0%, 100.0%)",
+                  "children": [
+                    {
+                      "name": "Reckitt (58.5%, 39.1%)",
+                      "size": 1,
+                      "level": 5
+                    },
+                    {
+                      "name": "欧莱雅 (41.5%, 60.9%)",
+                      "size": 1,
+                      "level": 5
+                    }
+                  ],
+                  "level": 4
+                }
+              ],
+              "level": 3
+            }
+          ],
+          "level": 2
+        },
+        {
+          "name": "鞋靴 (13.7%, 31.7%)",
+          "children": [
+            {
+              "name": "稳定运营 (100.0%, 100.0%)",
+              "children": [
+                {
+                  "name": "Hybrid (55.7%, 39.1%)",
+                  "children": [
+                    {
+                      "name": "斯凯奇 (86.7%, 84.4%)",
+                      "size": 1,
+                      "level": 5,
+                      "highlight": "blue"
+                    },
+                    {
+                      "name": "adidas (13.3%, 15.6%)",
+                      "size": 1,
+                      "level": 5,
+                      "highlight": "blue"
+                    }
+                  ],
+                  "level": 4,
+                  "highlight": "blue"
+                },
+                {
+                  "name": "Agency-heavy (44.3%, 60.9%)",
+                  "children": [
+                    {
+                      "name": "361 (100.0%, 100.0%)",
+                      "size": 1,
+                      "level": 5,
+                      "highlight": "blue"
+                    }
+                  ],
+                  "level": 4,
+                  "highlight": "blue"
+                }
+              ],
+              "level": 3,
+              "highlight": "blue"
+            }
+          ],
+          "level": 2,
+          "highlight": "blue"
+        },
+        {
+          "name": "五金工具 (2.8%, 8.2%)",
+          "children": [
+            {
+              "name": "稳定运营 (100.0%, 100.0%)",
+              "children": [
+                {
+                  "name": "Hybrid (100.0%, 100.0%)",
+                  "children": [
+                    {
+                      "name": "VEVOR (100.0%, 100.0%)",
+                      "size": 1,
+                      "level": 5
+                    }
+                  ],
+                  "level": 4
+                }
+              ],
+              "level": 3
+            }
+          ],
+          "level": 2
+        },
+        {
+          "name": "3C (8.8%, 17.2%)",
+          "children": [
+            {
+              "name": "稳定运营 (45.3%, 66.2%)",
+              "children": [
+                {
+                  "name": "Inhouse-dominant (68.3%, 76.9%)",
+                  "children": [
+                    {
+                      "name": "Wavytalk (100.0%, 100.0%)",
+                      "size": 1,
+                      "level": 5
+                    },
+                    {
+                      "name": "美的 (0.0%, 0.0%)",
+                      "size": 1,
+                      "level": 5
+                    }
+                  ],
+                  "level": 4
+                },
+                {
+                  "name": "Hybrid (31.7%, 23.1%)",
+                  "children": [
+                    {
+                      "name": "大疆 (65.0%, 50.6%)",
+                      "size": 1,
+                      "level": 5
+                    },
+                    {
+                      "name": "华为 (35.0%, 49.4%)",
+                      "size": 1,
+                      "level": 5
+                    }
+                  ],
+                  "level": 4
+                }
+              ],
+              "level": 3
+            },
+            {
+              "name": "出海冷启 (29.4%, 2.8%)",
+              "children": [
+                {
+                  "name": "Inhouse-dominant (100.0%, 100.0%)",
+                  "children": [
+                    {
+                      "name": "TCL (100.0%, 100.0%)",
+                      "size": 1,
+                      "level": 5
+                    }
+                  ],
+                  "level": 4
+                }
+              ],
+              "level": 3
+            },
+            {
+              "name": "新品Launch (25.3%, 30.9%)",
+              "children": [
+                {
+                  "name": "Hybrid (77.7%, 70.8%)",
+                  "children": [
+                    {
+                      "name": "安克 (76.6%, 85.5%)",
+                      "size": 1,
+                      "level": 5,
+                      "highlight": "red"
+                    },
+                    {
+                      "name": "追觅 (23.4%, 14.5%)",
+                      "size": 1,
+                      "level": 5,
+                      "highlight": "red"
+                    }
+                  ],
+                  "level": 4,
+                  "highlight": "red"
+                },
+                {
+                  "name": "Inhouse-dominant (22.3%, 29.2%)",
+                  "children": [
+                    {
+                      "name": "德兰明海 (100.0%, 100.0%)",
+                      "size": 1,
+                      "level": 5
+                    }
+                  ],
+                  "level": 4
+                }
+              ],
+              "level": 3,
+              "highlight": "red"
+            }
+          ],
+          "level": 2,
+          "highlight": "red"
+        },
+        {
+          "name": "母婴 (0.6%, 1.4%)",
+          "children": [
+            {
+              "name": "新品Launch (100.0%, 100.0%)",
+              "children": [
+                {
+                  "name": "Agency-heavy (100.0%, 100.0%)",
+                  "children": [
+                    {
+                      "name": "momcozy (100.0%, 100.0%)",
+                      "size": 1,
+                      "level": 5,
+                      "highlight": "red"
+                    }
+                  ],
+                  "level": 4,
+                  "highlight": "red"
+                }
+              ],
+              "level": 3,
+              "highlight": "red"
+            }
+          ],
+          "level": 2,
+          "highlight": "red"
+        },
+        {
+          "name": "女装 (0.1%, 0.3%)",
+          "children": [
+            {
+              "name": "稳定运营 (100.0%, 100.0%)",
+              "children": [
+                {
+                  "name": "Hybrid (100.0%, 100.0%)",
+                  "children": [
+                    {
+                      "name": "SHEIN (100.0%, 100.0%)",
+                      "size": 1,
+                      "level": 5
+                    }
+                  ],
+                  "level": 4
+                }
+              ],
+              "level": 3
+            }
+          ],
+          "level": 2
+        },
+        {
+          "name": "汽车 (0.0%, 0.0%)",
+          "children": [
+            {
+              "name": "出海冷启 (0.0%, 0.0%)",
+              "children": [
+                {
+                  "name": "Inhouse-dominant (0.0%, 0.0%)",
+                  "children": [
+                    {
+                      "name": "上汽国际 (0.0%, 0.0%)",
+                      "size": 1,
+                      "level": 5
+                    }
+                  ],
+                  "level": 4
+                }
+              ],
+              "level": 3
+            }
+          ],
+          "level": 2
+        }
+      ],
+      "level": 1
+    }
+  ],
+  "level": 0
+};
+
+function nodeColor(d) {
+  const hl = d.data && d.data.highlight;
+  // 3-color system: blue, red, or gray
+  if (hl === "blue") return { bg: "#2196F3", text: "#ffffff", radius: 7 };
+  if (hl === "red")  return { bg: "#f44336", text: "#ffffff", radius: 7 };
+
+  // All non-highlighted nodes: gray scale by level
+  const lv = d._level;
+  if (lv === 0) return { bg: "#37474f", text: "#ffffff", radius: 18 };
+  if (lv === 1) return { bg: "#cfd8dc", text: "#37474f", radius: 13 };
+  if (lv === 2) return { bg: "#eceff1", text: "#546e7a", radius: 10 };
+  if (lv === 3) return { bg: "#f5f5f5", text: "#78909c", radius: 8 };
+  if (lv === 4) return { bg: "#fafafa", text: "#90a4ae", radius: 7 };
+  return { bg: "#fafafa", text: "#b0bec5", radius: 5 };
+}
+
+function getHighlight(d) {
+  // Check if this node or any ancestor has highlight
+  let node = d;
+  while (node) {
+    if (node.data && node.data.highlight) return node.data.highlight;
+    node = node.parent;
+  }
+  return null;
+}
+
+let layout = "tree";
+const margin = { top: 20, right: 200, bottom: 20, left: 200 };
+const svg = d3.select("#chart").append("svg")
+    .attr("width", "100%")
+    .attr("height", "100%")
+    .call(d3.zoom().scaleExtent([0.1, 4]).on("zoom", (event) => {
+      g.attr("transform", event.transform);
+    }))
+    .on("dblclick.zoom", null);
+
+const g = svg.append("g")
+    .attr("transform", "translate(280, 80)");
+
+const root = d3.hierarchy(data);
+
+function getLayout() {
+  const w = window.innerWidth - 500;
+  const h = window.innerHeight - 120;
+  if (layout === "tree") {
+    return d3.tree().size([h, w]);
+  } else {
+    return d3.cluster().size([h, w]);
+  }
+}
+
+function update() {
+  const layoutFn = getLayout();
+  layoutFn(root);
+
+  root.descendants().forEach(d => {
+    if (d.data.level !== undefined) d._level = d.data.level;
+    else if (d.data.size) d._level = 5;
+    else d._level = d.depth;
+  });
+
+  // Links
+  const links = g.selectAll(".link")
+      .data(root.links(), d => d.target.data.name);
+
+  links.exit().remove();
+
+  const linksEnter = links.enter().append("path")
+      .attr("class", "link");
+
+  linksEnter.merge(links)
+      .transition().duration(600)
+      .attr("d", d => {
+        if (layout === "tree") {
+          return "M" + d.target.y + "," + d.target.x
+               + "C" + (d.source.y + d.target.y) / 2 + "," + d.target.x
+               + " " + (d.source.y + d.target.y) / 2 + "," + d.source.x
+               + " " + d.source.y + "," + d.source.x;
+        } else {
+          return "M" + d.source.y + "," + d.source.x
+               + "L" + (d.source.y + d.target.y) / 2 + "," + d.source.x
+               + "L" + (d.source.y + d.target.y) / 2 + "," + d.target.x
+               + "L" + d.target.y + "," + d.target.x;
+        }
+      })
+      .attr("stroke", d => {
+        const hl = d.target.data && d.target.data.highlight;
+        if (hl === "blue") return "#2196F3";
+        if (hl === "red") return "#f44336";
+        return "#bbb";
+      })
+      .attr("stroke-width", d => {
+        const hl = d.target.data && d.target.data.highlight;
+        return hl ? 2.5 : 1.2;
+      })
+      .attr("opacity", d => {
+        const hl = d.target.data && d.target.data.highlight;
+        return hl ? 0.85 : 0.4;
+      });
+
+  // Nodes
+  const nodes = g.selectAll(".node")
+      .data(root.descendants(), d => d.data.name);
+
+  nodes.exit().remove();
+
+  const nodesEnter = nodes.enter().append("g")
+      .attr("class", "node")
+      .on("click", (event, d) => {
+        if (d.children) { d._children = d.children; d.children = null; }
+        else if (d._children) { d.children = d._children; d._children = null; }
+        update();
+      });
+
+  nodesEnter.append("circle");
+  nodesEnter.append("text")
+      .attr("text-anchor", "middle");
+
+  const nodesMerge = nodesEnter.merge(nodes);
+
+  nodesMerge.transition().duration(600)
+      .attr("transform", d => "translate(" + d.y + "," + d.x + ")");
+
+  nodesMerge.select("circle")
+      .attr("r", d => nodeColor(d).radius)
+      .attr("fill", d => nodeColor(d).bg)
+      .attr("stroke", d => {
+        const hl = getHighlight(d);
+        if (hl) return nodeColor(d).bg;  // no visible border, same as fill
+        return nodeColor(d).bg;          // no border for non-highlighted too
+      })
+      .attr("stroke-width", 0);
+
+  nodesMerge.select("text")
+      .attr("dy", d => nodeColor(d).radius + 14)
+      .attr("text-anchor", "middle")
+      .text(d => {
+        let name = d.data.name;
+        if (d._level >= 5 && name.length > 35) {
+          name = name.substring(0, 33) + "...";
+        } else if (d._level >= 4 && name.length > 30) {
+          name = name.substring(0, 28) + "...";
+        }
+        return name;
+      });
+}
+
+function zoomIn() {
+  svg.transition().duration(300).call(
+    d3.zoom().scaleExtent([0.1, 4]).on("zoom", (event) => {
+      g.attr("transform", event.transform);
+    }).scaleBy, 1.3
+  );
+}
+function zoomOut() {
+  svg.transition().duration(300).call(
+    d3.zoom().scaleExtent([0.1, 4]).on("zoom", (event) => {
+      g.attr("transform", event.transform);
+    }).scaleBy, 0.7
+  );
+}
+function resetZoom() {
+  svg.transition().duration(500).call(
+    d3.zoom().scaleExtent([0.1, 4]).on("zoom", (event) => {
+      g.attr("transform", event.transform);
+    }).transform, d3.zoomIdentity
+  );
+}
+function toggleLayout() {
+  layout = layout === "tree" ? "cluster" : "tree";
+  update();
+}
+
+update();
+</script>
+</body>
+</html>
