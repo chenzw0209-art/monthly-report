@@ -169,7 +169,7 @@ document.querySelectorAll('#main-tabs .tab-btn').forEach(btn => {
   c2.setOption({
     tooltip: { trigger: 'axis' }, legend: { data: ['总GMV(M$)','CN品牌GMV(M$)','CN份额%'], top: 5 },
     xAxis: { type: 'category', data: td.map(d=>d.month) },
-    yAxis: [{ type: 'value', name: 'M$' }, { type: 'value', name: '%', min: 0, max: Math.ceil(Math.max.apply(null, td.map(function(d){return d.cn_share;}))/10)*10+5) }],
+    yAxis: [{ type: 'value', name: 'M$' }, { type: 'value', name: '%', min: 0, max: 100 }],
     series: [
       { name: '总GMV(M$)', type: 'line', data: td.map(d=>d.gmv ? d.gmv/1e6 : 0), smooth: true, lineStyle:{color:'#3b82f6'} },
       { name: 'CN品牌GMV(M$)', type: 'line', data: td.map(d=>d.cn_gmv ? d.cn_gmv/1e6 : 0), smooth: true, lineStyle:{color:'#10b981'} },
