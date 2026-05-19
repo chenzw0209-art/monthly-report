@@ -1,0 +1,35 @@
+[
+  {
+    "id": "game",
+    "name": "游戏出海",
+    "nameEn": "Gaming",
+    "description": "全球游戏行业月度追踪，覆盖SLG/RPG/射击/MOBA等品类，含新游拓客日历、区域市场偏好、达人营销生态",
+    "latestVersion": "v1.3",
+    "period": "2026 Q1",
+    "updateFrequency": "月度",
+    "tabs": ["新游拓客日历", "全球行业动向", "区域市场偏好", "达人营销生态"],
+    "dataSources": ["Insight应用数据", "广大大创意数据", "Nox聚星社媒数据", "GPC游戏工委"]
+  },
+  {
+    "id": "3c",
+    "name": "3C行业",
+    "nameEn": "Consumer Electronics",
+    "description": "US+DE双市场Amazon品类追踪，覆盖39+61类目，含PR拓客线索、品类格局、达人营销",
+    "latestVersion": "v2.0",
+    "period": "2026 Q1",
+    "updateFrequency": "月度",
+    "tabs": ["新客线索", "全球动态", "区域市场", "达人营销"],
+    "dataSources": ["Amazon Sorftime底表", "PR Newswire", "Nox聚星社媒数据", "CES/IFA展会情报"]
+  },
+  {
+    "id": "health-family",
+    "name": "健康与家庭",
+    "nameEn": "Health & Household",
+    "description": "US Amazon 13品类616子类目追踪，覆盖个人护理/维生素/家居/医疗设备，含中国品牌机会矩阵",
+    "latestVersion": "v2.4",
+    "period": "2026 Q1",
+    "updateFrequency": "月度",
+    "tabs": ["市场总览", "行业动态", "品类格局", "中国品牌机会"],
+    "dataSources": ["Amazon Sorftime底表", "FDA/CDC监管追踪", "CES/Cosmoprof展会", "SPINS成分趋势"]
+  }
+]

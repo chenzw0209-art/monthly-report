@@ -3,925 +3,175 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>游戏出海月度报告 · 2026年Q1（v1.3 · 新增达人实证）</title>
-<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
-<style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
-  background: #f5f7fa; color: #1a202c; line-height: 1.6;
-}
-.app { max-width: 1440px; margin: 0 auto; padding: 24px 28px 40px; }
-.header {
-  background: linear-gradient(135deg, #0f172a 0%, #1e40af 100%);
-  color: #fff; border-radius: 14px; padding: 28px 32px; margin-bottom: 18px;
-}
-.header-title { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
-.header-sub { font-size: 14px; color: #dbeafe; }
-.tabs { display: flex; gap: 8px; margin-bottom: 20px; padding: 6px;
-  background: #e2e8f0; border-radius: 12px; width: fit-content; flex-wrap: wrap; }
-.tab-btn { border: none; background: transparent; color: #475569; cursor: pointer;
-  padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 600; transition: all 0.18s; }
-.tab-btn.active { background: #fff; color: #0f172a; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
-.page { display: none; }
-.page.active { display: block; }
-.section { margin-bottom: 28px; }
-.section-header { margin-bottom: 16px; }
-.section-title { font-size: 24px; font-weight: 700; color: #0f172a; margin-bottom: 6px; }
-.section-desc { font-size: 13px; color: #64748b; }
-.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-.grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
-.card { background: #fff; border-radius: 12px; padding: 20px;
-  border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
-.card-title { font-size: 15px; font-weight: 600; color: #0f172a; margin-bottom: 2px; }
-.card-subtitle { font-size: 12px; color: #94a3b8; margin-bottom: 14px; }
-.kpi-card { background: #fff; border-radius: 12px; padding: 18px;
-  border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
-.kpi-label { font-size: 11px; color: #64748b; margin-bottom: 6px; letter-spacing: 0.3px; }
-.kpi-value { font-size: 26px; font-weight: 700; color: #0f172a; }
-.kpi-sub { font-size: 12px; color: #64748b; margin-top: 4px; }
-.kpi-note { font-size: 10px; color: #94a3b8; margin-top: 4px; font-style: italic; }
-.chart { width: 100%; height: 360px; }
-.chart-lg { width: 100%; height: 480px; }
-.chart-sm { width: 100%; height: 280px; }
-.exec-summary {
-  background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
-  color: #f1f5f9; border-radius: 14px;
-  padding: 22px 26px 24px; border-left: 5px solid #fbbf24;
-  box-shadow: 0 2px 10px rgba(15,23,42,0.15);
-}
-.exec-label { font-size: 11px; letter-spacing: 2px; color: #fbbf24; font-weight: 600; margin-bottom: 10px; }
-.exec-body { line-height: 1.8; }
-.exec-body .exec-head { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 8px; line-height: 1.5; }
-.exec-body .exec-line { font-size: 14px; color: #cbd5e1; margin-top: 4px; }
-.exec-body b { color: #fff; }
-.exec-body .exec-up { color: #86efac; font-weight: 700; }
-.exec-body .exec-down { color: #fca5a5; font-weight: 700; }
-.bullet-list { display: flex; flex-direction: column; gap: 12px; }
-.bullet-item {
-  background: #f8fafc; border-left: 4px solid #3b82f6;
-  border-radius: 8px; padding: 12px 14px;
-}
-.bullet-item.green { border-left-color: #10b981; background: #ecfdf5; }
-.bullet-item.amber { border-left-color: #f59e0b; background: #fffbeb; }
-.bullet-item.red { border-left-color: #dc2626; background: #fef2f2; }
-.bullet-item.purple { border-left-color: #8b5cf6; background: #f5f3ff; }
-.bullet-title { font-size: 13px; font-weight: 600; color: #0f172a; margin-bottom: 4px; }
-.bullet-body { font-size: 13px; color: #334155; line-height: 1.7; }
-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-th { text-align: left; padding: 10px 12px; background: #f8fafc;
-  font-weight: 600; color: #475569; border-bottom: 2px solid #e2e8f0;
-  font-size: 12px; position: sticky; top: 0; z-index: 4; cursor: pointer; user-select: none; }
-td { padding: 10px 12px; border-bottom: 1px solid #f1f5f9; color: #1e293b; }
-tr:hover td { background: #f8fafc; }
-.up { color: #059669; font-weight: 600; }
-.down { color: #dc2626; font-weight: 600; }
-.tag { display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; }
-.tag-p0 { background: #fef3c7; color: #92400e; }
-.tag-p1 { background: #e0e7ff; color: #3730a3; }
-.tag-p2 { background: #e2e8f0; color: #475569; }
-.tag-a { background: #ecfdf5; color: #065f46; }
-.tag-b { background: #fffbeb; color: #92400e; }
-.tag-c { background: #fef2f2; color: #991b1b; }
-.helper { font-size: 12px; color: #94a3b8; }
-.overview-grid { display: grid; grid-template-columns: 280px 1fr; gap: 16px; align-items: stretch; }
-.kpi-column { display: flex; flex-direction: column; gap: 14px; }
-.kpi-column .kpi-card { flex: 1; display: flex; flex-direction: column; justify-content: center; }
-.source-block {
-  background: #f8fafc; border-left: 4px solid #3b82f6;
-  border-radius: 8px; padding: 16px; margin-bottom: 16px; font-size: 12px; color: #64748b; line-height: 1.8;
-}
-.story-block {
-  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-  border-left: 4px solid #f59e0b;
-  border-radius: 8px; padding: 16px 18px; margin-bottom: 14px;
-  font-size: 14px; color: #78350f; line-height: 1.8;
-}
-@media (max-width: 960px) {
-  .app { padding: 16px; }
-  .grid-5, .grid-4 { grid-template-columns: repeat(2, 1fr); }
-  .grid-3, .grid-2 { grid-template-columns: 1fr; }
-  .tabs { width: 100%; overflow-x: auto; }
-  .overview-grid { grid-template-columns: 1fr; }
-}
-</style>
+<title>行业研究门户 · 钛动科技</title>
+<link rel="stylesheet" href="assets/portal.css">
 </head>
 <body>
-<div class="app">
-  <header class="header">
-    <div class="header-title">游戏出海月度报告</div>
-    <div class="header-sub">2026年Q1（重点2-3月，历月数据覆盖1-4月） · v1.3 · 钛动科技</div>
-  </header>
 
-  <div class="tabs" id="main-tabs">
-    <button class="tab-btn active" data-page="page-calendar">新游拓客日历</button>
-    <button class="tab-btn" data-page="page-global">全球行业动向</button>
-    <button class="tab-btn" data-page="page-region">区域市场偏好</button>
-    <button class="tab-btn" data-page="page-kol">达人营销生态</button>
-  </div>
-
-  <!-- ========== TAB 1: 新游拓客日历 ========== -->
-  <div class="page active" id="page-calendar">
-    <section class="section">
-      <div class="source-block">
-        <strong>数据源说明</strong><br>
-        <strong>口径基准日</strong>：2026-05-12 | <strong>硬门槛</strong>：2026-05-12之后仍未正式上线<br>
-        <strong>筛选规则</strong>：中国厂商/中国工作室/中国发行主体（IP授权项目保留但标注）；截至基准日未正式上线（Steam Coming Soon/预注册/CBT/Demo均可保留）；优先收录2025年至今国际展会（Gamescom/TGS/GDC/ChinaJoy/Steam Next Fest）中有实机/Demo/测试证据的新游<br>
-        <strong>信源等级</strong>：A级=官方PR+明确时间锚点+未上线证据 | B级=官方PR但无明确时间 | C级=第三方预估
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="exec-summary">
-        <div class="exec-label">NEW GAME CALENDAR · 新游拓客日历</div>
-        <div class="exec-body">
-          <div class="exec-head">50条有效线索中，<span class="exec-up">10款P0</span>需立即建联，<span class="exec-up">26款P1</span>持续跟踪，<span class="exec-down">14款P2</span>低优观察</div>
-          <div class="exec-line">A级信源<span class="exec-up">23条</span>（官方PR+明确时间+实机证据），B级<span class="exec-up">23条</span>（有官宣但缺时间锚点），C级<span class="exec-down">4条</span>（第三方预估）</div>
-          <div class="exec-line">品类结构：动作/RPG<b>33款（66%）</b>占绝对主导 → 射击4款 · 生存/沙盒4款 · 模拟经营3款。平台结构：PC+主机<b>16款（32%）</b>领先 → PC独占14款 → 多平台10款。38款仍为TBA窗口，<b>拓客节奏需以事件驱动而非日历驱动</b></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="grid-5" id="cal-kpis"></div>
-    </section>
-
-    <section class="section">
-      <div class="section-header">
-        <div class="section-title">P0优先建联 — 10款高确定性新游</div>
-        <div class="section-desc">A/B级信源 + 明确上线/测试窗口 + 达人营销预算概率高。按拓客紧迫性排序</div>
-      </div>
-      <div class="card" style="padding:12px;">
-        <div style="max-height:520px;overflow-y:auto;">
-          <table id="p0-table"></table>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="grid-2">
-        <div class="card"><div class="card-title">BD优先级分布</div><div class="card-subtitle">P0立即建联 · P1跟踪建联 · P2低优观察</div><div class="chart" id="cal-priority-pie"></div></div>
-        <div class="card"><div class="card-title">信源证据等级</div><div class="card-subtitle">A级=官方PR+时间锚点 · B级=官宣缺时间 · C级=第三方预估</div><div class="chart" id="cal-evidence-pie"></div></div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="card">
-        <div class="card-title">拓客时序建议</div>
-        <div class="card-subtitle">基于预计上线窗口的BD节奏规划</div>
-        <div class="bullet-list">
-          <div class="bullet-item green">
-            <div class="bullet-title">窗口一：现在（2026年5-6月）→ 立即建联</div>
-            <div class="bullet-body">
-              <b>CrisisX</b>（Hero Games，2026 Q2窗口，Gamescom可玩Demo已出）——窗口最紧迫，需立即核验是否已在5-6月上线。<br>
-              <b>Sea of Remnants</b>（网易，2026窗口，Closed Alpha已开）——有明确测试和2026窗口，适合达人种草。<br>
-              <b>Petit Planet</b>（米哈游，CBT后/预注册中）——2026年4月已开测试，高优先级但大厂BD切入难度高。<br>
-              <b>Honkai: Nexus Anima</b>（米哈游，预注册中）——崩坏IP新作，需监控下一轮测试地区。<br>
-              <b>Azur Promilia</b>（蛮啾，官网预注册中/TGS可玩）——二游新品强达人预算窗口。
-            </div>
-          </div>
-          <div class="bullet-item amber">
-            <div class="bullet-title">窗口二：3-6个月内（2026 Q3）→ 提前布局</div>
-            <div class="bullet-body">
-              <b>Phantom Blade Zero</b>（S-GAME，2026-09-09发售）——唯一有精确发售日的P0产品，发售前4个月是达人预热和核心玩家口碑铺垫黄金期。<br>
-              <b>ANANTA</b>（网易，TBA但TGS可玩）——都市开放世界，适合二游/开放世界达人，等下一轮测试/上线公告。<br>
-              <b>Monster Hunter Outlanders</b>（腾讯TiMi+Capcom授权，TBA但Beta即将到来）——全球IP移动端改编，达人触达价值极高。
-            </div>
-          </div>
-          <div class="bullet-item">
-            <div class="bullet-title">窗口三：6个月以上/待定 → 保持跟踪</div>
-            <div class="bullet-body">
-              <b>Honor of Kings: World</b>（腾讯TiMi，TBA）——王者荣耀IP全球化，gamescom已开放PC实机试玩，等下一轮测试/预约启动。<br>
-              <b>Blood Message</b>（网易，TBA）——AAA单机动作冒险，网易首个AAA单机，首曝后需等待下一次实机公开。
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <!-- ========== TAB 2: 全球行业动向 ========== -->
-  <div class="page" id="page-global">
-    <section class="section">
-      <div class="source-block">
-        <strong>数据源说明</strong><br>
-        <strong>官方口径</strong>：中国音数协游戏工委（GPC）《2026年Q1中国游戏产业季度报告》2026-04-17<br>
-        <strong>Insight底表</strong>：App Store + Google Play Top5000应用排行（2026-01至2026-04-29）<br>
-        <strong>外部交叉验证</strong>：华泰证券、伽马数据、开源证券、万里汇等研报（均在引用处标注数据时点）<br>
-        <strong>重要口径说明</strong>：Insight基于商城抓取Top5000，覆盖M AU>~5万的应用。曝光榜反映买量强度，下载榜反映实际用户触达，收入榜反映商业变现——三维度不可混用。
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="exec-summary">
-        <div class="exec-label">EXECUTIVE SUMMARY · 核心判断</div>
-        <div class="exec-body">
-          <div class="exec-head">Q1出海收入<span class="exec-up">$63.31亿</span>，同比<span class="exec-up">+31.76%</span>，创近三年增速新高。但这个增速主要靠两件事撑起来：<b>腾讯《王者荣耀》S31海外版3月单月爆了$740M</b>，和<b>中小厂商在SLG融合品类上的集中放量</b>。剔除MOBA后，大盘其实在4月已回落至1月水平</div>
-          <div class="exec-line">买量盘子出现结构性迁移：日本份额从1月40.9%降到4月27.0%（<span class="exec-down">-13.9pp</span>），印尼从13.3%涨到24.8%（<span class="exec-up">+11.4pp</span>）——不是日本不香了，是东南亚获客洼地被发现了。但注意：这只是买量层面的迁移，收入层面日本高ARPU地位短期不会被动摇</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="grid-5" id="global-kpis"></div>
-    </section>
-
-    <section class="section">
-      <div class="grid-2">
-        <div class="card"><div class="card-title">大盘曝光月度趋势（1-4月）</div><div class="card-subtitle">春节后爬升+4月回落。3月峰值由头部应用规模化投放驱动，4月-80%回归常态</div><div class="chart-lg" id="global-exposure-line"></div></div>
-        <div class="card"><div class="card-title">品类收入构成（2026年3月）</div><div class="card-subtitle">MOBA因王者荣耀S31海外版单月$741M成为最大品类。剔除MOBA后SLG持续统治</div><div class="chart-lg" id="global-category-pie"></div></div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="grid-2">
-        <div class="card"><div class="card-title">厂商收入排名（2026年3月）</div><div class="card-subtitle">腾讯因王者荣耀S31海外版断层第一。Level Infinite（腾讯海外发行）独立计算仍排第二</div><div class="chart-lg" id="global-publisher-bar"></div></div>
-        <div class="card"><div class="card-title">投放平台份额（2026年4月）</div><div class="card-subtitle">Applovin在Insight口径下占比88.8%。Mintegral 4月突然崛起（+6700%），值得关注</div><div class="chart-lg" id="global-platform-pie"></div></div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="card">
-        <div class="card-title">分品类曝光月度趋势</div>
-        <div class="card-subtitle">其他策略（SLG融合）全程稳居第一。休闲经营2-3月黑马爆发后4月回落——典型新品驱动曲线</div>
-        <div class="chart-lg" id="global-category-trend-line"></div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="card">
-        <div class="card-title">投放国家月度迁移（曝光占比）</div>
-        <div class="card-subtitle">日本净降13.9pp vs 印尼净升11.4pp——买量重心从高ARPU深耕向东南亚规模化获客迁移</div>
-        <div class="chart-lg" id="global-country-migration"></div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-header"><div class="section-title">本期爆款新品</div></div>
-      <div class="bullet-list">
-        <div class="bullet-item green">
-          <div class="bullet-title">完美世界《异环》· 2026-04-29上线</div>
-          <div class="bullet-body">首周下载385万，流水3030万元。PC/PS主机端贡献海外75%流水——<b>这也说明只看移动端数据会严重低估主机向产品</b>。UE5引擎，主攻韩日美市场。完美世界2025年营收66.6亿元成功扭亏，连续5个季度盈利，这款产品是他们的UE5技术标杆。</div>
-        </div>
-        <div class="bullet-item">
-          <div class="bullet-title">《無盡輪迴》· 2026-04-14港澳台+东南亚上线</div>
-          <div class="bullet-body">4天下载20.6万，流水约100万元。搜打撤+肉鸽差异化。值得注意的BD信号：联动台湾"大甲镇澜宫"送实体黄金——<b>区域性文化联动是东南亚市场的有效获客手段</b>。</div>
-        </div>
-        <div class="bullet-item">
-          <div class="bullet-title">心动《Heartopia》· 2026Q1</div>
-          <div class="bullet-body">Q1收入超$110万，登顶拉美收入上升榜。Google Play服务费下调后向安卓端倾斜——<b>拉美市场安卓占比高，服务费下调直接改善买量ROI</b>。</div>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <!-- ========== TAB 3: 区域市场偏好 ========== -->
-  <div class="page" id="page-region">
-    <section class="section">
-      <div class="exec-summary">
-        <div class="exec-label">REGIONAL INSIGHT · 区域核心发现</div>
-        <div class="exec-body">
-          <div class="exec-head">买量层面：日本→东南亚迁移是本期最确定的结构性变化。<span class="exec-up">东南亚四国（印尼+菲律宾+马来+泰国）曝光占比从1月28.8%升至4月40.5%</span></div>
-          <div class="exec-line">但不是所有品类都在迁移：复杂射击反而<b>从印尼29.8%转向日本73.1%</b>——日本在FPS/TPS高ARPU市场的独特地位不可替代。模拟经营<b>从美国73.4%转向日本59.9%</b>——说明日本本地化做得好仍有空间。男性RPG在菲律宾4月占69.9%但绝对量只有0.003B，<b>这个集中度是萎缩造成的，不是增长</b></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="grid-2">
-        <div class="card"><div class="card-title">3月投放国家集中度</div><div class="card-subtitle">美国29.6% + 日本28.3% = 买量双核。印尼18.3%为东南亚主战场</div><div class="chart-lg" id="region-country-bar"></div></div>
-        <div class="card"><div class="card-title">分品类×国家结构迁移（1→4月）</div><div class="card-subtitle">四个品类的国家重心都在变，但方向完全不同</div><div class="chart-lg" id="region-migration-chart"></div></div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-header"><div class="section-title">六大重点市场定位</div></div>
-      <div class="grid-3">
-        <div class="card" style="border-left:4px solid #3b82f6;">
-          <div class="card-title">美国 · 最大买量目的地</div>
-          <div style="font-size:13px;color:#334155;line-height:1.7;margin-top:8px;"><b>3月曝光占比</b>：29.6%<br><b>角色</b>：营收压舱石，SLG+模拟经营主战场<br><b>信号</b>：3月短暂达10.9%峰值后4月回落至5.4%。买量集中在头部产品，中小厂商进入门槛高<br><b>适合品类</b>：SLG融合、模拟经营</div>
-        </div>
-        <div class="card" style="border-left:4px solid #dc2626;">
-          <div class="card-title">日本 · 高ARPU重度投放</div>
-          <div style="font-size:13px;color:#334155;line-height:1.7;margin-top:8px;"><b>3月曝光占比</b>：28.3%<br><b>角色</b>：FPS/TPS和二次元主战场<br><b>信号</b>：份额从1月40.9%降到4月27.0%，但复杂射击反而从印尼回流至日本73.1%。买量在降，但特定品类的投放集中度在升<br><b>适合品类</b>：射击、二次元RPG、模拟经营</div>
-        </div>
-        <div class="card" style="border-left:4px solid #10b981;">
-          <div class="card-title">印尼 · 东南亚主战场</div>
-          <div style="font-size:13px;color:#334155;line-height:1.7;margin-top:8px;"><b>3月曝光占比</b>：18.3%<br><b>角色</b>：获客成本洼地，SLG+X规模化获客首选<br><b>信号</b>：从1月13.3%涨到4月24.8%，净升11.4pp，与日本下降形成镜像。SLG融合品类在印尼+菲律宾从22.2%→37.1%<br><b>适合品类</b>：SLG融合、休闲益智</div>
-        </div>
-        <div class="card" style="border-left:4px solid #f59e0b;">
-          <div class="card-title">韩国 · 重度RPG+二次元</div>
-          <div style="font-size:13px;color:#334155;line-height:1.7;margin-top:8px;"><b>3月曝光占比</b>：2.7%<br><b>角色</b>：RPG变现效率标杆市场<br><b>信号</b>：份额稳定在4.5-6.6%区间，买量占比不高但ARPU极高。二次元和MMORPG在此市场的ROI常优于日本<br><b>适合品类</b>：MMORPG、二次元RPG</div>
-        </div>
-        <div class="card" style="border-left:4px solid #8b5cf6;">
-          <div class="card-title">巴西 · 拉美主战场</div>
-          <div style="font-size:13px;color:#334155;line-height:1.7;margin-top:8px;"><b>3月曝光占比</b>：1.5%<br><b>角色</b>：安卓为主的增量市场<br><b>信号</b>：心动《Heartopia》登顶拉美收入上升榜。Google Play服务费下调后拉美安卓端ROI改善明显<br><b>适合品类</b>：休闲益智、模拟经营</div>
-        </div>
-        <div class="card" style="border-left:4px solid #ec4899;">
-          <div class="card-title">沙特 · 高净值新兴市场</div>
-          <div style="font-size:13px;color:#334155;line-height:1.7;margin-top:8px;"><b>角色</b>：大R玩家集中，ARPU极高<br><b>信号</b>：中东市场SLG品类天然适配（策略+社交+公会战），且本地化成本可控（阿语单语言覆盖多国）<br><b>适合品类</b>：SLG、MMORPG</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="story-block">
-        <strong>故事：日本买量"退潮"的真相</strong><br>
-        看1→4月数据，日本曝光占比从40.9%掉到27.0%，印尼从13.3%涨到24.8%。<br><br>
-        <b>有人会问</b>：高ARPU的日本不行了？<br><br>
-        <b>实际是</b>：三个因素在同时作用——<br>
-        1. 日本iOS激励广告eCPM持续下滑（2024Q1 $17.2 → Q2 $13.1），买量性价比在降<br>
-        2. 东南亚买量成本虽涨了2.5倍，但相比美日韩仍有CPI优势，SLG融合品类首选东南亚做规模化获客<br>
-        3. 《My Garden Tale》等单品在日本3月达峰后4月减速，拉低了全品类份额<br><br>
-        <b>结论</b>：不是日本"不行了"，而是买量策略从"日本单点高投入"变成了"日本+东南亚双线"。收入层面日本仍可能保持高位——毕竟ARPU摆在那。但买量结构已提前进入调整期，未来2-3个季度日本收入份额可能承压。
-      </div>
-    </section>
-  </div>
-
-  <!-- ========== TAB 4: 达人营销生态 ========== -->
-  <div class="page" id="page-kol">
-    <section class="section">
-      <div class="source-block">
-        <strong>数据源说明</strong><br>
-        <strong>广大大（AppGrowing Global）</strong>：全球游戏广告创意周榜Top30，W12-W18（2026-03-17至2026-05-04），共131条Top30创意记录<br>
-        <strong>Insight底表</strong>：素材数和曝光数据<br>
-        <strong>待补数据</strong>：Nox聚星达人benchmark（CPM/互动率/视频时长）——Wale提供中
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="exec-summary">
-        <div class="exec-label">KOL INSIGHT · 达人营销核心发现</div>
-        <div class="exec-body">
-          <div class="exec-head">中国厂商占出海素材Top30的<span class="exec-up">44.3%</span>，但沐瞳（MLBB）一家就占了其中的<span class="exec-up">69%</span></div>
-          <div class="exec-line">换句话说：<b>不是中国厂商整体会做素材，而是沐瞳特别会</b>。7周40次进入Top30，形成"集群式投放"——W12-W14三周峰值期每周冲8-10个席位，对应Q2开局营销节点。其余中国厂商的素材投放能力和持续性，跟沐瞳差了至少一个数量级</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="grid-4" id="kol-kpis"></div>
-    </section>
-
-    <section class="section">
-      <div class="section-header"><div class="section-title">沐瞳MLBB：集群式霸屏的战术拆解</div></div>
-      <div class="grid-2">
-        <div class="card"><div class="card-title">每周进入Top30的创意数量（W12-W18）</div><div class="card-subtitle">W12-W14三周峰值，每周8-10个席位</div><div class="chart" id="kol-mlbb-weekly"></div></div>
-        <div class="card"><div class="card-title">沐瞳素材的四层结构</div><div class="card-subtitle">品牌层/效果层/福利层/情感层各有不同用途</div>
-          <div class="bullet-list" style="margin-top:12px;">
-            <div class="bullet-item green">
-              <div class="bullet-title">品牌层（Brand Layer）</div><div class="bullet-body">高质量CG+明星代言，<b>不直接卖游戏，卖"MLBB是一种生活方式"</b>。主要用于YouTube/品牌专区</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-title">效果层（Performance Layer）</div><div class="bullet-body">游戏内实机画面+英雄技能高光时刻，<b>直接导向下载</b>。投放Applovin/Google Ads等效果渠道</div>
-            </div>
-            <div class="bullet-item amber">
-              <div class="bullet-title">福利层（Reward Layer）</div><div class="bullet-body">新英雄免费送/限时皮肤/登陆福利，<b>召回流失用户+拉新</b>。真人出镜+福利信息为主</div>
-            </div>
-            <div class="bullet-item purple">
-              <div class="bullet-title">情感层（Emotion Layer）</div><div class="bullet-body">W13首次出现4分42秒超长真人广告，投放12天即冲入榜首。<b>用真人故事建立情感连接</b>，不追求短平快转化</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="card">
-        <div class="card-title">长效素材的真相：不是所有素材都"消耗快"</div>
-        <div class="card-subtitle">基于广大大W12-W18的131条Top30创意生命周期分析</div>
-        <div class="bullet-list" style="margin-top:12px;">
-          <div class="bullet-item green">
-            <div class="bullet-title">最长寿素材：459天仍在榜</div>
-            <div class="bullet-body">1SOFT《Space shooter》单条素材投放459天仍维持人气榜位。<b>射击类/休闲类素材的生命周期远超行业直觉</b>——关键不是品类，而是素材结构是否具备"常青"属性（通用玩法展示 > 时效性活动展示）。</div>
-          </div>
-          <div class="bullet-item">
-            <div class="bullet-title">真人拍摄23次居2026年高频创意标签之首</div>
-            <div class="bullet-body">广大大Top30中"真人拍摄"标签出现23次，远超CG动画（9次）和游戏实机（11次）。<b>受众对"真人推荐"的信任度在2026年明显高于制作精良但"广告感"强的CG</b>。</div>
-          </div>
-          <div class="bullet-item amber">
-            <div class="bullet-title">素材消耗速度因品类而异</div>
-            <div class="bullet-body">MOBA/射击类素材更新频率最高（每周2-3条新素材），SLG/模拟经营更新频率低（每2-3周1条）。<b>SLG素材更"耐打"——因为核心玩法稳定，不需要频繁更新视觉素材</b>。</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-header"><div class="section-title">达人类型 × 产品阶段匹配</div></div>
-      <div class="grid-4">
-        <div class="card" style="border-left:4px solid #3b82f6;">
-          <div class="card-title">超级/头部达人（1M+粉）</div>
-          <div style="font-size:12px;color:#94a3b8;margin-bottom:8px;">适用阶段：品牌曝光/大版本更新</div>
-          <div style="font-size:13px;color:#334155;line-height:1.7;">单条成本高（$5K-$50K+），但曝光量大。适合做品牌声量，不适合做持续转化。沐瞳MLBB的品牌层素材主要用这类达人。</div>
-        </div>
-        <div class="card" style="border-left:4px solid #10b981;">
-          <div class="card-title">中腰部达人（100K-1M粉）</div>
-          <div style="font-size:12px;color:#94a3b8;margin-bottom:8px;">适用阶段：产品上线/测试期</div>
-          <div style="font-size:13px;color:#334155;line-height:1.7;">性价比最优区间。单条$1K-$5K，垂直品类粉丝精准。2026年趋势：受众对"职业玩家/垂类主播"的信任度高于泛娱乐达人。</div>
-        </div>
-        <div class="card" style="border-left:4px solid #f59e0b;">
-          <div class="card-title">纳米/小微达人（<100K粉）</div>
-          <div style="font-size:12px;color:#94a3b8;margin-bottom:8px;">适用阶段：长线种草/社区运营</div>
-          <div style="font-size:13px;color:#334155;line-height:1.7;">用规模换概率。单条成本<$500，互动率普遍更高（TikTok纳米达人互动率可达11.9%）。适合SLG/模拟经营等需要持续内容输出的品类。</div>
-        </div>
-        <div class="card" style="border-left:4px solid #8b5cf6;">
-          <div class="card-title">Reaction/试玩类达人</div>
-          <div style="font-size:12px;color:#94a3b8;margin-bottom:8px;">适用阶段：新游上线/CBT测试</div>
-          <div style="font-size:13px;color:#334155;line-height:1.7;">新游上线期最关键达人类型。玩家通过"看别人玩"来做下载决策。<b>新游拓客日历中的P0产品，应优先找此类达人做测试期试玩内容</b>。</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="card">
-        <div class="card-title">平台组合建议（按游戏品类）</div>
-        <div class="card-subtitle">基于Insight底表平台分布 + 广大大素材实证 + 行业共识</div>
-        <div style="overflow-x:auto;">
-          <table>
-            <thead><tr><th>游戏品类</th><th>TikTok</th><th>YouTube</th><th>Instagram</th><th>Twitch</th><th>策略要点</th></tr></thead>
-            <tbody>
-              <tr><td><b>SLG/策略</b></td><td>30%</td><td>50%</td><td>10%</td><td>10%</td><td>YouTube长视频做玩法深度展示；TikTok做"战报"类短视频</td></tr>
-              <tr><td><b>射击/FPS</b></td><td>20%</td><td>30%</td><td>10%</td><td>40%</td><td>Twitch直播是核心获客渠道；YouTube做击杀集锦</td></tr>
-              <tr><td><b>RPG/二次元</b></td><td>40%</td><td>30%</td><td>20%</td><td>10%</td><td>TikTok角色展示+剧情切片；Instagram做高质感角色立绘</td></tr>
-              <tr><td><b>模拟经营</b></td><td>50%</td><td>30%</td><td>15%</td><td>5%</td><td>TikTok"陪伴式"内容（陪我一起建城市）；YouTube长视频做深度攻略</td></tr>
-              <tr><td><b>休闲益智</b></td><td>60%</td><td>15%</td><td>10%</td><td>15%</td><td>TikTok短平快玩法展示+Applovin效果投放为主</td></tr>
-              <tr><td><b>MOBA</b></td><td>25%</td><td>40%</td><td>10%</td><td>25%</td><td>YouTube+Twitch做电竞赛事内容；TikTok做英雄技能高光</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    
-    <section class="section">
-      <div class="section-header"><div class="section-title">近一月亮点游戏达人营销实证（新增 · Nox近一月数据）</div></div>
-
-      <!-- KPI cards row -->
-      <div class="grid-4" style="margin-bottom:18px;">
-        <div class="kpi-card">
-          <div class="kpi-label">覆盖游戏</div>
-          <div class="kpi-value">4</div>
-          <div class="kpi-sub">原神 / 崩铁 / 异环 / 燕云十六声</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">三平台合计达人</div>
-          <div class="kpi-value">5.5万+</div>
-          <div class="kpi-sub">YT + TikTok + Instagram</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">月花费区间</div>
-          <div class="kpi-value">$28-715万</div>
-          <div class="kpi-sub">四款游戏合计</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">策略模式</div>
-          <div class="kpi-value">3种</div>
-          <div class="kpi-sub">社区自驱 / 铺量爆发 / 精品独占</div>
-        </div>
-      </div>
-
-      <!-- Key insight cards -->
-      <div class="bullet-list" style="margin-bottom:18px;">
-        <div class="bullet-item green">
-          <div class="bullet-title">发现1：付费投放对自然流量有显著带动效应</div>
-          <div class="bullet-body">崩铁付费→自然提升<b>4.62x</b>（滞后一周相关性0.47），原神1.09x。版本更新前一周集中付费投放是最优节奏。</div>
-        </div>
-        <div class="bullet-item amber">
-          <div class="bullet-title">发现2：头部集中度过高是四款游戏的共同风险</div>
-          <div class="bullet-body">原神前10名占<b>92.9%</b>支出，异环占59.3%。预算向中腰部倾斜，目标前10名降至55%以下是共性优化方向。</div>
-        </div>
-        <div class="bullet-item red">
-          <div class="bullet-title">发现3：复投创作者互动率衰减规律明确</div>
-          <div class="bullet-body">原神<b>88.9%</b>复投创作者互动率下滑，崩铁62%下滑。需建立"连续两次低于历史中位数即暂停"的动态评估机制。</div>
-        </div>
-        <div class="bullet-item purple">
-          <div class="bullet-title">发现4：跨界联动是低成本破圈杠杆</div>
-          <div class="bullet-body">燕云十六声×海底捞联动帖文表现超中位数，验证"线下生活场景+游戏IP"跨界合作的ROI潜力。</div>
-        </div>
-      </div>
-
-      <!-- Comprehensive comparison table -->
-      <div class="card">
-        <div class="card-title">四款游戏三平台达人营销综合对标</div>
-        <div class="card-subtitle">数据周期：2026-04至2026-05 | 信源：Nox聚星社媒数据分析平台</div>
-        <div style="overflow-x:auto; margin-top:12px;">
-          <table>
-            <thead>
-              <tr><th>维度</th><th>燕云十六声</th><th>异环</th><th>原神</th><th>崩坏：星穹铁道</th></tr>
-            </thead>
-            <tbody>
-              <tr><td><b>策略模式</b></td><td>精品独占型</td><td>铺量爆发型</td><td>社区自驱型</td><td>精准投放型</td></tr>
-              <tr><td><b>YouTube达人</b></td><td>667</td><td>7,655</td><td>17,200</td><td>275</td></tr>
-              <tr><td><b>TikTok达人</b></td><td>249</td><td>5,142</td><td>18,100</td><td>⬜ 未覆盖</td></tr>
-              <tr><td><b>Instagram达人</b></td><td>26</td><td>512</td><td>5,753</td><td>⬜ 未覆盖</td></tr>
-              <tr><td><b>三平台合计达人</b></td><td><b>942</b></td><td><b>13,309</b></td><td><b>41,053</b></td><td><b>275+</b></td></tr>
-              <tr><td><b>月花费估算</b></td><td>$28-40万</td><td>$339-473万</td><td>$473-715万</td><td>$6.6-9.7万+</td></tr>
-              <tr><td><b>YT互动率</b></td><td>2.59%</td><td>3%</td><td>4%</td><td>3%</td></tr>
-              <tr><td><b>TikTok互动率</b></td><td>4%</td><td><span class="up">12%</span></td><td><span class="up">21%</span></td><td>⬜</td></tr>
-              <tr><td><b>IG互动率</b></td><td><span class="up">26%（最高）</span></td><td>8%</td><td>15%</td><td>⬜</td></tr>
-              <tr><td><b>自然传播占比</b></td><td>—</td><td><span class="up">92.58%（TK）</span></td><td><span class="up">99.46%（YT）</span></td><td>—</td></tr>
-              <tr><td><b>资产沉淀率</b></td><td>YT 56% / TK 39%</td><td>YT 56% / TK <span class="up">63%</span></td><td>YT <span class="up">60%</span> / TK 49%</td><td>YT 53%</td></tr>
-              <tr><td><b>头部集中度风险</b></td><td>YT前10名占主导</td><td>前10名占<span class="down">59.3%</span></td><td>前10名占<span class="down">92.9%</span></td><td>前10%占<span class="down">90%</span></td></tr>
-              <tr><td><b>CPE竞争力</b></td><td><span class="up">$2.67（低32.9%）</span></td><td>$0.94</td><td><span class="up">$0.06（低72%）</span></td><td>$0.91（持平）</td></tr>
-              <tr><td><b>付费→自然带动</b></td><td>—</td><td>—</td><td>1.09x</td><td><span class="up">4.62x</span></td></tr>
-              <tr><td><b>复投衰减</b></td><td>—</td><td>—</td><td><span class="down">88.9%下滑</span></td><td><span class="down">62%下滑</span></td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- Strategy models -->
-      <div class="grid-3" style="margin-top:16px;">
-        <div class="card">
-          <div class="card-title">社区自驱型</div>
-          <div class="card-subtitle">代表：原神 · 崩铁</div>
-          <div style="font-size:13px;color:#334155;line-height:1.7;">
-            <p>自然传播<b>99%+</b>，微网红占比<b>76-90%</b></p>
-            <p>CPE $0.06，仅为市场<b>28%</b></p>
-            <p>风险：头部集中度92.9%</p>
-            <p>适用：3年+ IP沉淀的长线运营期</p>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">铺量爆发型</div>
-          <div class="card-subtitle">代表：异环</div>
-          <div style="font-size:13px;color:#334155;line-height:1.7;">
-            <p>三平台<b>13,309</b>达人地毯式覆盖</p>
-            <p>TikTok自然传播<b>92.58%</b></p>
-            <p>优化空间：微网红溢价2.20x</p>
-            <p>适用：新品大推期（上线1-3月）</p>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">精品独占型</div>
-          <div class="card-subtitle">代表：燕云十六声</div>
-          <div style="font-size:13px;color:#334155;line-height:1.7;">
-            <p>跨平台<b>100%</b>独占（无竞品提及）</p>
-            <p>Instagram互动率<b>26%</b>全平台最高</p>
-            <p>跨界联动（海底捞）超预期</p>
-            <p>适用：细分赛道品类深耕期</p>
-          </div>
-        </div>
-      </div>
-
-      <div style="font-size:11px;color:#94a3b8;margin-top:10px;">信源：Nox聚星社媒数据分析平台 近一月（2026-04至2026-05）；达人统计口径为品牌全平台提及/合作网红；预估花费基于视频/帖文表现估算</div>
-    </section>
-<section class="section">
-      <div class="section-header"><div class="section-title">本期报告待补数据清单</div></div>
-      <div class="card">
-        <div style="overflow-x:auto;">
-          <table>
-            <thead><tr><th>优先级</th><th>数据类型</th><th>期望信源</th><th>责任方</th><th>能填充的章节</th><th>预计工作量</th></tr></thead>
-            <tbody>
-              <tr><td style="color:#dc2626;font-weight:700;">高优</td><td>达人benchmark（CPM/互动率/视频时长）</td><td>Nox聚星</td><td>Wale提供</td><td>达人营销生态</td><td>1-2天</td></tr>
-              <tr><td style="color:#dc2626;font-weight:700;">高优</td><td>三平台Top视频素材（YT/TT/IG）</td><td>真实观看+内容编码</td><td>Wale提供</td><td>素材Benchmark</td><td>2-3天</td></tr>
-              <tr><td style="color:#dc2626;font-weight:700;">高优</td><td>官方PR系统性检索（CBT/EA/OB全阶段）</td><td>PR Newswire/Business Wire</td><td>Wale提供</td><td>新游拓客日历</td><td>2-3天</td></tr>
-              <tr><td style="color:#f59e0b;font-weight:700;">中优</td><td>Google Trends搜索热度</td><td>Google Trends公开接口</td><td>内部自建</td><td>区域热门榜单</td><td>0.5天</td></tr>
-              <tr><td style="color:#f59e0b;font-weight:700;">中优</td><td>评论区解读（TT/YT爆款视频评论）</td><td>爬虫抓取或人工取样</td><td>内部自建</td><td>区域用户反馈</td><td>1天</td></tr>
-              <tr><td style="color:#94a3b8;font-weight:700;">低优</td><td>用户画像深度拆解</td><td>Nox聚星/第三方调研</td><td>Wale提供</td><td>达人营销生态</td><td>2-3天</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
+<div class="portal-header">
+  <div class="portal-header-inner">
+    <h1>行业研究门户</h1>
+    <div class="subtitle">Industry Research Portal — 跨境电商出海行业月度追踪与拓客情报</div>
+    <div class="meta-line">
+      <div class="meta-item">覆盖行业 <span id="industry-count">-</span></div>
+      <div class="meta-item">数据源 <span id="source-count">-</span></div>
+      <div class="meta-item">更新频率 <span>月度</span></div>
+      <div class="meta-item">最新周期 <span>2026 Q1</span></div>
+    </div>
   </div>
 </div>
 
+<div class="portal-main">
+
+  <div class="stats-bar">
+    <div class="stat-card">
+      <div class="stat-value" id="stat-industries">-</div>
+      <div class="stat-label">覆盖行业</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="stat-categories">-</div>
+      <div class="stat-label">追踪类目</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="stat-reports">-</div>
+      <div class="stat-label">报告版本</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="stat-sources">-</div>
+      <div class="stat-label">独立信源</div>
+    </div>
+  </div>
+
+  <div class="section-header">
+    <div class="section-title">行业报告</div>
+    <div class="section-desc">每月更新，基于一手数据与多源交叉验证</div>
+  </div>
+
+  <div class="industry-grid" id="industry-grid"></div>
+
+  <div class="info-block">
+    <h2>关于本研究门户</h2>
+    <p>本门户整合钛动科技多行业出海研究产出，覆盖游戏、3C、健康与家庭等核心赛道。每份报告遵循统一方法论：一手数据驱动、多源交叉验证、结论紧贴证据。</p>
+    <p><strong>核心信源体系</strong></p>
+    <div class="source-list" id="source-list"></div>
+    <p style="margin-top:16px;font-size:12px;color:#94a3b8;">
+      所有报告遵循「结论前置 → 明细表居中 → 信源后置」三段式结构，关键数据至少2个独立信源交叉验证。
+      数据标注体系：精确值 / 推算（置信度：高/中/低） / 待验证。
+    </p>
+  </div>
+
+</div>
+
+<div class="portal-footer">
+  钛动科技 · 行业研究门户 · 更新于 2026-05
+</div>
+
 <script>
-// ==================== DATA ====================
-var P0_GAMES = [
-  {name:"Phantom Blade Zero",studio:"S-GAME",cat:"动作RPG/武侠",plat:"PS5, PC",window:"2026-09-09",lvl:"A",reason:"明确全球发售日，适合达人预热、试玩内容、核心玩家口碑铺垫",event:"公布2026年9月9日全球发售日期"},
-  {name:"Honor of Kings: World",studio:"TiMi Studio",cat:"开放世界动作RPG",plat:"PC, Mobile",window:"TBA",lvl:"A",reason:"腾讯核心IP全球化，达人需求强，适合动作RPG/开放世界/KOL试玩",event:"在gamescom 2025向海外玩家开放PC实机试玩"},
-  {name:"Blood Message",studio:"24 Entertainment",cat:"AAA单机动作冒险",plat:"Console, PC",window:"TBA",lvl:"B",reason:"网易首个AAA单机，新IP海外营销预算概率高",event:"网易公布AAA单机动作冒险新作"},
-  {name:"ANANTA",studio:"Naked Rain",cat:"都市开放世界RPG",plat:"PS5, PC, iOS, Android",window:"TBA",lvl:"A",reason:"开放世界都市题材适合海外达人试玩、角色内容和城市探索内容",event:"在TGS 2025提供可玩版本"},
-  {name:"Sea of Remnants",studio:"Joker Studio",cat:"海洋冒险RPG",plat:"PS5, PC, iOS, Android",window:"2026",lvl:"A",reason:"有明确测试和2026窗口，适合达人种草、探索类内容",event:"开启2026年Closed Alpha并展示玩法"},
-  {name:"Monster Hunter Outlanders",studio:"TiMi Studio",cat:"开放世界狩猎/生存",plat:"Mobile",window:"TBA",lvl:"B",reason:"全球IP移动端改编，达人触达价值高",event:"在TGS 2025展示并透露Beta计划"},
-  {name:"Azur Promilia",studio:"Manjuu",cat:"二次元开放世界/收集RPG",plat:"PS5, PC, Mobile",window:"TBA",lvl:"A",reason:"二游新品强达人预算窗口，适合角色/宠物/开放世界内容",event:"官网开放全球预注册"},
-  {name:"Petit Planet",studio:"HoYoverse",cat:"生活模拟/社交经营",plat:"PC, iOS, Android",window:"TBA",lvl:"A",reason:"HoYoverse新品，适合生活模拟、治愈、二游社区达人",event:"2026年4月开启测试并开放预注册"},
-  {name:"Honkai: Nexus Anima",studio:"HoYoverse",cat:"策略/收集/二游",plat:"PC/Mobile待定",window:"TBA",lvl:"A",reason:"崩坏IP新作，适合泛二游达人预热",event:"开启官网预注册和测试信息"},
-  {name:"CrisisX",studio:"Hero Games",cat:"开放世界生存",plat:"PC, Mobile",window:"2026 Q2",lvl:"B",reason:"Q2窗口紧迫，适合立即建联做上线前达人投放",event:"Gamescom 2025提供试玩Demo"}
+var INDUSTRIES = [
+  {
+    "id": "game",
+    "name": "游戏出海",
+    "nameEn": "Gaming",
+    "badgeClass": "badge-game",
+    "description": "全球游戏行业月度追踪，覆盖SLG/RPG/射击/MOBA/模拟经营/卡牌/休闲益智等品类。含新游拓客日历（50款追踪/P0级10款）、区域市场偏好（6大市场拆解）、达人营销生态（4游戏3平台对标）。",
+    "latestVersion": "v1.3",
+    "period": "2026 Q1",
+    "updateFrequency": "月度",
+    "tabs": ["新游拓客日历", "全球行业动向", "区域市场偏好", "达人营销生态"],
+    "dataSources": ["Insight应用数据", "广大大创意数据", "Nox聚星社媒数据", "GPC游戏工委"],
+    "categoryCount": "7大品类",
+    "url": "industry/game/"
+  },
+  {
+    "id": "3c",
+    "name": "3C行业",
+    "nameEn": "Consumer Electronics",
+    "badgeClass": "badge-3c",
+    "description": "US+DE双市场Amazon品类追踪，覆盖39+61个类目。含PR拓客线索（50条/S/A级优先分发）、品类格局（象限分析）、达人营销（3-15-60视频公式/跨国差异化）。",
+    "latestVersion": "v2.0",
+    "period": "2026 Q1",
+    "updateFrequency": "月度",
+    "tabs": ["新客线索", "全球动态", "区域市场", "达人营销"],
+    "dataSources": ["Amazon Sorftime底表", "PR Newswire", "Nox聚星社媒数据", "CES/IFA展会情报"],
+    "categoryCount": "100+类目",
+    "url": "industry/3c/"
+  },
+  {
+    "id": "health-family",
+    "name": "健康与家庭",
+    "nameEn": "Health & Household",
+    "badgeClass": "badge-health",
+    "description": "US Amazon 13品类616子类目追踪，覆盖个人护理($11.3B)/维生素($10.1B)/家居($9.0B)/医疗设备($3.2B)。含中国品牌机会矩阵、FDA合规追踪、品类GMV×CN份额象限分析。",
+    "latestVersion": "v2.4",
+    "period": "2026 Q1",
+    "updateFrequency": "月度",
+    "tabs": ["市场总览", "行业动态", "品类格局", "中国品牌机会"],
+    "dataSources": ["Amazon Sorftime底表", "FDA/CDC监管追踪", "CES/Cosmoprof展会", "SPINS成分趋势"],
+    "categoryCount": "616子类目",
+    "url": "industry/health-family/"
+  }
 ];
 
-// ==================== TAB SWITCHING ====================
-document.querySelectorAll('.tab-btn').forEach(function(btn){
-  btn.addEventListener('click',function(){
-    var pageId = this.getAttribute('data-page');
-    var parentTabs = this.parentElement;
-    parentTabs.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
-    this.classList.add('active');
-    if(parentTabs.id==='main-tabs'){
-      document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
-      var target = document.getElementById(pageId);
-      if(target){ target.classList.add('active'); }
-      setTimeout(resizeAllCharts,100);
-    }
-  });
-});
+(function() {
+  // render industry cards
+  var grid = document.getElementById('industry-grid');
+  var allSources = {};
+  var totalCategories = 0;
 
-function resizeAllCharts(){
-  Object.keys(charts).forEach(function(k){
-    if(charts[k] && !charts[k].isDisposed()){ charts[k].resize(); }
-  });
-}
-window.addEventListener('resize',function(){ resizeAllCharts(); });
+  INDUSTRIES.forEach(function(ind) {
+    // collect unique sources
+    ind.dataSources.forEach(function(s) { allSources[s] = true; });
+    // parse category count
+    var catMatch = ind.categoryCount.match(/\d+/);
+    if (catMatch) totalCategories += parseInt(catMatch[0]);
 
-var charts = {};
+    var tabsHtml = ind.tabs.map(function(t) {
+      return '<span style="display:inline-block;background:#f1f5f9;padding:2px 8px;border-radius:4px;font-size:11px;color:#475569;margin-right:4px;">' + t + '</span>';
+    }).join('');
 
-// ==================== TAB 1 CHARTS ====================
-(function(){
-  // KPI cards
-  var kpiData = [
-    {label:'有效线索总数',value:'50',sub:'覆盖中国厂商/工作室',note:'口径基准日：2026-05-12'},
-    {label:'P0 立即建联',value:'10',sub:'高确定性·A/B级信源',note:'有明确上线/测试窗口+达人营销预算信号'},
-    {label:'P1 跟踪建联',value:'26',sub:'等待下一事件触发',note:'有官宣但时间/实机待补'},
-    {label:'P2 低优观察',value:'14',sub:'远期/信号弱',note:'等复活信号或新实机'},
-    {label:'A级信源',value:'23',sub:'官方PR+时间锚点+实机证据',note:'高置信度，可直接用于BD话术'}
-  ];
-  var kpiHtml = '';
-  kpiData.forEach(function(k){
-    kpiHtml += '<div class="kpi-card"><div class="kpi-label">'+k.label+'</div><div class="kpi-value">'+k.value+'</div><div class="kpi-sub">'+k.sub+'</div><div class="kpi-note">'+k.note+'</div></div>';
-  });
-  document.getElementById('cal-kpis').innerHTML = kpiHtml;
-
-  // P0 table
-  var tHtml = '<thead><tr><th>游戏</th><th>厂商</th><th>品类</th><th>平台</th><th>窗口</th><th>信源</th><th>BD切入点</th><th>欢迎语事件</th></tr></thead><tbody>';
-  P0_GAMES.forEach(function(g){
-    var lvlTag = g.lvl==='A'?'tag-a':(g.lvl==='B'?'tag-b':'tag-c');
-    tHtml += '<tr><td><b>'+g.name+'</b></td><td>'+g.studio+'</td><td>'+g.cat+'</td><td>'+g.plat+'</td><td>'+g.window+'</td><td><span class="tag '+lvlTag+'">'+g.lvl+'级</span></td><td style="max-width:280px;">'+g.reason+'</td><td style="max-width:240px;">'+g.event+'</td></tr>';
-  });
-  tHtml += '</tbody>';
-  document.getElementById('p0-table').innerHTML = tHtml;
-
-  // Priority pie
-  charts.calPriority = echarts.init(document.getElementById('cal-priority-pie'));
-  charts.calPriority.setOption({
-    tooltip:{trigger:'item',formatter:'{b}: {c}款 ({d}%)'},
-    legend:{bottom:0,textStyle:{fontSize:11}},
-    series:[{type:'pie',radius:['45%','72%'],center:['50%','47%'],avoidLabelOverlap:false,
-      itemStyle:{borderRadius:6,borderColor:'#fff',borderWidth:3},
-      label:{show:true,formatter:'{b}\n{c}款'},
-      emphasis:{label:{fontSize:16,fontWeight:'bold'}},
-      data:[
-        {value:10,name:'P0 立即建联',itemStyle:{color:'#f59e0b'}},
-        {value:26,name:'P1 跟踪建联',itemStyle:{color:'#3b82f6'}},
-        {value:14,name:'P2 低优观察',itemStyle:{color:'#94a3b8'}}
-      ]
-    }]
+    var card = document.createElement('a');
+    card.className = 'industry-card';
+    card.href = ind.url;
+    card.innerHTML =
+      '<div class="card-top">' +
+        '<div class="card-badge ' + ind.badgeClass + '">' + ind.nameEn + '</div>' +
+        '<div class="card-name">' + ind.name + '</div>' +
+        '<div class="card-name-en">' + ind.updateFrequency + '更新 · ' + ind.period + '</div>' +
+        '<div class="card-desc">' + ind.description + '</div>' +
+      '</div>' +
+      '<div class="card-bottom">' +
+        '<div style="font-size:12px;font-weight:600;color:#334155;margin-bottom:6px;">报告结构</div>' +
+        '<div>' + tabsHtml + '</div>' +
+        '<div class="card-meta" style="margin-top:10px;">' +
+          '<div class="card-meta-item">数据源: <strong>' + ind.dataSources.length + '个</strong></div>' +
+          '<div class="card-meta-item">覆盖: <strong>' + ind.categoryCount + '</strong></div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="card-footer">' +
+        '<span class="version-tag">' + ind.latestVersion + ' · ' + ind.period + '</span>' +
+        '<span class="arrow-link">进入报告</span>' +
+      '</div>';
+    grid.appendChild(card);
   });
 
-  // Evidence pie
-  charts.calEvidence = echarts.init(document.getElementById('cal-evidence-pie'));
-  charts.calEvidence.setOption({
-    tooltip:{trigger:'item',formatter:'{b}: {c}款 ({d}%)'},
-    legend:{bottom:0,textStyle:{fontSize:11}},
-    series:[{type:'pie',radius:['45%','72%'],center:['50%','47%'],avoidLabelOverlap:false,
-      itemStyle:{borderRadius:6,borderColor:'#fff',borderWidth:3},
-      label:{show:true,formatter:'{b}\n{c}款'},
-      data:[
-        {value:23,name:'A级 硬证据',itemStyle:{color:'#10b981'}},
-        {value:23,name:'B级 可跟踪',itemStyle:{color:'#f59e0b'}},
-        {value:4,name:'C级 辅助',itemStyle:{color:'#ef4444'}}
-      ]
-    }]
-  });
+  // stats
+  document.getElementById('stat-industries').textContent = INDUSTRIES.length;
+  document.getElementById('stat-categories').textContent = totalCategories;
+  document.getElementById('stat-reports').textContent = INDUSTRIES.length;
+  document.getElementById('stat-sources').textContent = Object.keys(allSources).length;
+  document.getElementById('industry-count').textContent = INDUSTRIES.length;
+  document.getElementById('source-count').textContent = Object.keys(allSources).length;
 
-  // Category bar
-  charts.calCat = echarts.init(document.getElementById('cal-category-bar'));
-  charts.calCat.setOption({
-    tooltip:{trigger:'axis'},
-    xAxis:{type:'category',data:['动作/RPG','射击','生存/沙盒','模拟经营','开放世界','休闲/解谜','二次元','策略'],axisLabel:{fontSize:11}},
-    yAxis:{type:'value',name:'款数'},
-    series:[{type:'bar',data:[33,4,4,3,2,2,1,1],
-      itemStyle:{borderRadius:[6,6,0,0],color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#3b82f6'},{offset:1,color:'#93c5fd'}])},
-      label:{show:true,position:'top',fontSize:12,fontWeight:'bold'}
-    }]
-  });
-
-  // Platform bar
-  charts.calPlat = echarts.init(document.getElementById('cal-platform-bar'));
-  charts.calPlat.setOption({
-    tooltip:{trigger:'axis'},
-    xAxis:{type:'category',data:['PC+主机','PC','PC+移动','全平台','主机','待定','移动','主机+移动'],axisLabel:{fontSize:11}},
-    yAxis:{type:'value',name:'款数'},
-    series:[{type:'bar',data:[16,14,5,5,4,3,2,1],
-      itemStyle:{borderRadius:[6,6,0,0],color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#8b5cf6'},{offset:1,color:'#c4b5fd'}])},
-      label:{show:true,position:'top',fontSize:12,fontWeight:'bold'}
-    }]
-  });
-
-  // Studio bar
-  charts.calStudio = echarts.init(document.getElementById('cal-studio-bar'));
-  charts.calStudio.setOption({
-    tooltip:{trigger:'axis'},
-    xAxis:{type:'category',data:['腾讯系','网易系','HoYoverse','叠纸/Infold','Pathea','Hero Games','蛮啾','S-GAME','其他'],axisLabel:{fontSize:10,rotate:20}},
-    yAxis:{type:'value',name:'线索数'},
-    series:[{type:'bar',data:[7,3,3,2,2,1,1,1,30],
-      itemStyle:{borderRadius:[6,6,0,0],color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#f59e0b'},{offset:1,color:'#fcd34d'}])},
-      label:{show:true,position:'top',fontSize:12,fontWeight:'bold'}
-    }]
-  });
-
-  // Window bar
-  charts.calWindow = echarts.init(document.getElementById('cal-window-bar'));
-  charts.calWindow.setOption({
-    tooltip:{trigger:'axis'},
-    xAxis:{type:'category',data:['TBA','2026年内','2026 Q2','2026-09-09','2028','Coming soon'],axisLabel:{fontSize:10}},
-    yAxis:{type:'value',name:'款数'},
-    series:[{type:'bar',data:[38,5,2,1,1,1],
-      itemStyle:{borderRadius:[6,6,0,0],color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#ef4444'},{offset:1,color:'#fca5a5'}])},
-      label:{show:true,position:'top',fontSize:12,fontWeight:'bold'}
-    }]
+  // source list
+  var srcList = document.getElementById('source-list');
+  Object.keys(allSources).sort().forEach(function(s) {
+    var div = document.createElement('div');
+    div.className = 'source-item';
+    div.textContent = s;
+    srcList.appendChild(div);
   });
 })();
-
-// ==================== TAB 2 CHARTS ====================
-(function(){
-  // Global KPIs
-  var gkpi = [
-    {label:'Q1海外收入',value:'$63.31亿',sub:'中国自研游戏海外市场实际销售收入',note:'信源：GPC 2026-04-17'},
-    {label:'同比增速',value:'+31.76%',sub:'创近三年增速新高',note:'2019-2024 CAGR=9.1%'},
-    {label:'环比增速',value:'+6.23%',sub:'QoQ持续增长',note:'剔除MOBA后增速大幅收窄'},
-    {label:'SLG品类收入占比',value:'43.3%',sub:'中国自研移动游戏海外收入前100名',note:'下载量仅占2%但收入占15%，成功率16%'},
-    {label:'混合变现比例',value:'29%',sub:'IAA+IAP混合变现占比(2024Q3)',note:'2023Q3为25%，轻量化出海标配'}
-  ];
-  var gkhtml = '';
-  gkpi.forEach(function(k){
-    gkhtml += '<div class="kpi-card"><div class="kpi-label">'+k.label+'</div><div class="kpi-value">'+k.value+'</div><div class="kpi-sub">'+k.sub+'</div><div class="kpi-note">'+k.note+'</div></div>';
-  });
-  document.getElementById('global-kpis').innerHTML = gkhtml;
-
-  // Exposure line
-  charts.gExposure = echarts.init(document.getElementById('global-exposure-line'));
-  charts.gExposure.setOption({
-    tooltip:{trigger:'axis'},
-    legend:{data:['总曝光(B)','覆盖应用数','单应用均曝光(M)'],bottom:0},
-    xAxis:{type:'category',data:['2026-01','2026-02','2026-03','2026-04']},
-    yAxis:[
-      {type:'value',name:'曝光量(B)',axisLabel:{formatter:'{value}B'}},
-      {type:'value',name:'应用数/均曝光',axisLabel:{formatter:'{value}'}}
-    ],
-    series:[
-      {name:'总曝光(B)',type:'bar',data:[1.20,3.66,5.00,1.01],itemStyle:{borderRadius:[6,6,0,0],color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#3b82f6'},{offset:1,color:'#93c5fd'}])},label:{show:true,position:'top',fontSize:12}},
-      {name:'覆盖应用数',type:'line',yAxisIndex:1,data:[117,119,123,111],lineStyle:{color:'#10b981'},itemStyle:{color:'#10b981'},label:{show:true,position:'top',fontSize:11}},
-      {name:'单应用均曝光(M)',type:'line',yAxisIndex:1,data:[10.3,30.7,40.7,9.1],lineStyle:{color:'#f59e0b'},itemStyle:{color:'#f59e0b'},label:{show:true,position:'top',fontSize:11}}
-    ]
-  });
-
-  // Category pie (March revenue)
-  charts.gCatPie = echarts.init(document.getElementById('global-category-pie'));
-  charts.gCatPie.setOption({
-    tooltip:{trigger:'item',formatter:'{b}: ${c}M ({d}%)'},
-    legend:{bottom:0,textStyle:{fontSize:10},type:'scroll'},
-    series:[{type:'pie',radius:['40%','68%'],center:['50%','45%'],avoidLabelOverlap:false,
-      itemStyle:{borderRadius:4,borderColor:'#fff',borderWidth:2},
-      label:{formatter:'{b}\n{d}%',fontSize:10},
-      data:[
-        {value:763.71,name:'MOBA'},
-        {value:96.60,name:'Midcore Strategy'},
-        {value:26.03,name:'Hardcore Shooting'},
-        {value:25.53,name:'RPG-male'},
-        {value:8.10,name:'RPG-agender'},
-        {value:5.71,name:'4X'},
-        {value:5.23,name:'Management'},
-        {value:4.59,name:'RPG-female'}
-      ]
-    }]
-  });
-
-  // Publisher bar
-  charts.gPub = echarts.init(document.getElementById('global-publisher-bar'));
-  charts.gPub.setOption({
-    tooltip:{trigger:'axis',formatter:'{b}: ${c}M'},
-    xAxis:{type:'category',data:['腾讯','Level Infinite','网易','Century Games','Ujoy Games','叠纸','Doki Studio','FunPlus'],axisLabel:{fontSize:10,rotate:20}},
-    yAxis:{type:'value',name:'收入($M)',axisLabel:{formatter:'${value}M'}},
-    series:[{type:'bar',data:[763.94,27.86,7.97,7.00,4.20,4.08,3.15,2.78],
-      itemStyle:{borderRadius:[6,6,0,0],color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#f59e0b'},{offset:1,color:'#fcd34d'}])},
-      label:{show:true,position:'top',fontSize:11,formatter:'${c}M'}
-    }]
-  });
-
-  // Platform pie
-  charts.gPlat = echarts.init(document.getElementById('global-platform-pie'));
-  charts.gPlat.setOption({
-    tooltip:{trigger:'item',formatter:'{b}: {c}M ({d}%)'},
-    legend:{bottom:0,textStyle:{fontSize:11}},
-    series:[{type:'pie',radius:['45%','72%'],center:['50%','47%'],avoidLabelOverlap:false,
-      itemStyle:{borderRadius:6,borderColor:'#fff',borderWidth:3},
-      label:{formatter:'{b}\n{d}%',fontSize:11},
-      data:[
-        {value:1.7,name:'Applovin',itemStyle:{color:'#3b82f6'}},
-        {value:0.1,name:'Mintegral',itemStyle:{color:'#8b5cf6'}},
-        {value:0.06,name:'Facebook Ads',itemStyle:{color:'#10b981'}},
-        {value:0.03,name:'Google Ads',itemStyle:{color:'#f59e0b'}},
-        {value:0.02,name:'Moloco',itemStyle:{color:'#ef4444'}},
-        {value:0.02,name:'Unity',itemStyle:{color:'#94a3b8'}}
-      ]
-    }]
-  });
-
-  // Category trend multi-line
-  charts.gCatTrend = echarts.init(document.getElementById('global-category-trend-line'));
-  charts.gCatTrend.setOption({
-    tooltip:{trigger:'axis'},
-    legend:{data:['其他策略(SLG融合)','模拟经营','休闲经营','复杂射击','男性RPG','4X'],bottom:0,textStyle:{fontSize:10}},
-    xAxis:{type:'category',data:['2026-01','2026-02','2026-03','2026-04']},
-    yAxis:{type:'value',name:'曝光(B)',axisLabel:{formatter:'{value}B'}},
-    series:[
-      {name:'其他策略(SLG融合)',type:'line',data:[0.79,2.09,2.06,0.65],lineStyle:{color:'#3b82f6',width:3},areaStyle:{opacity:0.1,color:'#3b82f6'}},
-      {name:'模拟经营',type:'line',data:[0.20,0.36,1.02,0.19],lineStyle:{color:'#10b981'}},
-      {name:'休闲经营',type:'line',data:[0.00,0.59,1.67,0.14],lineStyle:{color:'#f59e0b'},areaStyle:{opacity:0.15,color:'#f59e0b'}},
-      {name:'复杂射击',type:'line',data:[0.02,0.24,0.15,0.03],lineStyle:{color:'#ef4444'}},
-      {name:'男性RPG',type:'line',data:[0.11,0.14,0.02,0.003],lineStyle:{color:'#8b5cf6',type:'dashed'}},
-      {name:'4X',type:'line',data:[0.01,0.19,0.05,0.0005],lineStyle:{color:'#94a3b8',type:'dashed'}}
-    ]
-  });
-
-  // Country migration - stacked area
-  charts.gCountry = echarts.init(document.getElementById('global-country-migration'));
-  charts.gCountry.setOption({
-    tooltip:{trigger:'axis'},
-    legend:{data:['日本','印度尼西亚','菲律宾','美国','韩国','巴西','中国台湾'],bottom:0,textStyle:{fontSize:10}},
-    xAxis:{type:'category',data:['2026-01','2026-02','2026-03','2026-04']},
-    yAxis:{type:'value',name:'占比(%)',axisLabel:{formatter:'{value}%'}},
-    series:[
-      {name:'日本',type:'line',data:[40.9,38.2,23.8,27.0],lineStyle:{color:'#dc2626',width:3},areaStyle:{opacity:0.12,color:'#dc2626'},label:{show:true,fontSize:10,formatter:'{c}%'}},
-      {name:'印度尼西亚',type:'line',data:[13.3,14.7,28.8,24.8],lineStyle:{color:'#10b981',width:3},areaStyle:{opacity:0.12,color:'#10b981'},label:{show:true,fontSize:10,formatter:'{c}%'}},
-      {name:'菲律宾',type:'line',data:[9.3,5.4,5.8,12.4],lineStyle:{color:'#3b82f6'}},
-      {name:'美国',type:'line',data:[7.0,6.5,10.9,5.4],lineStyle:{color:'#8b5cf6'}},
-      {name:'韩国',type:'line',data:[4.5,6.6,6.1,5.5],lineStyle:{color:'#f59e0b'}},
-      {name:'巴西',type:'line',data:[1.4,1.6,2.5,1.5],lineStyle:{color:'#ec4899'}},
-      {name:'中国台湾',type:'line',data:[3.9,4.7,3.9,3.0],lineStyle:{color:'#94a3b8',type:'dashed'}}
-    ]
-  });
-})();
-
-// ==================== TAB 3 CHARTS ====================
-(function(){
-  // Country bar (March)
-  charts.rCountry = echarts.init(document.getElementById('region-country-bar'));
-  charts.rCountry.setOption({
-    tooltip:{trigger:'axis',formatter:'{b}: {c}%'},
-    xAxis:{type:'category',data:['美国','日本','印尼','菲律宾','韩国','中国台湾','巴西'],axisLabel:{fontSize:11}},
-    yAxis:{type:'value',name:'曝光占比(%)',axisLabel:{formatter:'{value}%'}},
-    series:[{type:'bar',data:[29.6,28.3,18.3,4.8,2.7,1.9,1.5],
-      itemStyle:{borderRadius:[6,6,0,0],color:function(p){
-        var colors = ['#3b82f6','#dc2626','#10b981','#8b5cf6','#f59e0b','#ec4899','#94a3b8'];
-        return colors[p.dataIndex];
-      }},
-      label:{show:true,position:'top',fontSize:12,fontWeight:'bold',formatter:'{c}%'}
-    }]
-  });
-
-  // Migration chart - grouped bar
-  charts.rMig = echarts.init(document.getElementById('region-migration-chart'));
-  charts.rMig.setOption({
-    tooltip:{trigger:'axis',formatter:function(ps){ var r=ps[0].name+'<br/>';ps.forEach(function(p){r+=p.marker+' '+p.seriesName+': '+p.value+'%<br/>';});return r;}},
-    legend:{data:['1月主战场','4月主战场'],bottom:0},
-    xAxis:{type:'category',data:['其他策略(SLG融合)','复杂射击','模拟经营','男性RPG'],axisLabel:{fontSize:10}},
-    yAxis:{type:'value',name:'占比(%)',axisLabel:{formatter:'{value}%'}},
-    series:[
-      {name:'1月主战场',type:'bar',data:[{value:43.4,itemStyle:{color:'#dc2626'}},{value:29.8,itemStyle:{color:'#10b981'}},{value:73.4,itemStyle:{color:'#3b82f6'}},{value:41.4,itemStyle:{color:'#8b5cf6'}}],
-        label:{show:true,position:'top',fontSize:10,formatter:function(p){return p.name==='其他策略(SLG融合)'?'日本43.4%':p.name==='复杂射击'?'印尼29.8%':p.name==='模拟经营'?'美国73.4%':'菲律宾41.4%';}},itemStyle:{borderRadius:[6,6,0,0]}},
-      {name:'4月主战场',type:'bar',data:[{value:27.4,itemStyle:{color:'#fca5a5'}},{value:73.1,itemStyle:{color:'#dc2626'}},{value:59.9,itemStyle:{color:'#dc2626'}},{value:69.9,itemStyle:{color:'#8b5cf6'}}],
-        label:{show:true,position:'top',fontSize:10,formatter:function(p){return p.name==='其他策略(SLG融合)'?'日本27.4%+印尼25.8%':p.name==='复杂射击'?'日本73.1%':p.name==='模拟经营'?'日本59.9%':'菲律宾69.9%';}},itemStyle:{borderRadius:[6,6,0,0]}}
-    ]
-  });
-})();
-
-// ==================== TAB 4 CHARTS ====================
-(function(){
-  // KOL KPIs
-  var kkpi = [
-    {label:'中国厂商占Top30',value:'44.3%',sub:'广大大W12-W18出海素材Top30',note:'沐瞳一家占中国厂商记录的69%'},
-    {label:'沐瞳MLBB上榜次数',value:'40次/7周',sub:'每周平均5.7次',note:'W12-W14峰值期每周8-10个席位'},
-    {label:'最长寿素材',value:'459天',sub:'1SOFT《Space shooter》',note:'投放459天仍维持人气榜位'},
-    {label:'真人拍摄标签',value:'23次',sub:'2026年高频创意标签Top1',note:'远超CG动画9次+游戏实机11次'}
-  ];
-  var kkhtml = '';
-  kkpi.forEach(function(k){
-    kkhtml += '<div class="kpi-card"><div class="kpi-label">'+k.label+'</div><div class="kpi-value">'+k.value+'</div><div class="kpi-sub">'+k.sub+'</div><div class="kpi-note">'+k.note+'</div></div>';
-  });
-  document.getElementById('kol-kpis').innerHTML = kkhtml;
-
-  // MLBB weekly
-  charts.kMlbb = echarts.init(document.getElementById('kol-mlbb-weekly'));
-  charts.kMlbb.setOption({
-    tooltip:{trigger:'axis'},
-    xAxis:{type:'category',data:['W12\n3/17-23','W13\n3/24-30','W14\n3/31-4/6','W15\n4/7-13','W16\n4/14-20','W17\n4/21-27','W18\n4/28-5/4']},
-    yAxis:{type:'value',name:'上榜次数'},
-    series:[{type:'bar',data:[10,8,10,5,4,2,1],
-      itemStyle:{borderRadius:[6,6,0,0],color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#8b5cf6'},{offset:1,color:'#c4b5fd'}])},
-      label:{show:true,position:'top',fontSize:13,fontWeight:'bold'},
-      markLine:{silent:true,data:[{yAxis:5.7,name:'周均5.7次',label:{formatter:'周均'},lineStyle:{color:'#f59e0b',type:'dashed'}}]}
-    }]
-  });
-})();
-
-// Init all charts on visible page
-setTimeout(function(){ resizeAllCharts(); },300);
 </script>
+
 </body>
 </html>
