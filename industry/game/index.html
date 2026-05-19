@@ -169,6 +169,20 @@ tr:hover td { background: #f8fafc; }
     </section>
 
     <section class="section">
+      <div class="grid-2">
+        <div class="card"><div class="card-title">品类分布</div><div class="card-subtitle">动作/RPG占主导（66%）</div><div class="chart" id="cal-category-bar"></div></div>
+        <div class="card"><div class="card-title">平台分布</div><div class="card-subtitle">PC+主机领先（32%）</div><div class="chart" id="cal-platform-bar"></div></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="grid-2">
+        <div class="card"><div class="card-title">厂商分布</div><div class="card-subtitle">腾讯系7条线索领先</div><div class="chart" id="cal-studio-bar"></div></div>
+        <div class="card"><div class="card-title">上线窗口分布</div><div class="card-subtitle">38款仍为TBA，需事件驱动拓客</div><div class="chart" id="cal-window-bar"></div></div>
+      </div>
+    </section>
+
+    <section class="section">
       <div class="card">
         <div class="card-title">拓客时序建议</div>
         <div class="card-subtitle">基于预计上线窗口的BD节奏规划</div>
@@ -632,7 +646,7 @@ window.addEventListener('resize',function(){ resizeAllCharts(); });
 var charts = {};
 
 // ==================== TAB 1 CHARTS ====================
-(function(){
+(function(){ try {
   // KPI cards
   var kpiData = [
     {label:'有效线索总数',value:'50',sub:'覆盖中国厂商/工作室',note:'口径基准日：2026-05-12'},
@@ -736,10 +750,10 @@ var charts = {};
       label:{show:true,position:'top',fontSize:12,fontWeight:'bold'}
     }]
   });
-})();
+} catch(e) { console.error('Tab 1 charts failed:', e); } })();
 
 // ==================== TAB 2 CHARTS ====================
-(function(){
+(function(){ try {
   // Global KPIs
   var gkpi = [
     {label:'Q1海外收入',value:'$63.31亿',sub:'中国自研游戏海外市场实际销售收入',note:'信源：GPC 2026-04-17'},
@@ -857,10 +871,10 @@ var charts = {};
       {name:'中国台湾',type:'line',data:[3.9,4.7,3.9,3.0],lineStyle:{color:'#94a3b8',type:'dashed'}}
     ]
   });
-})();
+} catch(e) { console.error('Tab 2 charts failed:', e); } })();
 
 // ==================== TAB 3 CHARTS ====================
-(function(){
+(function(){ try {
   // Country bar (March)
   charts.rCountry = echarts.init(document.getElementById('region-country-bar'));
   charts.rCountry.setOption({
@@ -890,10 +904,10 @@ var charts = {};
         label:{show:true,position:'top',fontSize:10,formatter:function(p){return p.name==='其他策略(SLG融合)'?'日本27.4%+印尼25.8%':p.name==='复杂射击'?'日本73.1%':p.name==='模拟经营'?'日本59.9%':'菲律宾69.9%';}},itemStyle:{borderRadius:[6,6,0,0]}}
     ]
   });
-})();
+} catch(e) { console.error('Tab 3 charts failed:', e); } })();
 
 // ==================== TAB 4 CHARTS ====================
-(function(){
+(function(){ try {
   // KOL KPIs
   var kkpi = [
     {label:'中国厂商占Top30',value:'44.3%',sub:'广大大W12-W18出海素材Top30',note:'沐瞳一家占中国厂商记录的69%'},
@@ -919,7 +933,7 @@ var charts = {};
       markLine:{silent:true,data:[{yAxis:5.7,name:'周均5.7次',label:{formatter:'周均'},lineStyle:{color:'#f59e0b',type:'dashed'}}]}
     }]
   });
-})();
+} catch(e) { console.error('Tab 4 charts failed:', e); } })();
 
 // Init all charts on visible page
 setTimeout(function(){ resizeAllCharts(); },300);
