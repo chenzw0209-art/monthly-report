@@ -755,6 +755,11 @@ function renderD(catName) {
 
   document.getElementById('cat-detail-container').innerHTML = html;
 
+  // Show/hide static depth analysis panel
+  document.querySelectorAll('.cat-detail-panel').forEach(function(p){ p.style.display = 'none'; });
+  var depthPanel = document.getElementById('cat-detail-' + catName);
+  if (depthPanel) { depthPanel.style.display = 'block'; }
+
   // Render GMV trend chart
   var monthlyArr = c.monthly || [];
   var cnMonthlyArr = c.cn_monthly || [];
