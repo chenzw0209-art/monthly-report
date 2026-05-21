@@ -410,8 +410,10 @@ function renderD(catName) {
         var bodyPart = colonIdx > 0 ? b.substring(colonIdx+1) : b;
         // Replace BD建议 with 触达建议
         bodyPart = bodyPart.replace(/BD建议/g, '触达建议');
-        // Split body into sentences on 。 and ；, keep delimiter
-        var sentences = bodyPart.split(/(?<=[。；])/);
+        // Split body into sentences (replace 。；with delimiter, then split)
+        var sentences = bodyPart.replace(/([。；])/g, '$1
+').split('
+');
         // Separate out 触达建议 line
         var mainLines = [], cta = '';
         sentences.forEach(function(s) {
