@@ -415,9 +415,7 @@ function renderD(catName) {
         // Replace BD建议 with 触达建议
         bodyPart = bodyPart.replace(/BD建议/g, '触达建议');
         // Split body into sentences (replace 。；with delimiter, then split)
-        var sentences = bodyPart.replace(/([。；])/g, '$1
-').split('
-');
+        var sentences = bodyPart.replace(/([。；])/g, '$1\n').split('\n');
         // Separate out 触达建议 line
         var mainLines = [], cta = '';
         sentences.forEach(function(s) {
