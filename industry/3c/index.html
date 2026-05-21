@@ -68,8 +68,8 @@ td { padding: 10px 12px; border-bottom: 1px solid #f1f5f9; color: #1e293b; } tr:
     <div class="header-sub">US Amazon · 39品类 · 2026-04 vs 2026-03 · v2.0 · 钛动科技</div>
   </header>
   <div class="tabs" id="main-tabs">
-    <button class="tab-btn active" data-page="page-leads">客户动态</button>
-    <button class="tab-btn" data-page="page-market">市场大盘</button>
+    <button class="tab-btn active" data-page="page-leads" onclick="switchTab('page-leads')">客户动态</button>
+    <button class="tab-btn" data-page="page-market" onclick="switchTab('page-market')">市场大盘</button>
   </div>
 
   <!-- ===== TAB 1: 客户动态 ===== -->
@@ -168,32 +168,20 @@ function toggleRows(type) {
   }
 }
 // Tab switching
-(function() {
-  var tabs = document.querySelectorAll('#main-tabs .tab-btn');
-  if (tabs.length === 0) {
-    console.error('[Tab] No tab buttons found');
-    return;
+var _tabInitDone = false;
+function switchTab(pageId) {
+  document.querySelectorAll('#main-tabs .tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+  var btn = document.querySelector('#main-tabs [data-page="' + pageId + '"]');
+  var page = document.getElementById(pageId);
+  if (btn) btn.classList.add('active');
+  if (page) page.classList.add('active');
+  if (!_tabInitDone && pageId === 'page-market' && D.categories_l1 && D.categories_l1.length > 0) {
+    _tabInitDone = true;
+    setTimeout(function() { selectCat(D.categories_l1[0].name); }, 150);
   }
-  console.log('[Tab] Found ' + tabs.length + ' tab buttons');
-  tabs.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      console.log('[Tab] Clicked: ' + btn.dataset.page);
-      var allBtns = document.querySelectorAll('#main-tabs .tab-btn');
-      var allPages = document.querySelectorAll('.page');
-      allBtns.forEach(function(b) { b.classList.remove('active'); });
-      allPages.forEach(function(p) { p.classList.remove('active'); });
-      btn.classList.add('active');
-      var targetPage = document.getElementById(btn.dataset.page);
-      if (targetPage) {
-        targetPage.classList.add('active');
-        console.log('[Tab] Switched to: ' + btn.dataset.page);
-      } else {
-        console.error('[Tab] Page not found: ' + btn.dataset.page);
-      }
-      setTimeout(function() { window.dispatchEvent(new Event('resize')); }, 100);
-    });
-  });
-})();
+  setTimeout(function() { window.dispatchEvent(new Event('resize')); }, 100);
+}
 
 // Treemap
 (function(){
@@ -519,17 +507,6 @@ function selectCat(name) {
 
 // ===== Init =====
 (function() {
-  var initDone = false;
-  document.querySelectorAll('#main-tabs .tab-btn').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      if (!initDone && btn.dataset.page === 'page-market') {
-        if (D.categories_l1.length > 0) {
-          initDone = true;
-          setTimeout(function() { selectCat(D.categories_l1[0].name); }, 150);
-        }
-      }
-    });
-  });
 })();
 
 </script>
