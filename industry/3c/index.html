@@ -335,27 +335,26 @@ function renderD(catName) {
   // GMV trend chart
   html += '<div class="card" style="margin-bottom:16px;"><div class="card-title">'+c.name+' · GMV 趋势（双线图）</div><div class="card-subtitle">总 GMV 与中国品牌 GMV · 鼠标悬停显示中国品牌份额占比</div><div class="chart" id="detail-trend-chart"></div></div>';
 
-  // Grid-2
-  html += '<div class="grid-2" style="margin-bottom:16px;">';
+  // Grid-2: 左列三级类目图 | 右列品牌表上下
+  html += '<div class="grid-2" style="margin-bottom:16px;align-items:stretch;">';
 
+  // 左列：三级类目变化排序
   if (allSubs.length > 0) {
     html += '<div class="card" style="box-shadow:none;"><div class="card-title">三级类目变化排序</div><div class="card-subtitle">按 MoM 从高到低</div><div class="chart" id="detail-sub-chart"></div></div>';
   } else {
     html += '<div class="card" style="box-shadow:none;"><div class="card-title">三级类目变化排序</div><div class="chart" id="detail-sub-chart"><div style="text-align:center;padding:80px 0;color:#94a3b8;font-size:13px">该类目下无符合条件的三级品类</div></div></div>';
   }
 
-  html += '</div>'; // end grid-2 (subs + placeholder)
+  // 右列：全球品牌 + 中国品牌，上下堆叠
+  html += '<div style="display:flex;flex-direction:column;gap:12px;">';
 
   // Build brand MoM map
   var brandMomMap = {};
   brands.forEach(function(b){ brandMomMap[b.brand] = b.mom; });
 
-  // Two-column brand tables: Top10 global | Top10 CN
-  html += '<div class="grid-2" style="margin-bottom:16px;">';
-
   // --- Top10 全球品牌 ---
   var top10 = brands.slice(0, 10);
-  html += '<div class="card" style="box-shadow:none;"><div class="card-title">Top 10 全球品牌</div><div class="card-subtitle">按月销GMV降序</div>';
+  html += '<div class="card" style="box-shadow:none;flex:1;"><div class="card-title">Top 10 全球品牌</div><div class="card-subtitle">按月销GMV降序</div>';
   if (top10.length > 0) {
     html += '<table><thead><tr><th>#</th><th>品牌</th><th style="text-align:right">GMV</th><th style="text-align:right">MoM</th></tr></thead><tbody>';
     top10.forEach(function(b, i) {
@@ -374,7 +373,7 @@ function renderD(catName) {
 
   // --- Top10 中国品牌 ---
   var cnList = D.chinese_brands[catName]||[];
-  html += '<div class="card" style="box-shadow:none;"><div class="card-title">Top 10 中国品牌</div><div class="card-subtitle">按月销GMV降序</div>';
+  html += '<div class="card" style="box-shadow:none;flex:1;"><div class="card-title">Top 10 中国品牌</div><div class="card-subtitle">按月销GMV降序</div>';
   if (cnList.length > 0) {
     var cnTop10 = cnList.slice(0, 10);
     html += '<table><thead><tr><th>#</th><th>品牌</th><th style="text-align:right">GMV</th><th style="text-align:right">MoM</th></tr></thead><tbody>';
@@ -392,6 +391,7 @@ function renderD(catName) {
   }
   html += '</div>';
 
+  html += '</div>'; // end 右列 flex column
   html += '</div>'; // end grid-2
 
   // === 品类深度洞察（来自品类明细报告.md） ===
