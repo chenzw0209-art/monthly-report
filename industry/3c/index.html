@@ -46,6 +46,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft
 table { width: 100%; border-collapse: collapse; font-size: 13px; }
 th { text-align: left; padding: 10px 12px; background: #f8fafc; font-weight: 600; color: #475569; border-bottom: 2px solid #e2e8f0; font-size: 12px; }
 td { padding: 10px 12px; border-bottom: 1px solid #f1f5f9; color: #1e293b; } tr:hover td { background: #f8fafc; }
+.table-compact th { padding: 6px 10px; } .table-compact td { padding: 5px 10px; }
 .up { color: #059669; font-weight: 600; } .down { color: #dc2626; font-weight: 600; }
 .cat-row-extra, .cust-row-extra, .brand-row-extra { display: none; }
 .expand-btn { background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 8px; padding: 8px 20px; font-size: 13px; color: #475569; cursor: pointer; transition: background 0.15s; }
@@ -355,7 +356,7 @@ function renderD(catName) {
   var top10 = brands.slice(0, 10);
   html += '<div class="card" style="box-shadow:none;flex:1;"><div class="card-title">Top 10 全球品牌</div><div class="card-subtitle">按月销GMV降序</div>';
   if (top10.length > 0) {
-    html += '<table><thead><tr><th>#</th><th>品牌</th><th style="text-align:right">GMV</th><th style="text-align:right">MoM</th></tr></thead><tbody>';
+    html += '<table class="table-compact"><thead><tr><th>#</th><th>品牌</th><th style="text-align:right">GMV</th><th style="text-align:right">MoM</th></tr></thead><tbody>';
     top10.forEach(function(b, i) {
       var rowCls = i >= 5 ? ' class="brand-row-extra brand-global-extra"' : '';
       var cnBadge = b.is_cn ? ' <span style="font-size:10px;background:#fef3c7;color:#92400e;padding:1px 5px;border-radius:3px;">CN</span>' : '';
@@ -375,7 +376,7 @@ function renderD(catName) {
   html += '<div class="card" style="box-shadow:none;flex:1;"><div class="card-title">Top 10 中国品牌</div><div class="card-subtitle">按月销GMV降序</div>';
   if (cnList.length > 0) {
     var cnTop10 = cnList.slice(0, 10);
-    html += '<table><thead><tr><th>#</th><th>品牌</th><th style="text-align:right">GMV</th><th style="text-align:right">MoM</th></tr></thead><tbody>';
+    html += '<table class="table-compact"><thead><tr><th>#</th><th>品牌</th><th style="text-align:right">GMV</th><th style="text-align:right">MoM</th></tr></thead><tbody>';
     cnTop10.forEach(function(b, i) {
       var bm = brandMomMap[b.brand] || 0;
       var rowCls = i >= 5 ? ' class="brand-row-extra brand-cn-extra"' : '';
