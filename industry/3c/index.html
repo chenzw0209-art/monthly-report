@@ -337,12 +337,11 @@ function renderD(catName) {
 
   // Grid-2: 左列三级类目图 | 右列品牌表上下
   html += '<div class="grid-2" style="margin-bottom:16px;align-items:stretch;">';
-
   // 左列：三级类目变化排序
   if (allSubs.length > 0) {
-    html += '<div class="card" style="box-shadow:none;"><div class="card-title">三级类目变化排序</div><div class="card-subtitle">按 MoM 从高到低</div><div class="chart" id="detail-sub-chart"></div></div>';
+    html += '<div class="card" style="box-shadow:none;display:flex;flex-direction:column;"><div class="card-title">三级类目变化排序</div><div class="card-subtitle">按 MoM 从高到低</div><div id="detail-sub-chart" style="flex:1;min-height:300px;"></div></div>';
   } else {
-    html += '<div class="card" style="box-shadow:none;"><div class="card-title">三级类目变化排序</div><div class="chart" id="detail-sub-chart"><div style="text-align:center;padding:80px 0;color:#94a3b8;font-size:13px">该类目下无符合条件的三级品类</div></div></div>';
+    html += '<div class="card" style="box-shadow:none;display:flex;flex-direction:column;"><div class="card-title">三级类目变化排序</div><div id="detail-sub-chart" style="flex:1;min-height:300px;"><div style="text-align:center;padding:80px 0;color:#94a3b8;font-size:13px">该类目下无符合条件的三级品类</div></div></div>';
   }
 
   // 右列：全球品牌 + 中国品牌，上下堆叠
@@ -479,17 +478,19 @@ function renderD(catName) {
       var subEl = document.getElementById('detail-sub-chart');
       if (subEl) {
         var chartData = allSubs.slice().reverse();
-        echarts.init(subEl).setOption({
+        var subChart = echarts.init(subEl);
+        subChart.setOption({
           tooltip: {formatter: function(p){ return p.name+'<br/>MoM: '+fmtP(p.data.momv)+'<br/>GMV: '+fmtM(p.data.gmv)+'<br/>CN 份额: '+p.data.cn+'%'; }},
           grid: {left: 140, right: 60, top: 20, bottom: 30},
           xAxis: {type: 'value', name: 'MoM (%)'},
           yAxis: {type: 'category', data: chartData.map(function(s){return s.name;}), axisLabel:{fontSize:10, formatter: function(v){ return v.length > 14 ? v.slice(0,13)+'…' : v; }}},
-          series: [{type: 'bar',
+          series: [{type: 'bar', barMaxWidth: 20, barCategoryGap: '40%',
             data: chartData.map(function(s){ return {value: s.mom, momv: s.mom, gmv: s.gmv_curr, cn: s.cn_share,
               itemStyle: {color: s.mom >= 0 ? '#10b981' : '#f59e0b', borderRadius: [0,3,3,0]}};}),
             label: {show: true, position: function(p){return p.value >= 0 ? 'right' : 'left';}, formatter: function(p){return fmtP(p.value);}, fontSize: 10}
           }]
         }, true);
+        setTimeout(function(){ subChart.resize(); }, 100);
       }
     }, 50);
   }
