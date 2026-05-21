@@ -47,7 +47,7 @@ table { width: 100%; border-collapse: collapse; font-size: 13px; }
 th { text-align: left; padding: 10px 12px; background: #f8fafc; font-weight: 600; color: #475569; border-bottom: 2px solid #e2e8f0; font-size: 12px; }
 td { padding: 10px 12px; border-bottom: 1px solid #f1f5f9; color: #1e293b; } tr:hover td { background: #f8fafc; }
 .up { color: #059669; font-weight: 600; } .down { color: #dc2626; font-weight: 600; }
-.cat-row-extra, .cust-row-extra { display: none; }
+.cat-row-extra, .cust-row-extra, .brand-row-extra { display: none; }
 .expand-btn { background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 8px; padding: 8px 20px; font-size: 13px; color: #475569; cursor: pointer; transition: background 0.15s; }
 .expand-btn:hover { background: #e2e8f0; color: #1e293b; }
 .tag { display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; }
@@ -103,10 +103,10 @@ td { padding: 10px 12px; border-bottom: 1px solid #f1f5f9; color: #1e293b; } tr:
     <section class="section"><div class="card"><div class="card-title">大盘 GMV 趋势（双线图）</div><div class="card-subtitle">近 25 个月 · 39 品类合计 · 总 GMV 与中国品牌 GMV · 鼠标悬停显示中国品牌份额占比</div><div class="chart-lg" id="chart-trend"></div></div></section>
 
     <section class="section"><div class="card"><div class="card-title">大盘洞察</div><div class="card-subtitle">基于 39 个品类的整体分析 · 大盘信号、增长结构、中国品牌信号、风险与机会</div><div class="bullet-list">
-      <div class="bullet-item green"><div class="bullet-title">洞察1：低渗透高体量赛道——中国品牌系统性入场机会</div><div class="bullet-body"><b>厨房小家电</b>（$357M · CN 15.9%） · <b>办公电子产品</b>（$333M · CN 22.1%） · <b>笔记本电脑</b>（$235M · CN 12.7%）<br/>这些品类体量大但中国品牌渗透率低，存在结构性入场窗口。建议优先寻找有产品力但缺品牌化的制造商，以"技术+内容"双轮驱动切入。<b>BD建议：找有CES/IFA参展记录+Amazon Listing但无品牌内容矩阵的制造商标的。</b></div></div>
-<div class="bullet-item"><div class="bullet-title">洞察2：高渗透增长赛道——从"卖货"到"品牌化"的升级路径</div><div class="bullet-body"><b>记忆显示和存储</b>（CN 73.0% · MoM +3.8%） · <b>便携式音频和视频</b>（CN 56.1% · MoM +3.6%） · <b>相机和照片配件</b>（CN 56.5% · MoM +3.5%）<br/>中国品牌已在这些品类建立体量优势，但品牌溢价能力不足。下一步应关注DTC独立站+TikTok内容矩阵建设，从Amazon单渠道向全渠道品牌升级。<b>BD建议：找Amazon头部卖家但缺TikTok/独立站运营能力的品牌，提供内容+投放一体化方案。</b></div></div>
-<div class="bullet-item amber"><div class="bullet-title">洞察3：快速增长品类——中国品牌的"先发优势"窗口</div><div class="bullet-body"><b>笔记本电脑</b>（MoM +5.7% · CN 12.7%） · <b>监控和安全摄像头</b>（MoM +8.6% · CN 19.1%）<br/>这些品类正处于快速增长通道但中国品牌尚未大规模进入。品类增速快意味着消费者心智未固化，早期入场的中国品牌有机会建立品类认知。<b>BD建议：重点关注品类增速>5%且CN份额<20%的赛道，优先找有技术/设计差异化的品牌。</b></div></div>
-<div class="bullet-item"><div class="bullet-title">洞察4：3C品类中国品牌整体GMV占比 <b>41.7%</b>——"中国制造"已成为3C基础设施</div><div class="bullet-body">39个品类中，36升3降，最大涨幅品类<b>监控和安全摄像头</b>（+8.6%），最大跌幅<b>办公室照明</b>（-2.5%）。中国品牌在增材制造产品渗透率最高（92.8%），但在笔记本电脑、电脑打印机、电脑平板等品类仍存在显著低渗透机会。<b>BD建议：结合CES/IFA展会周期，在展后2-3周集中触达参展品牌，以"展会声量承接+内容矩阵搭建"为切入点。</b></div></div>
+      <div class="bullet-item green"><div class="bullet-title">洞察1：低渗透高体量赛道——中国品牌系统性入场机会</div><div class="bullet-body"><b>厨房小家电</b>（$357M · CN 15.9%） · <b>办公电子产品</b>（$333M · CN 22.1%） · <b>笔记本电脑</b>（$235M · CN 12.7%）<br/>这些品类体量大但中国品牌渗透率低，存在结构性入场窗口。<br/>建议优先寻找有产品力但缺品牌化的制造商，以"技术+内容"双轮驱动切入。<br/><b>触达建议：找有CES/IFA参展记录+Amazon Listing但无品牌内容矩阵的制造商标的。</b></div></div>
+<div class="bullet-item"><div class="bullet-title">洞察2：高渗透增长赛道——从"卖货"到"品牌化"的升级路径</div><div class="bullet-body"><b>记忆显示和存储</b>（CN 73.0% · MoM +3.8%） · <b>便携式音频和视频</b>（CN 56.1% · MoM +3.6%） · <b>相机和照片配件</b>（CN 56.5% · MoM +3.5%）<br/>中国品牌已在这些品类建立体量优势，但品牌溢价能力不足。<br/>下一步应关注DTC独立站+TikTok内容矩阵建设，从Amazon单渠道向全渠道品牌升级。<br/><b>触达建议：找Amazon头部卖家但缺TikTok/独立站运营能力的品牌，提供内容+投放一体化方案。</b></div></div>
+<div class="bullet-item amber"><div class="bullet-title">洞察3：快速增长品类——中国品牌的"先发优势"窗口</div><div class="bullet-body"><b>笔记本电脑</b>（MoM +5.7% · CN 12.7%） · <b>监控和安全摄像头</b>（MoM +8.6% · CN 19.1%）<br/>这些品类正处于快速增长通道但中国品牌尚未大规模进入。<br/>品类增速快意味着消费者心智未固化，早期入场的中国品牌有机会建立品类认知。<br/><b>触达建议：重点关注品类增速&gt;5%且CN份额&lt;20%的赛道，优先找有技术/设计差异化的品牌。</b></div></div>
+<div class="bullet-item"><div class="bullet-title">洞察4：3C品类中国品牌整体GMV占比 <b>41.7%</b>——"中国制造"已成为3C基础设施</div><div class="bullet-body">39个品类中，36升3降，最大涨幅品类<b>监控和安全摄像头</b>（+8.6%），最大跌幅<b>办公室照明</b>（-2.5%）。<br/>中国品牌在增材制造产品渗透率最高（92.8%），但在笔记本电脑、电脑打印机、电脑平板等品类仍存在显著低渗透机会。<br/><b>触达建议：结合CES/IFA展会周期，在展后2-3周集中触达参展品牌，以"展会声量承接+内容矩阵搭建"为切入点。</b></div></div>
     </div></div></section>
 
     <section class="section"><div class="section-header"><div class="section-title">品类月度异动分析</div><div class="section-desc">点击行或Treemap选类目 → 下方展开类目深度分析</div></div>
@@ -143,6 +143,16 @@ td { padding: 10px 12px; border-bottom: 1px solid #f1f5f9; color: #1e293b; } tr:
 </div>
 
 <script>
+// Expand/collapse brand rows within detail panel
+var _brandExpanded = {};
+function toggleBrands(type) {
+  _brandExpanded[type] = !_brandExpanded[type];
+  var cls = 'brand-' + type + '-extra';
+  var btn = document.getElementById('brand-' + type + '-btn');
+  var rows = document.querySelectorAll('.' + cls);
+  rows.forEach(function(r) { r.style.display = _brandExpanded[type] ? 'table-row' : 'none'; });
+  if (btn) btn.textContent = _brandExpanded[type] ? '收起 ▲' : '展开全部 ('+rows.length+'个) ▼';
+}
 // Expand/collapse table rows
 var _expanded = {};
 function toggleRows(type) {
@@ -330,22 +340,55 @@ function renderD(catName) {
     html += '<div class="card" style="box-shadow:none;"><div class="card-title">三级类目变化排序</div><div class="chart" id="detail-sub-chart"><div style="text-align:center;padding:80px 0;color:#94a3b8;font-size:13px">该类目下无符合条件的三级品类</div></div></div>';
   }
 
-  // Chinese brands table
-  html += '<div class="card" style="box-shadow:none;"><div class="card-title">前 20 中国品牌</div><div class="card-subtitle">该二级类目销额最高的 20 个中国品牌 · 按 GMV 降序</div>';
-  var cnList = D.chinese_brands[catName]||[];
+  html += '</div>'; // end grid-2 (subs + placeholder)
+
+  // Build brand MoM map
   var brandMomMap = {};
   brands.forEach(function(b){ brandMomMap[b.brand] = b.mom; });
-  if (cnList.length > 0) {
-    html += '<div style="max-height:360px;overflow-y:auto;"><table><thead><tr><th>#</th><th>品牌</th><th>主要三级类目</th><th style="text-align:right">GMV</th><th style="text-align:right">MoM</th></tr></thead><tbody>';
-    cnList.slice(0,20).forEach(function(b,i){
-      var bm = brandMomMap[b.brand] || 0;
-      html += '<tr><td>'+(i+1)+'</td><td style="font-weight:500">'+b.brand+'</td><td style="color:#64748b;font-size:12px">'+(b.l3||'-')+'</td><td style="text-align:right">'+fmtM(b.gmv_curr)+'</td><td style="text-align:right" class="'+cls(bm)+'">'+fmtP(bm)+'</td></tr>';
+
+  // Two-column brand tables: Top10 global | Top10 CN
+  html += '<div class="grid-2" style="margin-bottom:16px;">';
+
+  // --- Top10 全球品牌 ---
+  var top10 = brands.slice(0, 10);
+  html += '<div class="card" style="box-shadow:none;"><div class="card-title">Top 10 全球品牌</div><div class="card-subtitle">按月销GMV降序</div>';
+  if (top10.length > 0) {
+    html += '<table><thead><tr><th>#</th><th>品牌</th><th style="text-align:right">GMV</th><th style="text-align:right">MoM</th></tr></thead><tbody>';
+    top10.forEach(function(b, i) {
+      var rowCls = i >= 5 ? ' class="brand-row-extra brand-global-extra"' : '';
+      var cnBadge = b.is_cn ? ' <span style="font-size:10px;background:#fef3c7;color:#92400e;padding:1px 5px;border-radius:3px;">CN</span>' : '';
+      html += '<tr'+rowCls+'><td>'+(i+1)+'</td><td style="font-weight:500">'+b.brand+cnBadge+'</td><td style="text-align:right">'+fmtM(b.gmv_curr)+'</td><td style="text-align:right" class="'+cls(b.mom)+'">'+fmtP(b.mom)+'</td></tr>';
     });
-    html += '</tbody></table></div>';
+    html += '</tbody></table>';
+    if (top10.length > 5) {
+      html += '<div style="text-align:center;padding:10px 0 2px;"><button class="expand-btn" id="brand-global-btn" onclick="toggleBrands('global')">展开全部 ('+top10.length+'个) ▼</button></div>';
+    }
+  } else {
+    html += '<div style="text-align:center;padding:40px 0;color:#94a3b8;font-size:13px">无品牌数据</div>';
+  }
+  html += '</div>';
+
+  // --- Top10 中国品牌 ---
+  var cnList = D.chinese_brands[catName]||[];
+  html += '<div class="card" style="box-shadow:none;"><div class="card-title">Top 10 中国品牌</div><div class="card-subtitle">按月销GMV降序</div>';
+  if (cnList.length > 0) {
+    var cnTop10 = cnList.slice(0, 10);
+    html += '<table><thead><tr><th>#</th><th>品牌</th><th style="text-align:right">GMV</th><th style="text-align:right">MoM</th></tr></thead><tbody>';
+    cnTop10.forEach(function(b, i) {
+      var bm = brandMomMap[b.brand] || 0;
+      var rowCls = i >= 5 ? ' class="brand-row-extra brand-cn-extra"' : '';
+      html += '<tr'+rowCls+'><td>'+(i+1)+'</td><td style="font-weight:500">'+b.brand+'</td><td style="text-align:right">'+fmtM(b.gmv_curr)+'</td><td style="text-align:right" class="'+cls(bm)+'">'+fmtP(bm)+'</td></tr>';
+    });
+    html += '</tbody></table>';
+    if (cnTop10.length > 5) {
+      html += '<div style="text-align:center;padding:10px 0 2px;"><button class="expand-btn" id="brand-cn-btn" onclick="toggleBrands('cn')">展开全部 ('+cnTop10.length+'个) ▼</button></div>';
+    }
   } else {
     html += '<div style="text-align:center;padding:40px 0;color:#94a3b8;font-size:13px">无中国品牌数据</div>';
   }
-  html += '</div></div>';
+  html += '</div>';
+
+  html += '</div>'; // end grid-2
 
   // === 品类深度洞察（来自品类明细报告.md） ===
   var mdInsight = categoryInsights[catName] || categoryInsights[catName.replace('手机和配件','手机配件').replace('电子配件和用品','手机与电子配件')];
@@ -361,9 +404,28 @@ function renderD(catName) {
       bullets.forEach(function(b, idx) {
         var colors = ['#3b82f6','#10b981','#f59e0b','#8b5cf6'];
         var bgs = ['#eff6ff','#ecfdf5','#fffbeb','#f5f3ff'];
+        // Split title from body on first ：
+        var colonIdx = b.indexOf('：');
+        var titlePart = colonIdx > 0 ? b.substring(0, colonIdx+1) : '';
+        var bodyPart = colonIdx > 0 ? b.substring(colonIdx+1) : b;
+        // Replace BD建议 with 触达建议
+        bodyPart = bodyPart.replace(/BD建议/g, '触达建议');
+        // Split body into sentences on 。 and ；, keep delimiter
+        var sentences = bodyPart.split(/(?<=[。；])/);
+        // Separate out 触达建议 line
+        var mainLines = [], cta = '';
+        sentences.forEach(function(s) {
+          s = s.trim();
+          if (!s) return;
+          if (s.indexOf('触达建议') >= 0) { cta = s; }
+          else { mainLines.push(s); }
+        });
         html += '<div style="padding:14px 16px;background:'+bgs[idx % 4]+';border-radius:10px;border-left:4px solid '+colors[idx % 4]+';">';
-        html += '<div style="font-size:13px;color:#1e293b;line-height:1.8;">'+inlineMd(b)+'</div>';
-        html += '</div>';
+        if (titlePart) html += '<div style="font-size:13px;font-weight:600;color:#0f172a;margin-bottom:6px;">'+inlineMd(titlePart)+'</div>';
+        html += '<div style="font-size:13px;color:#334155;line-height:1.8;">';
+        mainLines.forEach(function(s) { html += '<div style="margin-bottom:3px;">'+inlineMd(s)+'</div>'; });
+        if (cta) html += '<div style="margin-top:6px;padding:6px 10px;background:rgba(0,0,0,0.04);border-radius:6px;font-size:12px;">'+inlineMd(cta)+'</div>';
+        html += '</div></div>';
       });
       html += '</div>';
     } else {
