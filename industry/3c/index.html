@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -168,16 +168,32 @@ function toggleRows(type) {
   }
 }
 // Tab switching
-document.querySelectorAll('#main-tabs .tab-btn').forEach(btn => {
-
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('#main-tabs .tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById(btn.dataset.page).classList.add('active');
-    setTimeout(() => window.dispatchEvent(new Event('resize')), 100);
+(function() {
+  var tabs = document.querySelectorAll('#main-tabs .tab-btn');
+  if (tabs.length === 0) {
+    console.error('[Tab] No tab buttons found');
+    return;
+  }
+  console.log('[Tab] Found ' + tabs.length + ' tab buttons');
+  tabs.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      console.log('[Tab] Clicked: ' + btn.dataset.page);
+      var allBtns = document.querySelectorAll('#main-tabs .tab-btn');
+      var allPages = document.querySelectorAll('.page');
+      allBtns.forEach(function(b) { b.classList.remove('active'); });
+      allPages.forEach(function(p) { p.classList.remove('active'); });
+      btn.classList.add('active');
+      var targetPage = document.getElementById(btn.dataset.page);
+      if (targetPage) {
+        targetPage.classList.add('active');
+        console.log('[Tab] Switched to: ' + btn.dataset.page);
+      } else {
+        console.error('[Tab] Page not found: ' + btn.dataset.page);
+      }
+      setTimeout(function() { window.dispatchEvent(new Event('resize')); }, 100);
+    });
   });
-});
+})();
 
 // Treemap
 (function(){
