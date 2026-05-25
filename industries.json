@@ -22,6 +22,17 @@
     "dataSources": ["Amazon Sorftime底表", "PR Newswire", "Nox聚星社媒数据", "CES/IFA展会情报"]
   },
   {
+    "id": "beauty",
+    "name": "美容和个人护理",
+    "nameEn": "Beauty & Personal Care",
+    "description": "US Amazon 10品类283子类目追踪，覆盖个人护理/皮肤护理/头发护理/美容工具等，含中国品牌机会矩阵与PR拓客线索",
+    "latestVersion": "v2.0",
+    "period": "2026 Q2",
+    "updateFrequency": "月度",
+    "tabs": ["新客线索", "市场大盘"],
+    "dataSources": ["Amazon Sorftime底表", "PR Newswire", "Cosmoprof/Beautyworld展会"]
+  },
+  {
     "id": "health-family",
     "name": "健康与家庭",
     "nameEn": "Health & Household",
