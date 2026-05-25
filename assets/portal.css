@@ -62,6 +62,7 @@ body {
 .badge-game { background: #dbeafe; color: #1e40af; }
 .badge-3c { background: #fce7f3; color: #9d174d; }
 .badge-health { background: #d1fae5; color: #065f46; }
+.badge-beauty { background: #fdf2f8; color: #9d174d; }
 
 .card-name { font-size: 20px; font-weight: 700; color: #0f172a; margin-bottom: 4px; }
 .card-name-en { font-size: 13px; color: #94a3b8; margin-bottom: 10px; }
