@@ -15,10 +15,10 @@
     "name": "3C行业",
     "nameEn": "Consumer Electronics",
     "description": "US+DE双市场Amazon品类追踪，覆盖39+61类目，含PR拓客线索、品类格局、达人营销",
-    "latestVersion": "v2.0",
-    "period": "2026 Q1",
+    "latestVersion": "v3.0",
+    "period": "2026 Q2",
     "updateFrequency": "月度",
-    "tabs": ["新客线索", "全球动态", "区域市场", "达人营销"],
+    "tabs": ["新客线索", "市场大盘"],
     "dataSources": ["Amazon Sorftime底表", "PR Newswire", "Nox聚星社媒数据", "CES/IFA展会情报"]
   },
   {
@@ -42,5 +42,16 @@
     "updateFrequency": "月度",
     "tabs": ["市场总览", "行业动态", "品类格局", "中国品牌机会"],
     "dataSources": ["Amazon Sorftime底表", "FDA/CDC监管追踪", "CES/Cosmoprof展会", "SPINS成分趋势"]
+  },
+  {
+    "id": "clothing",
+    "name": "服装、鞋和珠宝",
+    "nameEn": "Clothing, Shoes & Jewelry",
+    "description": "US Amazon 服装鞋珠宝品类追踪，含新客线索与市场大盘分析、中国品牌出海机会矩阵、5点归因深度洞察",
+    "latestVersion": "v1.0",
+    "period": "2026 Q2",
+    "updateFrequency": "月度",
+    "tabs": ["新客线索", "市场大盘"],
+    "dataSources": ["Amazon Sorftime底表", "PR Newswire"]
   }
 ]
